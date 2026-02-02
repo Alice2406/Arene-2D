@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-#include <ostream>
 
 #include "NpcContext.h"
 #include "StateMachine/State.h"
@@ -11,12 +10,12 @@ namespace NpcAi
     {
         void Enter(NpcContext _context) override
         {
-            std::cout << "Enter Patrol _State" << std::endl;
+            std::cout << "Enter Chase _State" << std::endl;
         }
 
         void Exit(NpcContext _context) override
         {
-            std::cout << "Exit Patrol _State" << std::endl;
+            std::cout << "Exit Chase _State" << std::endl;
         }
     };
 }
