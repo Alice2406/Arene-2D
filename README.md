@@ -1,39 +1,22 @@
 ```mermaid
 stateDiagram-v2
-    [] --> Spawning : Entrée en jeu
+    direction TB
 
-    Spawning --> Chasing : Animation terminée
-
-    state Chasing {
-        [] --> MoveTowardsPlayer
-        MoveTowardsPlayer --> CheckDistance : À chaque tick
+    state "Logique Berserker" as Berserker {
+        [*] --> B_Patrol
+        B_Patrol --> B_Chase : Joueur détecté\n(Distance < 400px)
+        B_Chase --> B_Attack : À portée de contact\n(Distance < 50px)
+        B_Attack --> B_Chase : Joueur s'éloigne
+        B_Chase --> B_Patrol : Joueur perdu de vue
     }
 
-    Chasing --> Attacking : Joueur à portée
-
-    state Attacking {
-        [] --> WindUp : Telegraphed Attack (Indicateur rouge)
-        WindUp --> ActiveFrames : Animation d'attaque
-        ActiveFrames --> Recovery : Fin de l'attaque
-        Recovery --> []
+    state "Logique Sniper" as Sniper {
+        [*] --> S_Patrol
+        S_Patrol --> S_Aim : Joueur détecté
+        S_Aim --> S_Shoot : Cible verrouillée\n(après 1.5s)
+        S_Shoot --> S_Flee : Joueur trop proche\n(Distance < 200px)
+        S_Flee --> S_Aim : Distance de sécurité\nrétablie
+        S_Aim --> S_Patrol : Joueur perdu
     }
 
-    Attacking --> Chasing : Joueur hors de portée / Fin de l'attaque
-
-    Chasing --> Stunned : Effet de contrôle (Knockback/Freeze)
-    Attacking --> Stunned : Interruption
-
-    Stunned --> Chasing : Durée expirée
-
-    Chasing --> Dying : HP <= 0
-    Attacking --> Dying : HP <= 0
-    Stunned --> Dying : HP <= 0
-
-    state Dying {
-        [] --> DeathAnimation
-        DeathAnimation --> DropLoot : Calcul de chance
-        DropLoot --> []
-    }
-
-    Dying --> [*] : Suppression de l'entité
 ```
