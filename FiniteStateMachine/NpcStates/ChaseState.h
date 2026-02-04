@@ -2,7 +2,8 @@
 #include <iostream>
 
 #include "NpcContext.h"
-#include "StateMachine/State.h"
+#include "../StateMachine/State.h"
+#include "SFML/Graphics.hpp"
 
 namespace NpcAi
 {
