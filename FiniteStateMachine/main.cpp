@@ -1,5 +1,5 @@
-#include "StateMachine/NPC.h"
-#include "Player.h"
+#include "NpcStates/NPC.h"
+#include "PlayerStates/Player.h"
 #include <SFML/Graphics.hpp>
 int main()
 {

@@ -1,10 +1,10 @@
 #pragma once
-#include "StateMachine.h"
+#include "../StateMachine/StateMachine.h"
 #include "SFML/Graphics.hpp"
-#include "NpcStates/ChaseState.h"
-#include "NpcStates/Conditions.h"
-#include "NpcStates/NpcContext.h"
-#include "NpcStates/PatrolState.h"
+#include "../NpcStates/ChaseState.h"
+#include "../NpcStates/Conditions.h"
+#include "../NpcStates/NpcContext.h"
+#include "../NpcStates/PatrolState.h"
 using namespace NpcAi;
 
 class Npc

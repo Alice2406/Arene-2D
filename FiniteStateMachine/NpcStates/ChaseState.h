@@ -1,8 +1,8 @@
 #pragma once
 #include <iostream>
-
+#include "SFML/Graphics.hpp"
 #include "NpcContext.h"
-#include "StateMachine/State.h"
+#include "../StateMachine/State.h"
 
 namespace NpcAi
 {

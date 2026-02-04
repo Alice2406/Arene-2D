@@ -137,15 +137,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerMoveState.cpp" />
+    <ClCompile Include="PlayerStates\Player.cpp" />
+    <ClCompile Include="PlayerStates\PlayerBaseState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NpcStates\ChaseState.h" />
     <ClInclude Include="NpcStates\Conditions.h" />
+    <ClInclude Include="NpcStates\NPC.h" />
     <ClInclude Include="NpcStates\NpcContext.h" />
     <ClInclude Include="NpcStates\PatrolState.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="StateMachine\NPC.h" />
+    <ClInclude Include="PlayerMoveState.h" />
+    <ClInclude Include="PlayerStates\Player.h" />
+    <ClInclude Include="PlayerStates\PlayerBaseState.h" />
+    <ClInclude Include="PlayerStates\PlayerContext.h" />
     <ClInclude Include="StateMachine\State.h" />
     <ClInclude Include="StateMachine\StateMachine.h" />
   </ItemGroup>
