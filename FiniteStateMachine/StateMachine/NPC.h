@@ -18,7 +18,7 @@ public:
     NpcContext context{};
     Npc() : shape({ 30.f, 30.f }) {
         shape.setFillColor(sf::Color::Red);
-        shape.setPosition({ 200.f, 200.f });
+        shape.setPosition({ -10.f, -10.f });
         context.npcShape = &shape;
     }
     sf::RectangleShape& getShape() { return shape; }
@@ -36,7 +36,7 @@ public:
 
         fsm.Init(patrolState, context);
     }
-
+    sf::Vector2f getPosition() { return shape.getPosition(); }
     void Update()
     {
         fsm.Update(context);
