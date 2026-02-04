@@ -21,7 +21,11 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="NPC\EnemyManager.cpp">
+=======
+    <ClCompile Include="PlayerBaseState.cpp">
+>>>>>>> 4186bb3 (Added PlayerBaseState and reorganized files)
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,6 +51,7 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="NpcStates\AttackState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -102,6 +107,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Animation-Assets\SharedData.h">
+=======
+    <ClInclude Include="PlayerContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBaseState.h">
+>>>>>>> 4186bb3 (Added PlayerBaseState and reorganized files)
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,6 @@
-#include "Player.h"
 #include "NPC/EnemyManager.h" 
+#include "NpcStates/NPC.h"
+#include "PlayerStates/Player.h"
 #include <SFML/Graphics.hpp>
 
 int main()

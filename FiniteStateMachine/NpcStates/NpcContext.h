@@ -1,5 +1,6 @@
 #pragma once
 #include "../Animation-Assets/Animator.h"
+#include "SFML/Graphics.hpp"
 
 class NpcContext
 {

@@ -5,6 +5,7 @@
 #include "NpcContext.h"
 #include "../StateMachine/State.h"
 #include "SFML/Graphics.hpp"
+
 namespace NpcAi
 {
     class PatrolState : public FSM::State<NpcContext>
