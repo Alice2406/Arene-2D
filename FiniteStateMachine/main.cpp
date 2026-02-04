@@ -32,8 +32,7 @@ int main()
         }
 
         window.clear();
-
-        player.Update(window);
+        player.Update(window, dt);
         enemyManager.Update(dt, player.getPosition());
         window.draw(player.getShape());
         enemyManager.Draw(window);

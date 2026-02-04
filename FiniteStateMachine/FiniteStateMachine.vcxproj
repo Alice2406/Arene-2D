@@ -140,6 +140,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerStates\Player.cpp" />
     <ClCompile Include="PlayerStates\PlayerBaseState.cpp" />
+    <ClCompile Include="PlayerStates\PlayerIdleState.cpp" />
     <ClCompile Include="PlayerStates\PlayerMoveState.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +171,7 @@
     <ClInclude Include="PlayerStates\Player.h" />
     <ClInclude Include="PlayerStates\PlayerBaseState.h" />
     <ClInclude Include="PlayerStates\PlayerContext.h" />
+    <ClInclude Include="PlayerStates\PlayerIdleState.h" />
     <ClInclude Include="PlayerStates\PlayerMoveState.h" />
     <ClInclude Include="StateMachine\State.h" />
     <ClInclude Include="StateMachine\StateMachine.h" />
