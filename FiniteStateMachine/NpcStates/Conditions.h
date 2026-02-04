@@ -9,9 +9,14 @@ namespace NpcAi
     public:
         static bool IsSeeingPlayer(NpcContext context)
         {
-            // Check vision
+            sf::Vector2f npcPos = context.npcShape->getPosition();
 
-            return true;
+            float deltaX = context.playerPos.x - npcPos.x;
+            float deltaY = context.playerPos.y - npcPos.y;
+
+            float distance = std::sqrt((deltaX * deltaX) + (deltaY * deltaY));
+
+            return distance < 300.0f;
         }
     };
 }

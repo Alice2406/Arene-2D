@@ -17,5 +17,20 @@ namespace NpcAi
         {
             std::cout << "Exit Chase _State" << std::endl;
         }
+        void Execute(NpcContext _context) override
+        {
+            sf::Vector2f direction = _context.playerPos - _context.npcShape->getPosition();
+
+            float length = std::sqrt((direction.x * direction.x) + (direction.y * direction.y));
+
+            if (length > 0)
+            {
+                direction.x /= length;
+                direction.y /= length;
+
+            }
+
+            _context.npcShape->move(direction * _context.speed * _context.deltaTime);
+        }
     };
 }

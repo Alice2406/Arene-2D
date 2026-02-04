@@ -1,22 +1,18 @@
 #include "StateMachine/NPC.h"
+#include "Player.h"
 #include <SFML/Graphics.hpp>
 int main()
 {
-    //Npc npc;
+    sf::RenderWindow window(sf::VideoMode({ 1900, 800 }), "SFML works!");
+    window.setFramerateLimit(60);
+    sf::Clock clock;
+    Player player;
+    Npc npc;
 
-    //npc.Init();
-
-    //while (true)
-    //{
-    //    npc.Update();
-    //}
-
-    sf::RenderWindow window(sf::VideoMode({ 200, 200 }), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-
+    npc.Init();
     while (window.isOpen())
     {
+        float dt = clock.restart().asSeconds();
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
@@ -24,15 +20,12 @@ int main()
         }
 
         window.clear();
-        window.draw(shape);
+        npc.context.deltaTime = dt;
+        npc.context.playerPos = player.getPosition();
+        npc.Update();
+        player.Update(window);
+        window.draw(player.getShape());
+        window.draw(npc.getShape());
         window.display();
     }
 }
-
-
-/*
-Template
-FSM
-fichiers inl
-
-*/
