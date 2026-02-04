@@ -1,4 +1,6 @@
 #pragma once
+#include "PlayerContext.h"
+#include "../StateMachine/StateMachine.h"
 #include "SFML/Graphics.hpp"
 
 class Player
@@ -8,12 +10,14 @@ private:
 	float speed; //sa vitesse
 	sf::Vector2f velocity; //mouvement
 public:
-	Player() : shape({ 30.f, 30.f }), speed(5.f) {
-		shape.setFillColor(sf::Color::Blue);
-		shape.setPosition({ 50.f, 50.f });
-	}
+	Player();
+
 	sf::Vector2f getPosition();
-	void Update(sf::RenderWindow& window);
+	void Update(sf::RenderWindow& window, float _dt);
 	sf::RectangleShape& getShape() { return shape; }
+
+	PlayerContext context;
+	FSM::StateMachine<PlayerContext> fsm;
 };
+
 

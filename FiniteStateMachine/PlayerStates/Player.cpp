@@ -1,23 +1,32 @@
 #include "Player.h"
-#include "SFML/Graphics.hpp"
+#include "PlayerMoveState.h"
+
+Player::Player() : shape({ 30.f, 30.f }), speed(5.f) {
+	shape.setFillColor(sf::Color::Blue);
+	shape.setPosition({ 50.f, 50.f });
+}
 
 sf::Vector2f Player::getPosition()
 {
 	return shape.getPosition();
 }
 
-void Player::Update(sf::RenderWindow& window)
+void Player::Update(sf::RenderWindow& window, float _dt)
 {
-	sf::Vector2f movement(0.f, 0.f);
+	context.player = this;
+
+	context.deltaTime = _dt;
+	context.moveInputX = 0;
+	context.moveInputY = 0;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-		movement.y += 1;
+		context.moveInputY += 1;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z))
-		movement.y -= 1;
+		context.moveInputY -= 1;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q))
-		movement.x -= 1;
+		context.moveInputX -= 1;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-		movement.x += 1;
+		context.moveInputX += 1;
 
-	shape.move(movement * speed);
+	fsm.Update(context);
 }
