@@ -23,7 +23,7 @@ int main()
         npc.context.deltaTime = dt;
         npc.context.playerPos = player.getPosition();
         npc.Update();
-        player.Update(window);
+        player.Update(window, dt);
         window.draw(player.getShape());
         window.draw(npc.getShape());
         window.display();
