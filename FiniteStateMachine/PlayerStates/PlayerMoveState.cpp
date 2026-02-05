@@ -6,7 +6,7 @@
 void PlayerMoveState::Enter(PlayerContext _context)
 {
 	std::cout << "Player enter Move state" << std::endl;
-	GetPlayer(_context)->getShape().setFillColor(sf::Color::Green);
+	GetPlayer(_context)->setAnimation(GetPlayer(_context)->textureRun, 1152, 192, 6, 0.15f, true, 0);
 }
 
 void PlayerMoveState::Exit(PlayerContext _context)

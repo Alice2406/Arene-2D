@@ -7,7 +7,7 @@ void PlayerAttackState::Enter(PlayerContext _context)
 {
 	timer = 0.f;
 	std::cout << "Player enter Attack state" << std::endl;
-	GetPlayer(_context)->getShape().setFillColor(sf::Color::White);
+	GetPlayer(_context)->setAnimation(GetPlayer(_context)->textureAttack, 768, 192, 4, 0.15f, true, 0);
 }
 
 void PlayerAttackState::Exit(PlayerContext _context)

@@ -24,7 +24,7 @@ int main()
         npc.context.playerPos = player.getPosition();
         npc.Update();
         player.Update(window, dt);
-        window.draw(player.getShape());
+        window.draw(player.getSprite());
         window.draw(npc.getShape());
         window.display();
     }
