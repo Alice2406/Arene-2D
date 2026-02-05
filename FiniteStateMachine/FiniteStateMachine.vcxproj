@@ -140,6 +140,7 @@
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NpcStates\GuardState.h" />
     <ClInclude Include="NpcStates\AimState.h" />
     <ClInclude Include="NpcStates\FleeState.h" />
     <ClInclude Include="NPC\Berserker.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="NpcStates\ShootState.h" />
     <ClInclude Include="StateMachine\State.h" />
     <ClInclude Include="StateMachine\StateMachine.h" />
+    <ClInclude Include="NPC\Tank.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="StateMachine\State.inl" />

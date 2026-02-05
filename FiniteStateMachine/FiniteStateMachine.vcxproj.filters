@@ -62,6 +62,12 @@
     <ClInclude Include="NpcStates\AimState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NPC\Tank.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NpcStates\GuardState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="StateMachine\State.inl">
