@@ -1,10 +1,12 @@
 #include "StateMachine/NPC.h"
 #include "Player.h"
+#include "Time.h"
 #include <SFML/Graphics.hpp>
 int main()
 {
     sf::RenderWindow window(sf::VideoMode({ 1900, 800 }), "SFML works!");
     window.setFramerateLimit(60);
+    srand(time(NULL));
     sf::Clock clock;
     Player player;
     Npc npc;

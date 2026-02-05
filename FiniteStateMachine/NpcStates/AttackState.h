@@ -1,0 +1,27 @@
+#pragma once
+#include "NpcContext.h"
+#include "../StateMachine/State.h"
+#include "SFML/Graphics.hpp"
+#include <iostream>
+
+namespace NpcAi
+{
+    class AttackState : public FSM::State<NpcContext>
+    {
+    public:
+        void Enter(NpcContext _context) override
+        {
+            std::cout << "ATTACK !!!" << std::endl;
+            _context.npcShape->setFillColor(sf::Color::Yellow);
+        }
+
+        void Execute(NpcContext _context) override
+        {
+        }
+
+        void Exit(NpcContext _context) override
+        {
+            _context.npcShape->setFillColor(sf::Color::Red);
+        }
+    };
+}
