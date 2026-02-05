@@ -6,10 +6,7 @@
 void PlayerMoveState::Enter(PlayerContext _context)
 {
 	std::cout << "Player enter Move state" << std::endl;
-	Player* p = GetPlayer(_context);
-	if (p) {
-		p->getShape().setFillColor(sf::Color::Green);
-	}
+	GetPlayer(_context)->getShape().setFillColor(sf::Color::Green);
 }
 
 void PlayerMoveState::Exit(PlayerContext _context)

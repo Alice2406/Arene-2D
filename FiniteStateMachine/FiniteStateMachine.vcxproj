@@ -139,6 +139,7 @@
     <ClCompile Include="NPC\EnemyManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerStates\Player.cpp" />
+    <ClCompile Include="PlayerStates\PlayerAttackState.cpp" />
     <ClCompile Include="PlayerStates\PlayerBaseState.cpp" />
     <ClCompile Include="PlayerStates\PlayerIdleState.cpp" />
     <ClCompile Include="PlayerStates\PlayerMoveState.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="NpcStates\ShootState.h" />
 
     <ClInclude Include="PlayerStates\Player.h" />
+    <ClInclude Include="PlayerStates\PlayerAttackState.h" />
     <ClInclude Include="PlayerStates\PlayerBaseState.h" />
     <ClInclude Include="PlayerStates\PlayerContext.h" />
     <ClInclude Include="PlayerStates\PlayerIdleState.h" />

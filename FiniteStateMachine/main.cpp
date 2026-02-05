@@ -5,7 +5,7 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode({ 1900, 800 }), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode({ 600, 600 }), "SFML works!");
     window.setFramerateLimit(60);
     srand(time(NULL));
 
