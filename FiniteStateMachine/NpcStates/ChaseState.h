@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-
 #include "NpcContext.h"
 #include "../StateMachine/State.h"
 #include "SFML/Graphics.hpp"
@@ -9,16 +8,13 @@ namespace NpcAi
 {
     class ChaseState : public FSM::State<NpcContext>
     {
-        void Enter(NpcContext _context) override
+        void Enter(NpcContext& _context) override
         {
             std::cout << "Enter Chase _State" << std::endl;
+            _context.npcShape->setFillColor(sf::Color::Magenta);
         }
 
-        void Exit(NpcContext _context) override
-        {
-            std::cout << "Exit Chase _State" << std::endl;
-        }
-        void Execute(NpcContext _context) override
+        void Execute(NpcContext& _context) override
         {
             sf::Vector2f direction = _context.playerPos - _context.npcShape->getPosition();
 
@@ -32,6 +28,11 @@ namespace NpcAi
             }
 
             _context.npcShape->move(direction * _context.speed * _context.deltaTime);
+        }
+        void Exit(NpcContext& _context) override
+        {
+            std::cout << "Exit Chase _State" << std::endl;
+            _context.npcShape->setFillColor(sf::Color::Red);
         }
     };
 }
