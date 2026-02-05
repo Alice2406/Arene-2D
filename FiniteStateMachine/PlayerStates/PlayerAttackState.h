@@ -5,7 +5,7 @@ class PlayerAttackState : public PlayerBaseState
 {
 private:
 	float timer = 0.f;
-	float duration = 0.3f;
+	float duration = 0.6f;
 
 public:
 	void Enter(PlayerContext _context) override;

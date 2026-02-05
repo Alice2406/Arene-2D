@@ -24,5 +24,5 @@ void PlayerBaseState::ApplyMouvement(PlayerContext& _context, float _inputX, flo
 	}
 
 	sf::Vector2f movement(_inputX * _speed * _context.deltaTime, _inputY * _speed * _context.deltaTime);
-	player->getShape().move(movement);
+	player->getSprite().move(movement);
 }

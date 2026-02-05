@@ -6,7 +6,7 @@
 void PlayerIdleState::Enter(PlayerContext _context)
 {
 	std::cout << " Player enter Idle state" << std::endl;
-	GetPlayer(_context)->getShape().setFillColor(sf::Color::Blue);
+	GetPlayer(_context)->setAnimation(GetPlayer(_context)->textureIdle, 1536, 192, 8, 0.15f, true, 0);
 }
 
 void PlayerIdleState::Exit(PlayerContext _context)
