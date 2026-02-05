@@ -19,4 +19,23 @@ stateDiagram-v2
         S_Aim --> S_Patrol : Joueur perdu
     }
 
+      state "Logique Tank" as Tank {
+       [*] --> T_Patrol
+    
+    T_Patrol --> T_Chase : Joueur détecté (< 400px)
+    T_Chase --> T_Patrol : Joueur loin (> 400px)
+
+    %% Mécanique de Tir (marche aussi depuis Patrol !)
+    T_Patrol --> T_Guard : Tir reçu (triggerGuard)
+    T_Chase --> T_Guard : Tir reçu (triggerGuard)
+    
+    state "Logique de Combat" as Combat {
+        T_Guard --> T_Chase : Timer fini (1.0s)
+        
+        T_Chase --> T_Attack : Contact (< 30px)
+        T_Attack --> T_Chase : Fin Attaque
+    }
+    }
+
+
 ```
