@@ -5,44 +5,44 @@
 #include "NpcContext.h"
 #include "../StateMachine/State.h"
 #include "SFML/Graphics.hpp"
-#include "time.h"
 namespace NpcAi
 {
     class PatrolState : public FSM::State<NpcContext>
     {
     private:
         sf::Vector2f targetpos;
+        void PickNewDestination()
+        {
+            float x = static_cast<float>(rand() % 1900);
+            float y = static_cast<float>(rand() % 800);
+            targetpos = sf::Vector2f(x, y);
+            std::cout << "Nouvelle cible : " << x << ", " << y << std::endl;
+        }
     public:
         void Enter(NpcContext _context) override
         {
             if (_context.npcShape->getPosition() == sf::Vector2f(-10.f, -10.f))
             {
-                srand(time(NULL));
-                float i = rand() % 800;
+                float i = rand() % 1900;
                 float j = rand() % 800;
                 _context.npcShape->setPosition({ i, j });
             }
             std::cout << "Enter Patrol _State" << std::endl;
-            
+            PickNewDestination();
         }
         void Execute(NpcContext _context) override
         {
-            srand(time(NULL));
-            float i = rand() % 800;
-            float j = rand() % 800;
-            sf::Vector2f targetpos = sf::Vector2f(i, j);
+            sf::Vector2f currentPos = _context.npcShape->getPosition();
+            sf::Vector2f direction = targetpos - currentPos;
+            float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 
-            float length = std::sqrt((targetpos.x * targetpos.x) + (targetpos.y * targetpos.y));
-
-            if (length > 0)
+            if (distance < 5.0f)
+                PickNewDestination();
+            else
             {
-                targetpos.x /= length;
-                targetpos.y /= length;
-
+                sf::Vector2f normalizedDir = direction / distance;
+                _context.npcShape->move(normalizedDir * _context.speed * _context.deltaTime);
             }
-
-            _context.npcShape->move(targetpos * _context.speed * _context.deltaTime);
-            
         }
         void Exit(NpcContext _context) override
         {
