@@ -6,22 +6,25 @@
 
 namespace NpcAi
 {
-    class AttackState : public FSM::State<NpcContext>
+    class AimState : public FSM::State<NpcContext>
     {
     public:
         void Enter(NpcContext& _context) override
         {
-            std::cout << "ATTACK !!!" << std::endl;
-            _context.npcShape->setFillColor(sf::Color::Yellow);
+            _context.currentTimer = 0.0f;
+            std::cout << "Cible en vue" << std::endl;
+            _context.npcShape->setFillColor(sf::Color::White);
         }
 
         void Execute(NpcContext& _context) override
         {
+            _context.currentTimer += _context.deltaTime;
+
         }
 
         void Exit(NpcContext& _context) override
         {
-            _context.npcShape->setFillColor(sf::Color::Red);
+            _context.npcShape->setFillColor(sf::Color::Green);
         }
     };
 }

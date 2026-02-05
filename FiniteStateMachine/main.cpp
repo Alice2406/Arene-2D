@@ -1,4 +1,5 @@
-#include "StateMachine/NPC.h"
+#include "NPC/Berserker.h"
+#include "NPC/Sniper.h"
 #include "Player.h"
 #include "Time.h"
 #include <SFML/Graphics.hpp>
@@ -9,9 +10,10 @@ int main()
     srand(time(NULL));
     sf::Clock clock;
     Player player;
-    Npc npc;
-
-    npc.Init();
+    Berserker berserker;
+    Sniper sniper;
+    berserker.Init();
+    sniper.Init();
     while (window.isOpen())
     {
         float dt = clock.restart().asSeconds();
@@ -22,12 +24,16 @@ int main()
         }
 
         window.clear();
-        npc.context.deltaTime = dt;
-        npc.context.playerPos = player.getPosition();
-        npc.Update();
+        berserker.context.deltaTime = dt;
+        berserker.context.playerPos = player.getPosition();
+        sniper.context.deltaTime = dt;
+        sniper.context.playerPos = player.getPosition();
+        berserker.Update();
+        sniper.Update();
         player.Update(window);
         window.draw(player.getShape());
-        window.draw(npc.getShape());
+        window.draw(berserker.getShape());
+        window.draw(sniper.getShape());
         window.display();
     }
 }

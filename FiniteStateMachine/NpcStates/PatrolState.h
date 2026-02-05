@@ -19,7 +19,7 @@ namespace NpcAi
             std::cout << "Nouvelle cible : " << x << ", " << y << std::endl;
         }
     public:
-        void Enter(NpcContext _context) override
+        void Enter(NpcContext& _context) override
         {
             if (_context.npcShape->getPosition() == sf::Vector2f(-10.f, -10.f))
             {
@@ -30,7 +30,7 @@ namespace NpcAi
             std::cout << "Enter Patrol _State" << std::endl;
             PickNewDestination();
         }
-        void Execute(NpcContext _context) override
+        void Execute(NpcContext& _context) override
         {
             sf::Vector2f currentPos = _context.npcShape->getPosition();
             sf::Vector2f direction = targetpos - currentPos;
@@ -44,7 +44,7 @@ namespace NpcAi
                 _context.npcShape->move(normalizedDir * _context.speed * _context.deltaTime);
             }
         }
-        void Exit(NpcContext _context) override
+        void Exit(NpcContext& _context) override
         {
             std::cout << "Exit Patrol _State" << std::endl;
         }

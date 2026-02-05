@@ -18,7 +18,7 @@ void FSM::StateMachine<ContextType>::Init(State* _initialState, ContextType _con
 }
 
 template<typename ContextType>
-void FSM::StateMachine<ContextType>::Update(ContextType _context)
+void FSM::StateMachine<ContextType>::Update(ContextType& _context)
 {
     currentState->Execute(_context);
 
