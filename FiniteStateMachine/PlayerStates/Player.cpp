@@ -59,6 +59,15 @@ void Player::Update(sf::RenderWindow& window, float _dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 		context.isAttackPressed = true;
 
+	if (context.moveInputX < 0)
+	{
+		sprite.setScale({ -1.f, 1.f });
+	}
+	else
+	{
+		sprite.setScale({ 1.f, 1.f });
+	}
+
 	fsm.Update(context);
 
 	if (frameCount > 0) {
