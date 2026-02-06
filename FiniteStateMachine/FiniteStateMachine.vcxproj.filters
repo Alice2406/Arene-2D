@@ -68,6 +68,15 @@
     <ClInclude Include="NpcStates\GuardState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Animation-Assets\Animator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation-Assets\AssetPath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation-Assets\ResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="StateMachine\State.inl">

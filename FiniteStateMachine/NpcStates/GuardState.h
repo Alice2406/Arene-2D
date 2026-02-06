@@ -15,7 +15,6 @@ namespace NpcAi
             _context.isInvulnerable = true;
             _context.triggerGuard = false;
             std::cout << "GuardState" << std::endl;
-            _context.npcShape->setFillColor(sf::Color::Blue);
         }
         void Execute(NpcContext& _context) override
         {
@@ -25,7 +24,6 @@ namespace NpcAi
         void Exit(NpcContext& _context) override
         {
             _context.isInvulnerable = false;
-            _context.npcShape->setFillColor(sf::Color::Red);
         }
     };
 }

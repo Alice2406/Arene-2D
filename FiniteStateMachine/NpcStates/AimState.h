@@ -13,7 +13,6 @@ namespace NpcAi
         {
             _context.currentTimer = 0.0f;
             std::cout << "Cible en vue" << std::endl;
-            _context.npcShape->setFillColor(sf::Color::White);
         }
 
         void Execute(NpcContext& _context) override
@@ -24,7 +23,6 @@ namespace NpcAi
 
         void Exit(NpcContext& _context) override
         {
-            _context.npcShape->setFillColor(sf::Color::Green);
         }
     };
 }
