@@ -43,9 +43,5 @@ namespace NpcAi
         {
             return context.currentTimer >= 0.5f;
         }
-        static bool IsShootByPlayer(NpcContext context)
-        {
-
-        }
     };
 }
