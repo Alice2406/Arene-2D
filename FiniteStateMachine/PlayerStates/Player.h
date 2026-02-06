@@ -1,5 +1,6 @@
 #pragma once
 #include "PlayerContext.h"
+#include "../CollisionBox.h"
 #include "../StateMachine/StateMachine.h"
 #include "SFML/Graphics.hpp"
 
@@ -22,6 +23,10 @@ public:
 	sf::Texture textureAttack;
 	sf::Sprite sprite;
 
+	CollisionBox hurtbox;
+	CollisionBox hitbox;
+	CollisionBox hitbox2;
+	
 	Player();
 
 	sf::Vector2f getPosition();

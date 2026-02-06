@@ -4,9 +4,22 @@
 #include "PlayerAttackState.h"
 #include <iostream>
 
-Player::Player() : frameWidth(0), frameHeight(0), frameCount(0), currentFrame(0), animationTimer(0.f), animationSpeed(0.1f), isLooping(true), speed(200.0f), sprite(textureIdle) {
+Player::Player() : frameWidth(0), frameHeight(0), frameCount(0), 
+currentFrame(0), animationTimer(0.f), animationSpeed(0.1f), isLooping(true), speed(200.0f),
+sprite(textureIdle), 
+hurtbox({ 35.f, 50.f }, { 0.f, 10.f }), hitbox({ 0.f, 0.f }, { 0.f, 0.f }),
+hitbox2({ 0.f, 0.f }, { 0.f, 0.f }) {
 
 	context.player = this;
+
+	hurtbox.owner = this;
+	hitbox.owner = this;
+	hitbox2.owner = this;
+
+	hitbox.isActive = false;
+	hitbox2.isActive = false;
+
+	sprite.setPosition({ 400, 300 });
 
 	if (!textureIdle.loadFromFile("../Assets/Player/Warrior_Idle.png")) {
 		std::cerr << "Erreur : Impossible de charger Warrior_Idle.png" << std::endl;
@@ -59,12 +72,10 @@ void Player::Update(sf::RenderWindow& window, float _dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 		context.isAttackPressed = true;
 
-	if (context.moveInputX < 0)
-	{
+	if (context.moveInputX < 0) {
 		sprite.setScale({ -1.f, 1.f });
 	}
-	else
-	{
+	else if (context.moveInputX > 0) {
 		sprite.setScale({ 1.f, 1.f });
 	}
 
@@ -85,6 +96,9 @@ void Player::Update(sf::RenderWindow& window, float _dt)
 		}
 	}
 
+	hurtbox.Update(getPosition(), sprite.getScale().x);
+	hitbox.Update(getPosition(), sprite.getScale().x);
+	hitbox2.Update(getPosition(), sprite.getScale().x);
 }
 
 void Player::setAnimation(const sf::Texture& tex, int w, int h, int count, float speed, bool loop, int row)

@@ -18,10 +18,25 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="PlayerStates\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerBaseState.cpp">
+    <ClCompile Include="PlayerStates\PlayerAttackState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStates\PlayerBaseState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStates\PlayerIdleState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStates\PlayerMoveState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,22 +53,37 @@
     <ClInclude Include="NpcStates\Conditions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StateMachine\NPC.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="StateMachine\State.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StateMachine\StateMachine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="NpcStates\NPC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerContext.h">
+    <ClInclude Include="PlayerStates\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerBaseState.h">
+    <ClInclude Include="PlayerStates\PlayerAttackState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStates\PlayerBaseState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStates\PlayerContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStates\PlayerIdleState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStates\PlayerMoveState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
