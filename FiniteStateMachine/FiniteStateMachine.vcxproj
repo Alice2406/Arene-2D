@@ -137,6 +137,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="NPC\EnemyManager.cpp" />
+    <ClCompile Include="CollisionBox.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerStates\Player.cpp" />
     <ClCompile Include="PlayerStates\PlayerAttackState.cpp" />
@@ -155,6 +157,8 @@
     <ClInclude Include="NpcStates\FleeState.h" />
     <ClInclude Include="NPC\Berserker.h" />
     <ClInclude Include="NpcStates\AttackState.h" />
+    <ClInclude Include="CollisionBox.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="NpcStates\ChaseState.h" />
     <ClInclude Include="NpcStates\Conditions.h" />
     <ClInclude Include="NpcStates\NPC.h" />

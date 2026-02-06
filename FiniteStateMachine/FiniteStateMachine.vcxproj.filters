@@ -18,14 +18,33 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="PlayerStates\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <ClCompile Include="NPC\EnemyManager.cpp">
 =======
     <ClCompile Include="PlayerBaseState.cpp">
 >>>>>>> 4186bb3 (Added PlayerBaseState and reorganized files)
+=======
+    <ClCompile Include="PlayerStates\PlayerAttackState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStates\PlayerBaseState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStates\PlayerIdleState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStates\PlayerMoveState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+>>>>>>> be93103 (Added Collisions to Player)
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -48,9 +67,10 @@
     <ClInclude Include="StateMachine\StateMachine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="NpcStates\NPC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <ClInclude Include="NpcStates\AttackState.h">
       <Filter>Header Files</Filter>
@@ -113,6 +133,30 @@
     </ClInclude>
     <ClInclude Include="PlayerBaseState.h">
 >>>>>>> 4186bb3 (Added PlayerBaseState and reorganized files)
+=======
+    <ClInclude Include="PlayerStates\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStates\PlayerAttackState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStates\PlayerBaseState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStates\PlayerContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStates\PlayerIdleState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStates\PlayerMoveState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+>>>>>>> be93103 (Added Collisions to Player)
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
