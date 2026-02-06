@@ -11,17 +11,21 @@ namespace NpcAi
     public:
         void Enter(NpcContext& _context) override
         {
-            std::cout << "Bouclier" << std::endl;
-            _context.npcShape->setFillColor(sf::Color::Red);
+            _context.currentTimer = 0.0f;
+            _context.isInvulnerable = true;
+            _context.triggerGuard = false;
+            std::cout << "GuardState" << std::endl;
+            _context.npcShape->setFillColor(sf::Color::Blue);
         }
-
         void Execute(NpcContext& _context) override
         {
+            _context.currentTimer += _context.deltaTime;
         }
 
         void Exit(NpcContext& _context) override
         {
-            _context.npcShape->setFillColor(sf::Color::Cyan);
+            _context.isInvulnerable = false;
+            _context.npcShape->setFillColor(sf::Color::Red);
         }
     };
 }

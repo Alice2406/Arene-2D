@@ -28,19 +28,33 @@ public:
     {
         PatrolState* patrolState = fsm.CreateState<PatrolState>();
         ChaseState* chaseState = fsm.CreateState<ChaseState>();
-        GuardState* guardState = fsm.CreateState<GuardState>();
         AttackState* attackState = fsm.CreateState<AttackState>();
-        patrolState->AddTransition(Conditions::IsSeeingPlayer, chaseState);
-        chaseState->AddTransition(Conditions::IsInAttackRange, attackState);
+        GuardState* guardState = fsm.CreateState<GuardState>();
 
-        chaseState->AddTransition([](const NpcContext _context)
-            {
-                return !Conditions::IsSeeingPlayer(_context);
+        patrolState->AddTransition(Conditions::IsSeeingPlayer, chaseState);
+
+        chaseState->AddTransition([](NpcContext& ctx) {
+            return !Conditions::IsSeeingPlayer(ctx);
             }, patrolState);
-        attackState->AddTransition([](const NpcContext _context)
-            {
-                return !Conditions::IsInAttackRange(_context);
+
+        patrolState->AddTransition([](NpcContext& ctx) { 
+            return ctx.triggerGuard; 
+            }, guardState);
+
+        chaseState->AddTransition([](NpcContext& ctx) { 
+            return ctx.triggerGuard; 
+            }, guardState);
+
+        guardState->AddTransition([](NpcContext& ctx) { 
+            return ctx.currentTimer >= 1.0f; 
             }, chaseState);
+
+        chaseState->AddTransition(Conditions::IsInAttackRange, attackState);
+        attackState->AddTransition([](NpcContext& ctx)
+            {
+                return !Conditions::IsInAttackRange(ctx);
+            }, chaseState);
+
         fsm.Init(patrolState, context);
     }
     sf::Vector2f getPosition() { return shape.getPosition(); }
