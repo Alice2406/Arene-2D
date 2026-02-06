@@ -8,7 +8,7 @@ namespace NpcAi
     public:
         static bool IsSeeingPlayer(NpcContext context)
         {
-            sf::Vector2f npcPos = context.npcShape->getPosition();
+            sf::Vector2f npcPos = context.npcSprite->getPosition();
 
             float deltaX = context.playerPos.x - npcPos.x;
             float deltaY = context.playerPos.y - npcPos.y;
@@ -19,7 +19,7 @@ namespace NpcAi
         }
         static bool IsInAttackRange(NpcContext context)
         {
-            sf::Vector2f npcPos = context.npcShape->getPosition();
+            sf::Vector2f npcPos = context.npcSprite->getPosition();
 
             float deltaX = context.playerPos.x - npcPos.x;
             float deltaY = context.playerPos.y - npcPos.y;
@@ -30,7 +30,7 @@ namespace NpcAi
         }
         static bool IsTooClose(NpcContext context)
         {
-            sf::Vector2f npcPos = context.npcShape->getPosition();
+            sf::Vector2f npcPos = context.npcSprite->getPosition();
 
             float deltaX = context.playerPos.x - npcPos.x;
             float deltaY = context.playerPos.y - npcPos.y;

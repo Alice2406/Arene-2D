@@ -2,23 +2,29 @@
 #include "NPC/Sniper.h"
 #include "NPC/Tank.h"
 #include "Player.h"
-#include "Time.h"
 #include <SFML/Graphics.hpp>
+#include <vector>
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode({ 1900, 800 }), "SFML works!");
     window.setFramerateLimit(60);
     srand(time(NULL));
+
     sf::Clock clock;
     Player player;
-    Berserker berserker;
-    Sniper sniper;
-    Tank tank;
 
-    berserker.Init();
-    tank.Init();
-    sniper.Init();
+    std::vector<Tank*> tanks;
 
+    Tank* t1 = new Tank(TankSkin::TURTLE);
+    t1->Init(); 
+    t1->setPosition({ -10.f, -10.f });
+    tanks.push_back(t1);
+
+    // Tu peux en ajouter un deuxième facilement maintenant :
+    // Tank* t2 = new Tank(TankSkin::FISH);
+    // t2->Init();
+    // tanks.push_back(t2);
     while (window.isOpen())
     {
         float dt = clock.restart().asSeconds();
@@ -29,22 +35,26 @@ int main()
         }
 
         window.clear();
-        berserker.context.deltaTime = dt;
-        berserker.context.playerPos = player.getPosition();
-        sniper.context.deltaTime = dt;
-        sniper.context.playerPos = player.getPosition();
-        tank.context.deltaTime = dt;
-        tank.context.playerPos = player.getPosition();
 
-        berserker.Update();
-        sniper.Update();
-        tank.Update();
-        player.Update(window);
+        player.Update(window); 
 
+        for (Tank* t : tanks)
+        {
+            t->context.deltaTime = dt;
+            t->context.playerPos = player.getPosition();
+
+            t->Update(dt);
+        }
         window.draw(player.getShape());
-        window.draw(berserker.getShape());
-        window.draw(sniper.getShape());
-        window.draw(tank.getShape());
+
+        for (Tank* t : tanks)
+        {
+            window.draw(t->getSprite()); 
+        }
+
         window.display();
     }
+    for (Tank* t : tanks) delete t;
+
+    return 0;
 }

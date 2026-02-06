@@ -21,18 +21,22 @@ namespace NpcAi
     public:
         void Enter(NpcContext& _context) override
         {
-            if (_context.npcShape->getPosition() == sf::Vector2f(-10.f, -10.f))
+            if (_context.animator)
+            {
+                _context.animator->SwitchAnimation("Walk");
+            }
+            if (_context.npcSprite->getPosition() == sf::Vector2f(-10.f, -10.f))
             {
                 float i = rand() % 1900;
                 float j = rand() % 800;
-                _context.npcShape->setPosition({ i, j });
+                _context.npcSprite->setPosition({ i, j });
             }
             std::cout << "Enter Patrol _State" << std::endl;
             PickNewDestination();
         }
         void Execute(NpcContext& _context) override
         {
-            sf::Vector2f currentPos = _context.npcShape->getPosition();
+            sf::Vector2f currentPos = _context.npcSprite->getPosition();
             sf::Vector2f direction = targetpos - currentPos;
             float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 
@@ -41,7 +45,7 @@ namespace NpcAi
             else
             {
                 sf::Vector2f normalizedDir = direction / distance;
-                _context.npcShape->move(normalizedDir * _context.speed * _context.deltaTime);
+                _context.npcSprite->move(normalizedDir * _context.speed * _context.deltaTime);
             }
         }
         void Exit(NpcContext& _context) override

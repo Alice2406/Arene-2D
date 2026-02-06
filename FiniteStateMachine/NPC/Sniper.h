@@ -9,21 +9,26 @@
 #include "../NpcStates/PatrolState.h"
 using namespace NpcAi;
 
+enum class SniperSkin {
+    GNOLL,
+    HARPOON_FISH,
+    SHAMAN
+};
 class Sniper
 {
 private:
     int value = 100;
 
     FSM::StateMachine<NpcContext> fsm;
-    sf::RectangleShape shape;
+    //sf::RectangleShape shape;
 public:
     NpcContext context{};
-    Sniper() : shape({ 30.f, 30.f }) {
-        shape.setFillColor(sf::Color::Green);
-        shape.setPosition({ -10.f, -10.f });
-        context.npcShape = &shape;
-    }
-    sf::RectangleShape& getShape() { return shape; }
+    //Sniper() : shape({ 30.f, 30.f }) {
+    //    shape.setFillColor(sf::Color::Green);
+    //    shape.setPosition({ -10.f, -10.f });
+    //    context.npcShape = &shape;
+    //}
+    //sf::RectangleShape& getShape() { return shape; }
     void Init()
     {
         PatrolState* patrolState = fsm.CreateState<PatrolState>();
@@ -47,7 +52,6 @@ public:
             }, aimState);
         fsm.Init(patrolState, context);
     }
-    sf::Vector2f getPosition() { return shape.getPosition(); }
     void Update()
     {
         fsm.Update(context);

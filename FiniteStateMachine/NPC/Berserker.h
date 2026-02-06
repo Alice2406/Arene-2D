@@ -8,21 +8,33 @@
 #include "../NpcStates/PatrolState.h"
 using namespace NpcAi;
 
+enum class BerserkerSkin {
+    BEAR,
+    GNOME,
+    LANCER,
+    LIZARD,
+    PADDLE_FISH,
+    SNAKE,
+    SPIDER,
+    THIEF,
+    TROLL
+};
+
 class Berserker
 {
 private:
     int value = 100;
 
     FSM::StateMachine<NpcContext> fsm;
-    sf::RectangleShape shape;
+    //sf::RectangleShape shape;
 public:
     NpcContext context{};
-    Berserker() : shape({ 30.f, 30.f }) {
-        shape.setFillColor(sf::Color::Red);
-        shape.setPosition({ -10.f, -10.f });
-        context.npcShape = &shape;
-    }
-    sf::RectangleShape& getShape() { return shape; }
+    //Berserker() : shape({ 30.f, 30.f }) {
+    //    shape.setFillColor(sf::Color::Red);
+    //    shape.setPosition({ -10.f, -10.f });
+    //    context.npcShape = &shape;
+    //}
+    //sf::RectangleShape& getShape() { return shape; }
     void Init()
     {
         PatrolState* patrolState = fsm.CreateState<PatrolState>();
@@ -40,7 +52,6 @@ public:
             }, chaseState);
         fsm.Init(patrolState, context);
     }
-    sf::Vector2f getPosition() { return shape.getPosition(); }
     void Update()
     {
         fsm.Update(context);

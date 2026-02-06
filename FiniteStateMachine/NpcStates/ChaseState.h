@@ -11,12 +11,15 @@ namespace NpcAi
         void Enter(NpcContext& _context) override
         {
             std::cout << "Enter Chase _State" << std::endl;
-            _context.npcShape->setFillColor(sf::Color::Magenta);
+            if (_context.animator)
+            {
+                _context.animator->SwitchAnimation("Walk");
+            }
         }
 
         void Execute(NpcContext& _context) override
         {
-            sf::Vector2f direction = _context.playerPos - _context.npcShape->getPosition();
+            sf::Vector2f direction = _context.playerPos - _context.npcSprite->getPosition();
 
             float length = std::sqrt((direction.x * direction.x) + (direction.y * direction.y));
 
@@ -27,12 +30,11 @@ namespace NpcAi
 
             }
 
-            _context.npcShape->move(direction * _context.speed * _context.deltaTime);
+            _context.npcSprite->move(direction * _context.speed * _context.deltaTime);
         }
         void Exit(NpcContext& _context) override
         {
             std::cout << "Exit Chase _State" << std::endl;
-            _context.npcShape->setFillColor(sf::Color::Red);
         }
     };
 }
