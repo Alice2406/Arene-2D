@@ -10,6 +10,7 @@
 #include "../Animation-Assets/Animator.h"
 #include "../Animation-Assets/AssetPath.h"
 #include "../Animation-Assets/ResourceManager.h"
+#include <iostream>
 using namespace NpcAi;
 
 enum class TankSkin {
@@ -109,7 +110,12 @@ public:
     sf::Sprite& getSprite() { return m_sprite; }
     void Update(float dt)
     {
-        m_animator.Update(dt);
         fsm.Update(context);
+        m_animator.Update(dt);
+    }
+    void Draw(sf::RenderWindow& window)
+    {
+        m_sprite.setTextureRect(sf::IntRect({ 0, 0 }, { 200, 200 }));
+        window.draw(m_sprite);
     }
 };
