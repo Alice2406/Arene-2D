@@ -17,11 +17,10 @@ int main()
     std::vector<Tank*> tanks;
 
     Tank* t1 = new Tank(TankSkin::TURTLE);
+    t1->setPosition({ 400.f, 400.f });
     t1->Init(); 
-    t1->setPosition({ -10.f, -10.f });
     tanks.push_back(t1);
 
-    // Tu peux en ajouter un deuxième facilement maintenant :
     // Tank* t2 = new Tank(TankSkin::FISH);
     // t2->Init();
     // tanks.push_back(t2);
@@ -37,19 +36,17 @@ int main()
         window.clear();
 
         player.Update(window); 
-
         for (Tank* t : tanks)
         {
             t->context.deltaTime = dt;
             t->context.playerPos = player.getPosition();
-
             t->Update(dt);
         }
         window.draw(player.getShape());
 
         for (Tank* t : tanks)
         {
-            window.draw(t->getSprite()); 
+            t->Draw(window);
         }
 
         window.display();
