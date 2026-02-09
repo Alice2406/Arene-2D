@@ -45,7 +45,7 @@ public:
     void takeDamage(int damage);
     void setAnimation(const sf::Texture& tex, int w, int h, int count, float speed, bool loop, int row);
     void Update(sf::RenderWindow& window, float _dt);
-    
+    bool CheckHit(const sf::FloatRect& enemyBounds);
 
     PlayerContext context;
     FSM::StateMachine<PlayerContext> fsm;

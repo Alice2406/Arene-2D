@@ -1,4 +1,5 @@
 #include "EnemyManager.h"
+#include "../PlayerStates/Player.h"
 
 EnemyManager::~EnemyManager()
 {
@@ -36,27 +37,84 @@ void EnemyManager::SpawnSniper(SniperSkin skin, sf::Vector2f position)
     m_snipers.push_back(newSniper);
 }
 
-void EnemyManager::Update(float dt, sf::Vector2f playerPos)
+void EnemyManager::Update(float dt, Player& player)
 {
-    for (Tank* t : m_tanks)
+    auto itTank = m_tanks.begin();
+    while (itTank != m_tanks.end())
     {
+        Tank* t = *itTank;
+
         t->context.deltaTime = dt;
-        t->context.playerPos = playerPos;
+        t->context.playerPos = player.getPosition();
         t->Update(dt);
+
+        sf::FloatRect enemyBounds = t->GetGlobalBounds();
+        if (player.CheckHit(enemyBounds) && !t->IsHit())
+        {
+            t->TakeDamage(25); 
+        }
+
+        if (t->IsDead())
+        {
+            delete t; 
+            itTank = m_tanks.erase(itTank); 
+        }
+        else
+        {
+            ++itTank;
+        }
     }
 
-    for (Berserker* b : m_berserkers)
+    auto itBerserker = m_berserkers.begin();
+    while (itBerserker != m_berserkers.end())
     {
+        Berserker* b = *itBerserker;
+
         b->context.deltaTime = dt;
-        b->context.playerPos = playerPos;
+        b->context.playerPos = player.getPosition();
         b->Update(dt);
+
+        sf::FloatRect enemyBounds = b->GetGlobalBounds();
+        if (player.CheckHit(enemyBounds) && !b->IsHit())
+        {
+            b->TakeDamage(20);
+        }
+
+        if (b->IsDead())
+        {
+            delete b;
+            itBerserker = m_berserkers.erase(itBerserker);
+        }
+        else
+        {
+            ++itBerserker;
+        }
     }
 
-    for (Sniper* s : m_snipers)
+    auto itSniper = m_snipers.begin();
+    while (itSniper != m_snipers.end())
     {
+        Sniper* s = *itSniper;
+
         s->context.deltaTime = dt;
-        s->context.playerPos = playerPos;
+        s->context.playerPos = player.getPosition();
         s->Update(dt);
+
+        sf::FloatRect enemyBounds = s->GetGlobalBounds();
+        if (player.CheckHit(enemyBounds) && !s->IsHit())
+        {
+            s->TakeDamage(35);
+        }
+
+        if (s->IsDead())
+        {
+            delete s;
+            itSniper = m_snipers.erase(itSniper);
+        }
+        else
+        {
+            ++itSniper;
+        }
     }
 }
 

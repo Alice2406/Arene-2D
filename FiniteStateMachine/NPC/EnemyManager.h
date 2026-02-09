@@ -6,6 +6,7 @@
 #include "Berserker.h"
 #include "Sniper.h"
 
+class Player;
 class EnemyManager
 {
 private:
@@ -19,8 +20,7 @@ public:
     void SpawnTank(TankSkin skin, sf::Vector2f position);
     void SpawnBerserker(BerserkerSkin skin, sf::Vector2f position);
     void SpawnSniper(SniperSkin skin, sf::Vector2f position);
-
-    void Update(float dt, sf::Vector2f playerPos);
+    void Update(float dt, Player& player);
 
     void Draw(sf::RenderWindow& window);
 };

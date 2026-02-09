@@ -13,7 +13,7 @@ int main()
     Player player;
     CollisionManager colManager;
 
-    colManager.addHurtbox(&player.hurtbox);
+    colManager.addHurtbox(&player.hurtbox); 
     colManager.addHitbox(&player.hitbox);
     colManager.addHitbox(&player.hitbox2);
 
@@ -39,7 +39,7 @@ int main()
         window.clear();
         colManager.checkCollisions();
         player.Update(window, dt);
-        enemyManager.Update(dt, player.getPosition());
+        enemyManager.Update(dt, player);
         enemyManager.Draw(window);
 
         window.draw(player.getSprite());

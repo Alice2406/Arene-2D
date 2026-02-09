@@ -19,12 +19,15 @@ class Tank
 {
 private:
     int value = 100;
+    int m_currentHealth;
     sf::Sprite m_sprite;
     sf::Texture m_texture;
     ResourceManager m_resources;
     Animator m_animator;
     TankData m_data;
     FSM::StateMachine<NpcContext> fsm;
+    float m_flashTimer = 0.0f;
+    const float FLASH_DURATION = 0.15f;
 public:
     NpcContext context{};
     Tank(TankSkin skinType) : m_sprite(m_texture), m_animator(m_sprite)
@@ -47,6 +50,7 @@ public:
         m_sprite.setOrigin({ m_data.idle.frameSize.x / 2.f, m_data.idle.frameSize.y / 2.f });
 
         m_animator.SwitchAnimation("Idle");
+        m_currentHealth = m_data.health;
     }
     void Init()
     {
@@ -81,16 +85,48 @@ public:
 
         fsm.Init(patrolState, context);
     }
+
+    void TakeDamage(int damageAmount)
+    {
+        m_currentHealth -= damageAmount;
+
+        m_sprite.setColor(sf::Color(255, 100, 100));
+        m_flashTimer = FLASH_DURATION;
+
+        std::cout << "Aie ! Vie restante : " << m_currentHealth << std::endl;
+    }
+
+    bool IsDead() const
+    {
+        return m_currentHealth <= 0;
+    }
     void setPosition(const sf::Vector2f& position)
     {
         m_sprite.setPosition(position);
     }
+
     sf::Sprite& getSprite() { return m_sprite; }
+
     void Update(float dt)
     {
         fsm.Update(context);
         m_animator.Update(dt);
+        if (m_flashTimer > 0)
+        {
+            m_flashTimer -= dt;
+            if (m_flashTimer <= 0)
+            {
+                m_sprite.setColor(sf::Color::White);
+            }
+        }
     }
+
+    sf::FloatRect GetGlobalBounds() const { return m_sprite.getGlobalBounds(); }
+
+    bool IsHit() const {
+        return m_flashTimer > 0.0f;
+    }
+
     void Draw(sf::RenderWindow& window)
     {
         window.draw(m_sprite);

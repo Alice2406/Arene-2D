@@ -99,10 +99,10 @@ void Player::Update(sf::RenderWindow& window, float _dt)
     context.moveInputY = 0;
     context.isAttackPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space);
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) context.moveInputY += 1;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z)) context.moveInputY -= 1;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) context.moveInputX -= 1;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) context.moveInputX += 1;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down)) context.moveInputY += 1;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up)) context.moveInputY -= 1;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)) context.moveInputX -= 1;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)) context.moveInputX += 1;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::K)) takeDamage(10);
 
@@ -136,4 +136,29 @@ void Player::Update(sf::RenderWindow& window, float _dt)
     hurtbox.Update(getPosition(), sprite.getScale().x);
     hitbox.Update(getPosition(), sprite.getScale().x);
     hitbox2.Update(getPosition(), sprite.getScale().x);
+}
+
+bool Player::CheckHit(const sf::FloatRect& enemyBounds)
+{
+    if (hitbox.isActive)
+    {
+        sf::FloatRect globalHitbox1 = hitbox.bounds;
+
+        globalHitbox1.position.x = sprite.getPosition().x + hitbox.offset.x;
+        globalHitbox1.position.y = sprite.getPosition().y + hitbox.offset.y;
+
+        if (globalHitbox1.findIntersection(enemyBounds)) return true;
+    }
+
+    if (hitbox2.isActive)
+    {
+        sf::FloatRect globalHitbox2 = hitbox2.bounds;
+
+        globalHitbox2.position.x = sprite.getPosition().x + hitbox2.offset.x;
+        globalHitbox2.position.y = sprite.getPosition().y + hitbox2.offset.y;
+
+        if (globalHitbox2.findIntersection(enemyBounds)) return true;
+    }
+
+    return false;
 }
