@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <SFML/System/Vector2.hpp>
+#include "../Animation-Assets/SharedData.h"
 
 enum class BerserkerSkin {
     BEAR,
@@ -9,12 +10,6 @@ enum class BerserkerSkin {
     PADDLEFISH,
     THIEF,
     TROLL
-};
-struct AnimConfig {
-    std::string texturePath;
-    sf::Vector2i frameSize;
-    int frameCount;
-    float speed;
 };
 
 struct BerserkerData {

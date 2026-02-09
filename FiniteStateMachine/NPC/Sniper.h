@@ -68,8 +68,18 @@ public:
             }, aimState);
         fsm.Init(patrolState, context);
     }
-    void Update()
+    void setPosition(const sf::Vector2f& position)
+    {
+        m_sprite.setPosition(position);
+    }
+    sf::Sprite& getSprite() { return m_sprite; }
+    void Update(float dt)
     {
         fsm.Update(context);
+        m_animator.Update(dt);
+    }
+    void Draw(sf::RenderWindow& window)
+    {
+        window.draw(m_sprite);
     }
 };

@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="NPC\EnemyManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
@@ -143,6 +144,8 @@
     <ClInclude Include="Animation-Assets\Animator.h" />
     <ClInclude Include="Animation-Assets\AssetPath.h" />
     <ClInclude Include="Animation-Assets\ResourceManager.h" />
+    <ClInclude Include="Animation-Assets\SharedData.h" />
+    <ClInclude Include="NPC\EnemyManager.h" />
     <ClInclude Include="NpcStates\GuardState.h" />
     <ClInclude Include="NpcStates\AimState.h" />
     <ClInclude Include="NpcStates\FleeState.h" />
