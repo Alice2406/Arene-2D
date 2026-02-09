@@ -3,21 +3,21 @@
 #include "Player.h"
 #include "PlayerAttackState.h"
 
-void PlayerAttackState::Enter(PlayerContext _context)
+void PlayerAttackState::Enter(PlayerContext& _context)
 {
 	timer = 0.f;
 	std::cout << "Player enter Attack state" << std::endl;
 	getPlayer(_context)->setAnimation(getPlayer(_context)->textureAttack, 768, 192, 4, 0.15f, true, 0);
 }
 
-void PlayerAttackState::Exit(PlayerContext _context)
+void PlayerAttackState::Exit(PlayerContext& _context)
 {
 	std::cout << "Player exit Attack state" << std::endl;
 	getPlayer(_context)->hitbox.isActive = false;
 	getPlayer(_context)->hitbox2.isActive = false;
 }
 
-void PlayerAttackState::Execute(PlayerContext _context)
+void PlayerAttackState::Execute(PlayerContext& _context)
 {
 	timer += _context.deltaTime;
 	Player* p = getPlayer(_context);

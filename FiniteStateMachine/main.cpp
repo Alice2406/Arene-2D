@@ -5,7 +5,7 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode({ 800, 600 }), "Arene 2D");
+    sf::RenderWindow window(sf::VideoMode({ 1900, 800 }), "Arene 2D");
     window.setFramerateLimit(60);
     srand(time(NULL));
 
