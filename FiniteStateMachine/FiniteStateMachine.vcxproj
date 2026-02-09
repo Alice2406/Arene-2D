@@ -152,6 +152,12 @@
     <ClInclude Include="NpcStates\Conditions.h" />
     <ClInclude Include="NpcStates\NpcContext.h" />
     <ClInclude Include="NpcStates\PatrolState.h" />
+    <ClInclude Include="NPC\BerserkerData.h" />
+    <ClInclude Include="NPC\BerserkerDataBase.h" />
+    <ClInclude Include="NPC\SniperData.h" />
+    <ClInclude Include="NPC\SniperDataBase.h" />
+    <ClInclude Include="NPC\TankData.h" />
+    <ClInclude Include="NPC\TankDataBase.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="NPC\Sniper.h" />
     <ClInclude Include="NpcStates\ShootState.h" />

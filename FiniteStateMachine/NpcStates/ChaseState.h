@@ -22,11 +22,11 @@ namespace NpcAi
             sf::Vector2f direction = _context.playerPos - _context.npcSprite->getPosition();
             if (direction.x < 0)
             {
-                _context.npcSprite->setScale({ -1.f, 1.f });
+                _context.npcSprite->setScale({ -_context.baseScale.x, _context.baseScale.y });
             }
             else if (direction.x > 0)
             {
-                _context.npcSprite->setScale({ 1.f, 1.f });
+                _context.npcSprite->setScale({ _context.baseScale.x, _context.baseScale.y });
             }
             float length = std::sqrt((direction.x * direction.x) + (direction.y * direction.y));
 
