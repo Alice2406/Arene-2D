@@ -13,6 +13,10 @@ namespace NpcAi
         void Enter(NpcContext& _context) override
         {
             std::cout << "Enter Flee _State" << std::endl;
+            if (_context.animator)
+            {
+                _context.animator->SwitchAnimation("Walk");
+            }
         }
 
         void Execute(NpcContext& _context) override

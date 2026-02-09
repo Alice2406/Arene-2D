@@ -1,9 +1,6 @@
-#include "NPC/Berserker.h"
-#include "NPC/Sniper.h"
-#include "NPC/Tank.h"
 #include "Player.h"
+#include "NPC/EnemyManager.h" 
 #include <SFML/Graphics.hpp>
-#include <vector>
 
 int main()
 {
@@ -14,19 +11,19 @@ int main()
     sf::Clock clock;
     Player player;
 
-    std::vector<Tank*> tanks;
+    EnemyManager enemyManager;
 
-    Tank* t1 = new Tank(TankSkin::TURTLE);
-    t1->setPosition({ 400.f, 400.f });
-    t1->Init(); 
-    tanks.push_back(t1);
+    enemyManager.SpawnTank(TankSkin::TURTLE, { -10.f, -10.f });
+    enemyManager.SpawnTank(TankSkin::PANDA, { -10.f, -10.f });
+    enemyManager.SpawnBerserker(BerserkerSkin::THIEF, { -10.f, -10.f });
+    enemyManager.SpawnBerserker(BerserkerSkin::LANCER, { -10.f, -10.f });
+    enemyManager.SpawnSniper(SniperSkin::GNOLL, { -10.f, -10.f });
+    enemyManager.SpawnSniper(SniperSkin::SHAMAN, { -10.f, -10.f });
 
-    // Tank* t2 = new Tank(TankSkin::FISH);
-    // t2->Init();
-    // tanks.push_back(t2);
     while (window.isOpen())
     {
         float dt = clock.restart().asSeconds();
+
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
@@ -35,23 +32,13 @@ int main()
 
         window.clear();
 
-        player.Update(window); 
-        for (Tank* t : tanks)
-        {
-            t->context.deltaTime = dt;
-            t->context.playerPos = player.getPosition();
-            t->Update(dt);
-        }
+        player.Update(window);
+        enemyManager.Update(dt, player.getPosition());
         window.draw(player.getShape());
-
-        for (Tank* t : tanks)
-        {
-            t->Draw(window);
-        }
+        enemyManager.Draw(window);
 
         window.display();
     }
-    for (Tank* t : tanks) delete t;
 
     return 0;
 }

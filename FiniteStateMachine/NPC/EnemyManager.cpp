@@ -1,0 +1,78 @@
+#include "EnemyManager.h"
+
+EnemyManager::~EnemyManager()
+{
+    for (Tank* t : m_tanks) delete t;
+    m_tanks.clear();
+
+    for (Berserker* b : m_berserkers) delete b;
+    m_berserkers.clear();
+
+    for (Sniper* s : m_snipers) delete s;
+    m_snipers.clear();
+}
+
+void EnemyManager::SpawnTank(TankSkin skin, sf::Vector2f position)
+{
+    Tank* newTank = new Tank(skin);
+    newTank->setPosition(position);
+    newTank->Init();
+    m_tanks.push_back(newTank);
+}
+
+void EnemyManager::SpawnBerserker(BerserkerSkin skin, sf::Vector2f position)
+{
+    Berserker* newBerserker = new Berserker(skin);
+    newBerserker->setPosition(position);
+    newBerserker->Init();
+    m_berserkers.push_back(newBerserker);
+}
+
+void EnemyManager::SpawnSniper(SniperSkin skin, sf::Vector2f position)
+{
+    Sniper* newSniper = new Sniper(skin);
+    newSniper->setPosition(position);
+    newSniper->Init();
+    m_snipers.push_back(newSniper);
+}
+
+void EnemyManager::Update(float dt, sf::Vector2f playerPos)
+{
+    for (Tank* t : m_tanks)
+    {
+        t->context.deltaTime = dt;
+        t->context.playerPos = playerPos;
+        t->Update(dt);
+    }
+
+    for (Berserker* b : m_berserkers)
+    {
+        b->context.deltaTime = dt;
+        b->context.playerPos = playerPos;
+        b->Update(dt);
+    }
+
+    for (Sniper* s : m_snipers)
+    {
+        s->context.deltaTime = dt;
+        s->context.playerPos = playerPos;
+        s->Update(dt);
+    }
+}
+
+void EnemyManager::Draw(sf::RenderWindow& window)
+{
+    for (Tank* t : m_tanks)
+    {
+        t->Draw(window);
+    }
+
+    for (auto* b : m_berserkers)
+    {
+        b->Draw(window);
+    }
+    for (auto* s : m_snipers)
+    {
+        s->Draw(window);
+    }
+}
