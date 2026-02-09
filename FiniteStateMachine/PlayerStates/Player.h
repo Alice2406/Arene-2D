@@ -1,6 +1,6 @@
 #pragma once
 #include "PlayerContext.h"
-#include "../CollisionBox.h"
+#include "../Core/CollisionBox.h"
 #include "../StateMachine/StateMachine.h"
 #include "SFML/Graphics.hpp"
 

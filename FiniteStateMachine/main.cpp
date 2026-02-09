@@ -1,7 +1,6 @@
 #include "NPC/EnemyManager.h" 
-#include "NpcStates/NPC.h"
 #include "PlayerStates/Player.h"
-#include "CollisionManager.h"
+#include "Core/CollisionManager.h"
 #include <SFML/Graphics.hpp>
 
 int main()
@@ -38,7 +37,7 @@ int main()
         }
 
         window.clear();
-        colManager.CheckCollisions();
+        colManager.checkCollisions();
         player.Update(window, dt);
         enemyManager.Update(dt, player.getPosition());
         enemyManager.Draw(window);

@@ -1,5 +1,5 @@
 #include "CollisionManager.h"
-#include "PlayerStates/Player.h"
+#include "../PlayerStates/Player.h"
 #include <iostream>
 
 void CollisionManager::addHurtbox(CollisionBox* _box)
