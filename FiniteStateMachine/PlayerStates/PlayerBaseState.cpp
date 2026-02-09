@@ -2,19 +2,19 @@
 #include "Player.h"
 #include <cmath>
 
-Player* PlayerBaseState::GetPlayer(PlayerContext& _context) const
+Player* PlayerBaseState::getPlayer(PlayerContext& _context) const
 {
     return _context.player;
 }
 
-bool PlayerBaseState::HasMouvementInput(const PlayerContext& _context) const
+bool PlayerBaseState::hasMouvementInput(const PlayerContext& _context) const
 {
 	return (_context.moveInputX != 0 || _context.moveInputY != 0);
 }
 
-void PlayerBaseState::ApplyMouvement(PlayerContext& _context, float _inputX, float _inputY, float _speed) const
+void PlayerBaseState::applyMouvement(PlayerContext& _context, float _inputX, float _inputY, float _speed) const
 {
-	Player* player = GetPlayer(_context);
+	Player* player = getPlayer(_context);
 	if (!player) return;
 	
 	float magnitude = std::sqrt(_inputX * _inputX + _inputY * _inputY);

@@ -11,7 +11,7 @@ private :
 public:
 	void addHurtbox(CollisionBox* _box);
 	void addHitbox(CollisionBox* _box);
-	void CheckCollisions();
+	void checkCollisions();
 
 };
 

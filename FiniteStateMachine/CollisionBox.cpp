@@ -31,7 +31,7 @@ void CollisionBox::debugDraw(sf::RenderWindow& window)
 		}
 		else {
 			debugShape.setFillColor(sf::Color::Transparent);
-			debugShape.setOutlineColor(sf::Color(100, 100, 100)); // Gris
+			debugShape.setOutlineColor(sf::Color(100, 100, 100));
 		}
 
 		window.draw(debugShape);
