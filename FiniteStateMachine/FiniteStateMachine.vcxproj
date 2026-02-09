@@ -140,6 +140,7 @@
     <ClCompile Include="CollisionBox.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayerStates\PlayerDeadState.cpp" />
     <ClCompile Include="PlayerStates\Player.cpp" />
     <ClCompile Include="PlayerStates\PlayerAttackState.cpp" />
     <ClCompile Include="PlayerStates\PlayerBaseState.cpp" />
@@ -172,7 +173,7 @@
     <ClInclude Include="NPC\TankDataBase.h" />
     <ClInclude Include="NPC\Sniper.h" />
     <ClInclude Include="NpcStates\ShootState.h" />
-
+    <ClInclude Include="PlayerStates\PlayerDeadState.h" />
     <ClInclude Include="PlayerStates\Player.h" />
     <ClInclude Include="PlayerStates\PlayerAttackState.h" />
     <ClInclude Include="PlayerStates\PlayerBaseState.h" />

@@ -38,7 +38,6 @@ int main()
         }
 
         window.clear();
-
         colManager.CheckCollisions();
         player.Update(window, dt);
         enemyManager.Update(dt, player.getPosition());

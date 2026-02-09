@@ -7,20 +7,20 @@ void PlayerAttackState::Enter(PlayerContext _context)
 {
 	timer = 0.f;
 	std::cout << "Player enter Attack state" << std::endl;
-	GetPlayer(_context)->setAnimation(GetPlayer(_context)->textureAttack, 768, 192, 4, 0.15f, true, 0);
+	getPlayer(_context)->setAnimation(getPlayer(_context)->textureAttack, 768, 192, 4, 0.15f, true, 0);
 }
 
 void PlayerAttackState::Exit(PlayerContext _context)
 {
 	std::cout << "Player exit Attack state" << std::endl;
-	GetPlayer(_context)->hitbox.isActive = false;
-	GetPlayer(_context)->hitbox2.isActive = false;
+	getPlayer(_context)->hitbox.isActive = false;
+	getPlayer(_context)->hitbox2.isActive = false;
 }
 
 void PlayerAttackState::Execute(PlayerContext _context)
 {
 	timer += _context.deltaTime;
-	Player* p = GetPlayer(_context);
+	Player* p = getPlayer(_context);
 
 	if (timer >= 0.f && timer < 0.60f)
 	{
@@ -39,8 +39,8 @@ void PlayerAttackState::Execute(PlayerContext _context)
         p->hitbox2.isActive = false;
     }
 
-	if (HasMouvementInput(_context)) {
-		ApplyMouvement(_context, _context.moveInputX, _context.moveInputY, 200.0f);
+	if (hasMouvementInput(_context)) {
+		applyMouvement(_context, _context.moveInputX, _context.moveInputY, 200.0f);
 	}
 
 }

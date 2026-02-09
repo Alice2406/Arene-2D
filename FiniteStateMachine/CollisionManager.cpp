@@ -1,4 +1,5 @@
 #include "CollisionManager.h"
+#include "PlayerStates/Player.h"
 #include <iostream>
 
 void CollisionManager::addHurtbox(CollisionBox* _box)
@@ -11,7 +12,7 @@ void CollisionManager::addHitbox(CollisionBox* _box)
 	hitboxes.push_back(_box);
 }
 
-void CollisionManager::CheckCollisions()
+void CollisionManager::checkCollisions()
 {
     for (auto* attack : hitboxes) {
         if (!attack->isActive) continue;
@@ -23,6 +24,12 @@ void CollisionManager::CheckCollisions()
 
             if (attack->bounds.findIntersection(target->bounds)) {
                 std::cout << "COLLISION DETECTEE !" << std::endl;
+
+                Player* victim = static_cast<Player*>(target->owner);
+
+                if (victim) {
+                    victim->takeDamage(10);
+                }
             }
         }
     }

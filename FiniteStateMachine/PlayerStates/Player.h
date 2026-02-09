@@ -7,35 +7,46 @@
 class Player
 {
 private:
-	sf::IntRect currentRect;
-	int frameWidth, frameHeight, frameCount;
-	int currentFrame = 0;
-	float animationTimer = 0.0f;
-	float animationSpeed;
-	bool isLooping;
+    // Animation
+    sf::IntRect currentRect;
+    int frameWidth, frameHeight, frameCount;
+    int currentFrame = 0;
+    float animationTimer = 0.0f;
+    float animationSpeed;
+    bool isLooping;
 
-	float speed;
-	sf::Vector2f velocity;
+    // Statistiques & Gameplay
+    float speed;
+    int hp = 100;
+    int maxHp = 100;
+    bool isInvulnerable = false;
+    float invulnTimer = 0.f;
 
 public:
-	sf::Texture textureIdle;
-	sf::Texture textureRun;
-	sf::Texture textureAttack;
-	sf::Sprite sprite;
+    // Assets
+    sf::Texture textureIdle, textureRun, textureAttack, textureDeath;
+    sf::Sprite sprite;
 
-	CollisionBox hurtbox;
-	CollisionBox hitbox;
-	CollisionBox hitbox2;
-	
-	Player();
+    // Physique
+    CollisionBox hurtbox;
+    CollisionBox hitbox;
+    CollisionBox hitbox2;
 
-	sf::Vector2f getPosition();
-	void Update(sf::RenderWindow& window, float _dt);
-	void setAnimation(const sf::Texture& tex, int w, int h, int count, float speed, bool loop, int row);
-	sf::Sprite& getSprite() { return sprite; }
+    Player();
 
-	PlayerContext context;
-	FSM::StateMachine<PlayerContext> fsm;
+    // Getters / Setters
+    sf::Vector2f getPosition() const { return sprite.getPosition(); }
+    int getCurrentFrame() const { return currentFrame; }
+    int getFrameCount() const { return frameCount; }
+    int getHp() const { return hp; }
+    sf::Sprite& getSprite() { return sprite; }
+
+    // Méthodes principales
+    void takeDamage(int damage);
+    void setAnimation(const sf::Texture& tex, int w, int h, int count, float speed, bool loop, int row);
+    void Update(sf::RenderWindow& window, float _dt);
+    
+
+    PlayerContext context;
+    FSM::StateMachine<PlayerContext> fsm;
 };
-
-

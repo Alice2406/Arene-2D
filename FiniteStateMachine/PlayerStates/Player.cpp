@@ -2,121 +2,138 @@
 #include "PlayerMoveState.h"
 #include "PlayerIdleState.h"
 #include "PlayerAttackState.h"
+#include "PlayerDeadState.h"
 #include <iostream>
 
-Player::Player() : frameWidth(0), frameHeight(0), frameCount(0), 
-currentFrame(0), animationTimer(0.f), animationSpeed(0.1f), isLooping(true), speed(200.0f),
-sprite(textureIdle), 
-hurtbox({ 35.f, 50.f }, { 0.f, 10.f }), hitbox({ 0.f, 0.f }, { 0.f, 0.f }),
-hitbox2({ 0.f, 0.f }, { 0.f, 0.f }) {
+Player::Player() :
+    frameWidth(0), frameHeight(0), frameCount(0), speed(200.0f),
+    animationSpeed(0.1f), isLooping(false),
+    sprite(textureIdle),
+    hurtbox({ 35.f, 50.f }, { 0.f, 10.f }),
+    hitbox({ 0.f, 0.f }, { 0.f, 0.f }),
+    hitbox2({ 0.f, 0.f }, { 0.f, 0.f })
+{
+    context.player = this;
 
-	context.player = this;
+    hurtbox.owner = this;
+    hitbox.owner = this;
+    hitbox2.owner = this;
+    hitbox.isActive = false;
+    hitbox2.isActive = false;
 
-	hurtbox.owner = this;
-	hitbox.owner = this;
-	hitbox2.owner = this;
+    if (!textureIdle.loadFromFile("../Assets/Player/Warrior_Idle.png")) {
+        std::cerr << "Erreur : Impossible de charger Warrior_Idle.png" << std::endl;
+    }
+    if (!textureRun.loadFromFile("../Assets/Player/Warrior_Run.png")) {
+        std::cerr << "Erreur : Impossible de charger Warrior_Run.png" << std::endl;
+    }
+    if (!textureAttack.loadFromFile("../Assets/Player/Warrior_Attack1.png")) {
+        std::cerr << "Erreur : Impossible de charger Warrior_Attack1.png" << std::endl;
+    }
+    if (!textureDeath.loadFromFile("../Assets/Player/Dust_02.png")) {
+        std::cerr << "Erreur : Impossible de charger Dust_02.png" << std::endl;
+    }
 
-	hitbox.isActive = false;
-	hitbox2.isActive = false;
+    sprite.setTexture(textureIdle);
+    sprite.setPosition({ 400, 300 });
 
-	sprite.setPosition({ 400, 300 });
+    auto* idle = fsm.CreateState<PlayerIdleState>();
+    auto* move = fsm.CreateState<PlayerMoveState>();
+    auto* attack = fsm.CreateState<PlayerAttackState>();
+    auto* dead = fsm.CreateState<PlayerDeadState>();
 
-	if (!textureIdle.loadFromFile("../Assets/Player/Warrior_Idle.png")) {
-		std::cerr << "Erreur : Impossible de charger Warrior_Idle.png" << std::endl;
-	}
-	if (!textureRun.loadFromFile("../Assets/Player/Warrior_Run.png")) {
-		std::cerr << "Erreur : Impossible de charger Warrior_Run.png" << std::endl;
-	}
-	if (!textureAttack.loadFromFile("../Assets/Player/Warrior_Attack1.png")) {
-		std::cerr << "Erreur : Impossible de charger Warrior_Attack1.png" << std::endl;
-	}
+    auto isDead = [](PlayerContext _c) { return _c.player->getHp() <= 0; };
+    idle->AddTransition(isDead, dead);
+    move->AddTransition(isDead, dead);
+    attack->AddTransition(isDead, dead);
 
-	sprite.setTexture(textureIdle);
+    idle->AddTransition([](PlayerContext _c) { return _c.isAttackPressed; }, attack);
+    idle->AddTransition([](PlayerContext _c) { return (_c.moveInputX != 0 || _c.moveInputY != 0); }, move);
 
-	PlayerIdleState* idle = fsm.CreateState<PlayerIdleState>();
-	PlayerMoveState* move = fsm.CreateState<PlayerMoveState>();
-	PlayerAttackState* attack = fsm.CreateState<PlayerAttackState>();
+    move->AddTransition([](PlayerContext _c) { return _c.isAttackPressed; }, attack);
+    move->AddTransition([](PlayerContext _c) { return (_c.moveInputX == 0 && _c.moveInputY == 0); }, idle);
 
-	idle->AddTransition([this](PlayerContext _c) { return (_c.moveInputX != 0 || _c.moveInputY != 0); }, move);
-	idle->AddTransition([](PlayerContext _c) { return _c.isAttackPressed; }, attack);
+    attack->AddTransition([attack](PlayerContext _c) {
+        return attack->IsFinished() && (_c.moveInputX == 0 && _c.moveInputY == 0);
+        }, idle);
+    attack->AddTransition([attack](PlayerContext _c) {
+        return attack->IsFinished() && (_c.moveInputX != 0 || _c.moveInputY != 0);
+        }, move);
 
-	move->AddTransition([this](PlayerContext _c) { return (_c.moveInputX == 0 && _c.moveInputY == 0); }, idle);
-	move->AddTransition([](PlayerContext _c) { return _c.isAttackPressed; }, attack);
-
-	attack->AddTransition([attack](PlayerContext _c) { return attack->IsFinished() && (_c.moveInputX == 0 && _c.moveInputY == 0); }, idle);
-	attack->AddTransition([attack](PlayerContext _c) { return attack->IsFinished() && (_c.moveInputX != 0 || _c.moveInputY != 0); }, move);
-
-	fsm.Init(idle, context);
+    fsm.Init(idle, context);
 }
 
-sf::Vector2f Player::getPosition()
+
+void Player::takeDamage(int damage)
 {
-	return sprite.getPosition();
-}
-
-void Player::Update(sf::RenderWindow& window, float _dt)
-{
-	context.deltaTime = _dt;
-	context.moveInputX = 0;
-	context.moveInputY = 0;
-	context.isAttackPressed = false;
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-		context.moveInputY += 1;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z))
-		context.moveInputY -= 1;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q))
-		context.moveInputX -= 1;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-		context.moveInputX += 1;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
-		context.isAttackPressed = true;
-
-	if (context.moveInputX < 0) {
-		sprite.setScale({ -1.f, 1.f });
-	}
-	else if (context.moveInputX > 0) {
-		sprite.setScale({ 1.f, 1.f });
-	}
-
-	fsm.Update(context);
-
-	if (frameCount > 0) {
-		animationTimer += _dt;
-		if (animationTimer >= animationSpeed) {
-			animationTimer = 0.f;
-			currentFrame++;
-
-			if (currentFrame >= frameCount) {
-				currentFrame = isLooping ? 0 : frameCount - 1;
-			}
-
-			currentRect.position.x = currentFrame * frameWidth;
-			sprite.setTextureRect(currentRect);
-		}
-	}
-
-	hurtbox.Update(getPosition(), sprite.getScale().x);
-	hitbox.Update(getPosition(), sprite.getScale().x);
-	hitbox2.Update(getPosition(), sprite.getScale().x);
+    if (isInvulnerable || hp <= 0) return;
+    hp -= damage;
+    std::cout << "HP: " << hp << "/" << maxHp << std::endl;
+    if (hp > 0) {
+        isInvulnerable = true;
+        invulnTimer = 0.5f;
+    }
 }
 
 void Player::setAnimation(const sf::Texture& tex, int w, int h, int count, float speed, bool loop, int row)
 {
-	sprite.setTexture(tex);
+    sprite.setTexture(tex);
+    frameWidth = w / count;
+    frameHeight = h;
+    frameCount = count;
+    animationSpeed = speed;
+    isLooping = loop;
+    currentFrame = 0;
+    animationTimer = 0.f;
 
-	frameWidth = w / count;
-	frameHeight = h;
-	frameCount = count;
-	animationSpeed = speed;
-	isLooping = loop;
+    currentRect.size = { frameWidth, frameHeight };
+    currentRect.position = { 0, row * h };
+    sprite.setTextureRect(currentRect);
+    sprite.setOrigin({ frameWidth / 2.f, h / 2.f });
+}
 
-	currentFrame = 0;
-	animationTimer = 0.f;
+void Player::Update(sf::RenderWindow& window, float _dt)
+{
+    context.deltaTime = _dt;
+    context.moveInputX = 0;
+    context.moveInputY = 0;
+    context.isAttackPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space);
 
-	currentRect.size = { frameWidth, frameHeight };
-	currentRect.position = { 0, row * h };
-	sprite.setTextureRect(currentRect);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) context.moveInputY += 1;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z)) context.moveInputY -= 1;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) context.moveInputX -= 1;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) context.moveInputX += 1;
 
-	sprite.setOrigin({ frameWidth / 2.f, h / 2.f });
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::K)) takeDamage(10);
+
+    if (context.moveInputX != 0) sprite.setScale({ (float)context.moveInputX, 1.f });
+
+    fsm.Update(context);
+
+    if (frameCount > 0) {
+        animationTimer += _dt;
+        if (animationTimer >= animationSpeed) {
+            animationTimer = 0.f;
+            currentFrame++;
+            if (currentFrame >= frameCount) {
+                currentFrame = isLooping ? 0 : frameCount - 1;
+            }
+            currentRect.position.x = currentFrame * frameWidth;
+            sprite.setTextureRect(currentRect);
+        }
+    }
+
+    if (isInvulnerable) {
+        invulnTimer -= _dt;
+        sprite.setColor(((int)(invulnTimer * 10) % 2 == 0) ? sf::Color::Transparent : sf::Color::White);
+
+        if (invulnTimer <= 0) {
+            isInvulnerable = false;
+            sprite.setColor(sf::Color::White);
+        }
+    }
+
+    hurtbox.Update(getPosition(), sprite.getScale().x);
+    hitbox.Update(getPosition(), sprite.getScale().x);
+    hitbox2.Update(getPosition(), sprite.getScale().x);
 }
