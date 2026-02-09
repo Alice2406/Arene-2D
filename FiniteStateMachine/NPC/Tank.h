@@ -40,8 +40,8 @@ public:
         std::string pathGuard = "";
         std::string pathAttack = "";
 
-        int framesWalk = 1;
-        int framesAttack = 1;
+        int framesWalk = 7;
+        int framesAttack = 10;
         float speedWalk = 0.1f;
         switch (skinType)
         {
@@ -50,8 +50,9 @@ public:
             pathWalk = AssetPaths::Tank::Turtle::WALK;
             pathGuard = AssetPaths::Tank::Turtle::GUARD;
             pathAttack = AssetPaths::Tank::Turtle::ATTACK;
-            framesWalk = 4;
-            framesAttack = 3;
+            framesWalk = 7;
+            framesAttack = 10;
+            m_sprite.setScale({ 0.7f , 0.7f});
             break;
         }
 
@@ -62,13 +63,13 @@ public:
         sf::Texture& tGuard = m_resources.GetTexture(pathGuard);
         sf::Texture& tAttack = m_resources.GetTexture(pathAttack);
 
-        m_animator.AddAnimation("Idle", tIdle, { 32,32 }, 2, 0.5f, true);
-        m_animator.AddAnimation("Walk", tWalk, { 32,32 }, framesWalk, speedWalk);
-        m_animator.AddAnimation("Guard", tGuard, { 32,32 }, 1, 1.0f);
-        m_animator.AddAnimation("Attack", tAttack, { 64,64 }, framesAttack, 0.1f, false);
+        m_animator.AddAnimation("Idle", tIdle, { 320,320 }, 10, 0.5f, true);
+        m_animator.AddAnimation("Walk", tWalk, { 320,320 }, framesWalk, speedWalk);
+        m_animator.AddAnimation("Guard", tGuard, { 320,320 }, 6, 1.0f);
+        m_animator.AddAnimation("Attack", tAttack, { 320,320 }, framesAttack, 0.1f, true);
 
         m_animator.SwitchAnimation("Idle");
-        m_sprite.setOrigin({ 16, 16 });
+        m_sprite.setOrigin({ 160, 160 });
     }
     void Init()
     {
@@ -115,7 +116,6 @@ public:
     }
     void Draw(sf::RenderWindow& window)
     {
-        m_sprite.setTextureRect(sf::IntRect({ 0, 0 }, { 200, 200 }));
         window.draw(m_sprite);
     }
 };

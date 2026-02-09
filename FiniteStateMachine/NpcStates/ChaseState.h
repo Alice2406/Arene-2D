@@ -20,7 +20,14 @@ namespace NpcAi
         void Execute(NpcContext& _context) override
         {
             sf::Vector2f direction = _context.playerPos - _context.npcSprite->getPosition();
-
+            if (direction.x < 0)
+            {
+                _context.npcSprite->setScale({ -1.f, 1.f });
+            }
+            else if (direction.x > 0)
+            {
+                _context.npcSprite->setScale({ 1.f, 1.f });
+            }
             float length = std::sqrt((direction.x * direction.x) + (direction.y * direction.y));
 
             if (length > 0)
