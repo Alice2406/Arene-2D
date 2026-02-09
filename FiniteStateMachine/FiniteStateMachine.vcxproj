@@ -136,8 +136,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation-Assets\Animator.cpp" />
+    <ClCompile Include="Animation-Assets\ResourceManager.cpp" />
     <ClCompile Include="Core\CollisionBox.cpp" />
     <ClCompile Include="Core\CollisionManager.cpp" />
+    <ClCompile Include="NPC\Berserker.cpp" />
+    <ClCompile Include="NPC\BerserkerDataBase.cpp" />
     <ClCompile Include="NPC\EnemyManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerStates\PlayerDeadState.cpp" />

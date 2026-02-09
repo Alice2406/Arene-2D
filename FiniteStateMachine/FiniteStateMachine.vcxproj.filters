@@ -1,171 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="Core\CollisionBox.cpp" />
+    <ClCompile Include="Core\CollisionManager.cpp" />
+    <ClCompile Include="NPC\EnemyManager.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayerStates\PlayerDeadState.cpp" />
+    <ClCompile Include="PlayerStates\Player.cpp" />
+    <ClCompile Include="PlayerStates\PlayerAttackState.cpp" />
+    <ClCompile Include="PlayerStates\PlayerBaseState.cpp" />
+    <ClCompile Include="PlayerStates\PlayerIdleState.cpp" />
+    <ClCompile Include="PlayerStates\PlayerMoveState.cpp" />
+    <ClCompile Include="Animation-Assets\Animator.cpp" />
+    <ClCompile Include="Animation-Assets\ResourceManager.cpp" />
+    <ClCompile Include="NPC\Berserker.cpp" />
+    <ClCompile Include="NPC\BerserkerDataBase.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerStates\Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <ClCompile Include="NPC\EnemyManager.cpp">
-=======
-    <ClCompile Include="PlayerBaseState.cpp">
->>>>>>> 4186bb3 (Added PlayerBaseState and reorganized files)
-=======
-    <ClCompile Include="PlayerStates\PlayerAttackState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerStates\PlayerBaseState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerStates\PlayerIdleState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerStates\PlayerMoveState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionManager.cpp">
->>>>>>> be93103 (Added Collisions to Player)
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="Animation-Assets\Animator.h" />
+    <ClInclude Include="Animation-Assets\AssetPath.h" />
+    <ClInclude Include="Animation-Assets\ResourceManager.h" />
+    <ClInclude Include="Animation-Assets\SharedData.h" />
+    <ClInclude Include="Core\CollisionBox.h" />
+    <ClInclude Include="Core\CollisionManager.h" />
+    <ClInclude Include="NPC\EnemyManager.h" />
+    <ClInclude Include="NpcStates\GuardState.h" />
+    <ClInclude Include="NpcStates\AimState.h" />
+    <ClInclude Include="NpcStates\FleeState.h" />
+    <ClInclude Include="NPC\Berserker.h" />
+    <ClInclude Include="NpcStates\AttackState.h" />
+    <ClInclude Include="NpcStates\ChaseState.h" />
+    <ClInclude Include="NpcStates\Conditions.h" />
+    <ClInclude Include="NpcStates\NpcContext.h" />
+    <ClInclude Include="NpcStates\PatrolState.h" />
+    <ClInclude Include="NPC\BerserkerData.h" />
+    <ClInclude Include="NPC\BerserkerDataBase.h" />
+    <ClInclude Include="NPC\SniperData.h" />
+    <ClInclude Include="NPC\SniperDataBase.h" />
+    <ClInclude Include="NPC\TankData.h" />
+    <ClInclude Include="NPC\TankDataBase.h" />
+    <ClInclude Include="NPC\Sniper.h" />
+    <ClInclude Include="NpcStates\ShootState.h" />
+    <ClInclude Include="PlayerStates\PlayerDeadState.h" />
+    <ClInclude Include="PlayerStates\Player.h" />
+    <ClInclude Include="PlayerStates\PlayerAttackState.h" />
+    <ClInclude Include="PlayerStates\PlayerBaseState.h" />
+    <ClInclude Include="PlayerStates\PlayerContext.h" />
+    <ClInclude Include="PlayerStates\PlayerIdleState.h" />
+    <ClInclude Include="PlayerStates\PlayerMoveState.h" />
+    <ClInclude Include="StateMachine\State.h" />
+    <ClInclude Include="StateMachine\StateMachine.h" />
+    <ClInclude Include="NPC\Tank.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NpcStates\PatrolState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NpcStates\ChaseState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NpcStates\NpcContext.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NpcStates\Conditions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StateMachine\State.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StateMachine\StateMachine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NpcStates\NPC.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <ClInclude Include="NpcStates\AttackState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NPC\Sniper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NPC\Berserker.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NpcStates\FleeState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NpcStates\ShootState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NpcStates\AimState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NPC\Tank.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NpcStates\GuardState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation-Assets\Animator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation-Assets\AssetPath.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation-Assets\ResourceManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NPC\TankData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NPC\TankDataBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NPC\SniperData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NPC\SniperDataBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NPC\BerserkerData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NPC\BerserkerDataBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NPC\EnemyManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation-Assets\SharedData.h">
-=======
-    <ClInclude Include="PlayerContext.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerBaseState.h">
->>>>>>> 4186bb3 (Added PlayerBaseState and reorganized files)
-=======
-    <ClInclude Include="PlayerStates\Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerStates\PlayerAttackState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerStates\PlayerBaseState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerStates\PlayerContext.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerStates\PlayerIdleState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerStates\PlayerMoveState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionManager.h">
->>>>>>> be93103 (Added Collisions to Player)
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="StateMachine\State.inl">
-      <Filter>Header Files</Filter>
-    </None>
-    <None Include="StateMachine\StateMachine.inl">
-      <Filter>Header Files</Filter>
-    </None>
+    <None Include="StateMachine\State.inl" />
+    <None Include="StateMachine\StateMachine.inl" />
   </ItemGroup>
 </Project>
