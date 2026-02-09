@@ -10,15 +10,10 @@
 #include "../Animation-Assets/Animator.h"
 #include "../Animation-Assets/AssetPath.h"
 #include "../Animation-Assets/ResourceManager.h"
+#include "TankDataBase.h"
 #include <iostream>
 using namespace NpcAi;
 
-enum class TankSkin {
-    MINOTAUR,
-    PANDA,
-    SKULL,
-    TURTLE
-};
 
 class Tank
 {
@@ -28,48 +23,30 @@ private:
     sf::Texture m_texture;
     ResourceManager m_resources;
     Animator m_animator;
+    TankData m_data;
     FSM::StateMachine<NpcContext> fsm;
 public:
     NpcContext context{};
     Tank(TankSkin skinType) : m_sprite(m_texture), m_animator(m_sprite)
     {
+        m_data = TankDatabase::GetData(skinType);
+
         context.npcSprite = &m_sprite;
         context.animator = &m_animator;
-        std::string pathIdle = "";
-        std::string pathWalk = "";
-        std::string pathGuard = "";
-        std::string pathAttack = "";
+        context.speed = m_data.moveSpeed;
 
-        int framesWalk = 7;
-        int framesAttack = 10;
-        float speedWalk = 0.1f;
-        switch (skinType)
-        {
-        case TankSkin::TURTLE:
-            pathIdle = AssetPaths::Tank::Turtle::IDLE;
-            pathWalk = AssetPaths::Tank::Turtle::WALK;
-            pathGuard = AssetPaths::Tank::Turtle::GUARD;
-            pathAttack = AssetPaths::Tank::Turtle::ATTACK;
-            framesWalk = 7;
-            framesAttack = 10;
-            m_sprite.setScale({ 0.7f , 0.7f});
-            break;
-        }
+        sf::Texture& texIdle = m_resources.GetTexture(m_data.idle.texturePath);
+        sf::Texture& texWalk = m_resources.GetTexture(m_data.walk.texturePath);
+        sf::Texture& texAttack = m_resources.GetTexture(m_data.attack.texturePath);
+        sf::Texture& texGuard = m_resources.GetTexture(m_data.guard.texturePath);
 
-        if (pathIdle.empty()) return;
-
-        sf::Texture& tIdle = m_resources.GetTexture(pathIdle);
-        sf::Texture& tWalk = m_resources.GetTexture(pathWalk);
-        sf::Texture& tGuard = m_resources.GetTexture(pathGuard);
-        sf::Texture& tAttack = m_resources.GetTexture(pathAttack);
-
-        m_animator.AddAnimation("Idle", tIdle, { 320,320 }, 10, 0.5f, true);
-        m_animator.AddAnimation("Walk", tWalk, { 320,320 }, framesWalk, speedWalk);
-        m_animator.AddAnimation("Guard", tGuard, { 320,320 }, 6, 1.0f);
-        m_animator.AddAnimation("Attack", tAttack, { 320,320 }, framesAttack, 0.1f, true);
+        m_animator.AddAnimation("Idle", texIdle, m_data.idle.frameSize, m_data.idle.frameCount, m_data.idle.speed);
+        m_animator.AddAnimation("Walk", texWalk, m_data.walk.frameSize, m_data.walk.frameCount, m_data.walk.speed);
+        m_animator.AddAnimation("Attack", texAttack, m_data.attack.frameSize, m_data.attack.frameCount, m_data.attack.speed);
+        m_animator.AddAnimation("Guard", texGuard, m_data.guard.frameSize, m_data.guard.frameCount, m_data.guard.speed);
+        m_sprite.setOrigin({ m_data.idle.frameSize.x / 2.f, m_data.idle.frameSize.y / 2.f });
 
         m_animator.SwitchAnimation("Idle");
-        m_sprite.setOrigin({ 160, 160 });
     }
     void Init()
     {

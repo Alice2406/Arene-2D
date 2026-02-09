@@ -40,12 +40,11 @@ namespace NpcAi
             sf::Vector2f direction = targetpos - currentPos;
             if (direction.x < 0)
             {
-                _context.npcSprite->setScale({ -1.f, 1.f });
+                _context.npcSprite->setScale({ -_context.baseScale.x, _context.baseScale.y });
             }
-            // Sinon, s'il est à droite
             else if (direction.x > 0)
             {
-                _context.npcSprite->setScale({ 1.f, 1.f });
+                _context.npcSprite->setScale({ _context.baseScale.x, _context.baseScale.y });
             }
             float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 
