@@ -15,6 +15,7 @@
     <ClCompile Include="Animation-Assets\ResourceManager.cpp" />
     <ClCompile Include="NPC\Berserker.cpp" />
     <ClCompile Include="NPC\BerserkerDataBase.cpp" />
+    <ClCompile Include="TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation-Assets\Animator.h" />
@@ -52,6 +53,7 @@
     <ClInclude Include="StateMachine\StateMachine.h" />
     <ClInclude Include="NPC\Tank.h" />
     <ClInclude Include="NPC\EnemyProjectile.h" />
+    <ClInclude Include="TileMap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="StateMachine\State.inl" />

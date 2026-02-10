@@ -150,6 +150,7 @@
     <ClCompile Include="PlayerStates\PlayerBaseState.cpp" />
     <ClCompile Include="PlayerStates\PlayerIdleState.cpp" />
     <ClCompile Include="PlayerStates\PlayerMoveState.cpp" />
+    <ClCompile Include="TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation-Assets\Animator.h" />
@@ -187,6 +188,7 @@
     <ClInclude Include="StateMachine\State.h" />
     <ClInclude Include="StateMachine\StateMachine.h" />
     <ClInclude Include="NPC\Tank.h" />
+    <ClInclude Include="TileMap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="StateMachine\State.inl" />
