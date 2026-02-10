@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <SFML/Graphics.hpp>
-
+#include "../NPC/EnemyProjectile.h"
 #include "Tank.h"
 #include "Berserker.h"
 #include "Sniper.h"
@@ -13,6 +13,7 @@ private:
     std::vector<Tank*> m_tanks;
     std::vector<Berserker*> m_berserkers;
     std::vector<Sniper*> m_snipers;
+    std::vector<EnemyProjectile*> m_projectiles;
 
 public:
     ~EnemyManager();

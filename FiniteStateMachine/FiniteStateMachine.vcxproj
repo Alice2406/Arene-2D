@@ -158,6 +158,7 @@
     <ClInclude Include="Animation-Assets\SharedData.h" />
     <ClInclude Include="Core\CollisionBox.h" />
     <ClInclude Include="Core\CollisionManager.h" />
+    <ClInclude Include="NPC\EnemyProjectile.h" />
     <ClInclude Include="NPC\EnemyManager.h" />
     <ClInclude Include="NpcStates\GuardState.h" />
     <ClInclude Include="NpcStates\AimState.h" />

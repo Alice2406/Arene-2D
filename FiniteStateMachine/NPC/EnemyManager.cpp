@@ -96,6 +96,7 @@ void EnemyManager::Update(float dt, Player& player)
     {
         Sniper* s = *itSniper;
 
+        s->context.projectileList = &m_projectiles;
         s->context.deltaTime = dt;
         s->context.playerPos = player.getPosition();
         s->Update(dt);
@@ -116,6 +117,28 @@ void EnemyManager::Update(float dt, Player& player)
             ++itSniper;
         }
     }
+    auto itProj = m_projectiles.begin();
+    while (itProj != m_projectiles.end())
+    {
+        EnemyProjectile* p = *itProj;
+
+        p->Update(dt);
+
+        if (player.CheckHit(p->GetGlobalBounds()))
+        {
+            p->Destroy();
+        }
+
+        if (!p->IsActive())
+        {
+            delete p;
+            itProj = m_projectiles.erase(itProj);
+        }
+        else
+        {
+            ++itProj;
+        }
+    }
 }
 
 void EnemyManager::Draw(sf::RenderWindow& window)
@@ -132,5 +155,9 @@ void EnemyManager::Draw(sf::RenderWindow& window)
     for (auto* s : m_snipers)
     {
         s->Draw(window);
+    }
+    for (auto* p : m_projectiles)
+    {
+        p->Draw(window);
     }
 }

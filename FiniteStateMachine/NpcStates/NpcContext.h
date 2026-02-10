@@ -1,5 +1,6 @@
 #pragma once
 #include "../Animation-Assets/Animator.h"
+#include "../NPC/EnemyProjectile.h"
 #include "SFML/Graphics.hpp"
 
 class NpcContext
@@ -14,4 +15,7 @@ public:
     float currentTimer = 0.0f;
     bool triggerGuard = false;
     bool isInvulnerable = false;
+    std::vector<EnemyProjectile*>* projectileList = nullptr;
+    sf::Texture* weaponTexture = nullptr;
+    AnimConfig weaponConfig;
 };

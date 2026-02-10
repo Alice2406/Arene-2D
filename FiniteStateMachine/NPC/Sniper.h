@@ -34,12 +34,13 @@ public:
         context.npcSprite = &m_sprite;
         context.animator = &m_animator;
         context.speed = m_data.moveSpeed;
-
         sf::Texture& texIdle = m_resources.GetTexture(m_data.idle.texturePath);
         sf::Texture& texWalk = m_resources.GetTexture(m_data.walk.texturePath);
         sf::Texture& texAttack = m_resources.GetTexture(m_data.attack.texturePath);
         sf::Texture& texWeapon = m_resources.GetTexture(m_data.weapon.texturePath);
 
+        context.weaponTexture = &texWeapon;
+        context.weaponConfig = m_data.weapon;
         m_animator.AddAnimation("Idle", texIdle, m_data.idle.frameSize, m_data.idle.frameCount, m_data.idle.speed);
         m_animator.AddAnimation("Walk", texWalk, m_data.walk.frameSize, m_data.walk.frameCount, m_data.walk.speed);
         m_animator.AddAnimation("Attack", texAttack, m_data.attack.frameSize, m_data.attack.frameCount, m_data.attack.speed);

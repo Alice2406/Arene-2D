@@ -51,6 +51,7 @@
     <ClInclude Include="StateMachine\State.h" />
     <ClInclude Include="StateMachine\StateMachine.h" />
     <ClInclude Include="NPC\Tank.h" />
+    <ClInclude Include="NPC\EnemyProjectile.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="StateMachine\State.inl" />

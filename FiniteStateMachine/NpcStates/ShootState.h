@@ -1,6 +1,7 @@
 #pragma once
 #include "NpcContext.h"
 #include "../StateMachine/State.h"
+#include "../NPC/EnemyProjectile.h"
 #include "SFML/Graphics.hpp"
 #include <iostream>
 
@@ -12,9 +13,19 @@ namespace NpcAi
         void Enter(NpcContext& _context) override
         {
             std::cout << "SHOOT !!!" << std::endl;
-            if (_context.animator)
+            if (_context.animator) _context.animator->SwitchAnimation("Attack");
+            if (_context.projectileList && _context.weaponTexture)
             {
-                _context.animator->SwitchAnimation("Attack");
+                sf::Vector2f startPos = _context.npcSprite->getPosition();
+
+                EnemyProjectile* newProj = new EnemyProjectile(
+                    *_context.weaponTexture,
+                    _context.weaponConfig,
+                    startPos,
+                    _context.playerPos
+                );
+
+                _context.projectileList->push_back(newProj);
             }
         }
 
