@@ -95,7 +95,7 @@ void Player::setAnimation(const sf::Texture& tex, int w, int h, int count, float
 void Player::Update(sf::RenderWindow& window, float _dt, sf::Vector2f worldBounds)
 {
     sf::Vector2f pos = sprite.getPosition();
-    sf::FloatRect bounds = sprite.getGlobalBounds(); // La vraie boîte visuelle
+    sf::FloatRect bounds = sprite.getGlobalBounds();
 
     float distOriginToLeft = pos.x - bounds.position.x;
     float distOriginToTop = pos.y - bounds.position.y;
