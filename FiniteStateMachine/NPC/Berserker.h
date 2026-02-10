@@ -84,4 +84,5 @@ public:
     {
         return m_currentHealth <= 0;
     }
+    sf::Vector2f getPosition() const { return m_sprite.getPosition(); }
 };

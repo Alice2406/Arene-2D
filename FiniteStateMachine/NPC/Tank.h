@@ -131,4 +131,5 @@ public:
     {
         window.draw(m_sprite);
     }
+    sf::Vector2f getPosition() const { return m_sprite.getPosition(); }
 };

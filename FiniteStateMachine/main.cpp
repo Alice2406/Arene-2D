@@ -15,8 +15,19 @@ int main()
     TileMap map;
     Player player;
     CollisionManager colManager;
+    sf::Texture waterTexture;
+    sf::Vector2u mapSizeInTiles = { 56, 28 };
+    sf::Vector2u tileSize = { 63, 63 };
 
-    if (!map.load("../Assets/Levels/Level1.txt", "..\\Assets\\Terrain\\Tileset\\map.png", { 64, 64 }))
+    sf::Vector2f worldBounds;
+    worldBounds.x = mapSizeInTiles.x * tileSize.x;
+    worldBounds.y = mapSizeInTiles.y * tileSize.y;
+    if (!waterTexture.loadFromFile("..\\Assets\\Terrain\\Tileset\\Water.png")) return -1;
+    waterTexture.setRepeated(true);
+    sf::Sprite oceanSprite(waterTexture);
+    oceanSprite.setTextureRect(sf::IntRect({ 0, 0 }, { 10000, 10000 }));
+    oceanSprite.setPosition({ -5000.f, -5000.f });
+    if (!map.load("../Assets/Levels/Level1.txt", "..\\Assets\\Terrain\\Tileset\\map.png", { 63, 63 }))
     {
         return -1;
     }
@@ -46,8 +57,9 @@ int main()
         window.clear();
         window.setView(camera);
         colManager.checkCollisions();
-        player.Update(window, dt);
-        enemyManager.Update(dt, player);
+        player.Update(window, dt, worldBounds);
+        enemyManager.Update(dt, player, worldBounds);
+        window.draw(oceanSprite);
         window.draw(map);
         enemyManager.Draw(window);
 

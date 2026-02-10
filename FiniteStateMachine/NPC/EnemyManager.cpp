@@ -37,7 +37,7 @@ void EnemyManager::SpawnSniper(SniperSkin skin, sf::Vector2f position)
     m_snipers.push_back(newSniper);
 }
 
-void EnemyManager::Update(float dt, Player& player)
+void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds)
 {
     auto itTank = m_tanks.begin();
     while (itTank != m_tanks.end())
@@ -46,18 +46,21 @@ void EnemyManager::Update(float dt, Player& player)
 
         t->context.deltaTime = dt;
         t->context.playerPos = player.getPosition();
+
         t->Update(dt);
+
+        keepInsideMap(t, worldBounds);
 
         sf::FloatRect enemyBounds = t->GetGlobalBounds();
         if (player.CheckHit(enemyBounds) && !t->IsHit())
         {
-            t->TakeDamage(25); 
+            t->TakeDamage(25);
         }
 
         if (t->IsDead())
         {
-            delete t; 
-            itTank = m_tanks.erase(itTank); 
+            delete t;
+            itTank = m_tanks.erase(itTank);
         }
         else
         {
@@ -72,7 +75,10 @@ void EnemyManager::Update(float dt, Player& player)
 
         b->context.deltaTime = dt;
         b->context.playerPos = player.getPosition();
+
         b->Update(dt);
+
+        keepInsideMap(b, worldBounds);
 
         sf::FloatRect enemyBounds = b->GetGlobalBounds();
         if (player.CheckHit(enemyBounds) && !b->IsHit())
@@ -99,7 +105,10 @@ void EnemyManager::Update(float dt, Player& player)
         s->context.projectileList = &m_projectiles;
         s->context.deltaTime = dt;
         s->context.playerPos = player.getPosition();
+
         s->Update(dt);
+
+        keepInsideMap(s, worldBounds);
 
         sf::FloatRect enemyBounds = s->GetGlobalBounds();
         if (player.CheckHit(enemyBounds) && !s->IsHit())
@@ -117,6 +126,7 @@ void EnemyManager::Update(float dt, Player& player)
             ++itSniper;
         }
     }
+
     auto itProj = m_projectiles.begin();
     while (itProj != m_projectiles.end())
     {
@@ -125,6 +135,12 @@ void EnemyManager::Update(float dt, Player& player)
         p->Update(dt);
 
         if (player.CheckHit(p->GetGlobalBounds()))
+        {
+            p->Destroy();
+        }
+
+        sf::Vector2f pos = p->getPosition();
+        if (pos.x < 0 || pos.y < 0 || pos.x > worldBounds.x || pos.y > worldBounds.y)
         {
             p->Destroy();
         }
@@ -140,7 +156,6 @@ void EnemyManager::Update(float dt, Player& player)
         }
     }
 }
-
 void EnemyManager::Draw(sf::RenderWindow& window)
 {
     for (Tank* t : m_tanks)

@@ -92,8 +92,33 @@ void Player::setAnimation(const sf::Texture& tex, int w, int h, int count, float
     sprite.setOrigin({ frameWidth / 2.f, h / 2.f });
 }
 
-void Player::Update(sf::RenderWindow& window, float _dt)
+void Player::Update(sf::RenderWindow& window, float _dt, sf::Vector2f worldBounds)
 {
+    sf::Vector2f pos = sprite.getPosition();
+    sf::FloatRect bounds = sprite.getGlobalBounds(); // La vraie boîte visuelle
+
+    float distOriginToLeft = pos.x - bounds.position.x;
+    float distOriginToTop = pos.y - bounds.position.y;
+
+    float distOriginToRight = bounds.size.x - distOriginToLeft;
+    float distOriginToBottom = bounds.size.y - distOriginToTop;
+
+    if (pos.x < distOriginToLeft) {
+        pos.x = distOriginToLeft;
+    }
+    else if (pos.x > worldBounds.x - distOriginToRight) {
+        pos.x = worldBounds.x - distOriginToRight;
+    }
+
+    if (pos.y < distOriginToTop) {
+        pos.y = distOriginToTop;
+    }
+    else if (pos.y > worldBounds.y - distOriginToBottom) {
+        pos.y = worldBounds.y - distOriginToBottom;
+    }
+
+    sprite.setPosition(pos);
+
     context.deltaTime = _dt;
     context.moveInputX = 0;
     context.moveInputY = 0;

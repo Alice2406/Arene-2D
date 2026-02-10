@@ -15,7 +15,6 @@
     <ClCompile Include="Animation-Assets\ResourceManager.cpp" />
     <ClCompile Include="NPC\Berserker.cpp" />
     <ClCompile Include="NPC\BerserkerDataBase.cpp" />
-    <ClCompile Include="TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation-Assets\Animator.h" />

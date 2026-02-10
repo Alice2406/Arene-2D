@@ -65,4 +65,5 @@ public:
     sf::FloatRect GetGlobalBounds() const { return m_sprite.getGlobalBounds(); }
     bool IsActive() const { return m_active; }
     void Destroy() { m_active = false; }
+    sf::Vector2f getPosition() const { return m_sprite.getPosition(); }
 };
