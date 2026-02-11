@@ -15,8 +15,12 @@
     <ClCompile Include="Animation-Assets\ResourceManager.cpp" />
     <ClCompile Include="NPC\Berserker.cpp" />
     <ClCompile Include="NPC\BerserkerDataBase.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Obstacles\Obstacle.cpp" />
     <ClCompile Include="Obstacles\ObstacleManager.cpp" />
+=======
+    <ClCompile Include="Core\HealthComponent.cpp" />
+>>>>>>> 4dbe90e (Added HealthComponent)
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation-Assets\Animator.h" />
@@ -55,8 +59,12 @@
     <ClInclude Include="NPC\Tank.h" />
     <ClInclude Include="NPC\EnemyProjectile.h" />
     <ClInclude Include="TileMap.h" />
+<<<<<<< HEAD
     <ClInclude Include="Obstacles\Obstacle.h" />
     <ClInclude Include="Obstacles\ObstacleManager.h" />
+=======
+    <ClInclude Include="Core\HealthComponent.h" />
+>>>>>>> 4dbe90e (Added HealthComponent)
   </ItemGroup>
   <ItemGroup>
     <None Include="StateMachine\State.inl" />

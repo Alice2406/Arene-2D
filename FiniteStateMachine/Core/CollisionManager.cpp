@@ -28,7 +28,7 @@ void CollisionManager::checkCollisions()
                 Player* victim = static_cast<Player*>(target->owner);
 
                 if (victim) {
-                    victim->takeDamage(10);
+                    victim->handleDamage(10);
                 }
             }
         }
