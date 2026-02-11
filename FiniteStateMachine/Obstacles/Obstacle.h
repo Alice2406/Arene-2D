@@ -9,9 +9,9 @@ enum class ObstacleType {
     TREE, //solide, obstacle
     SHEEP1, //anime, obstacle
 	SHEEP2, //anime, obstacle
-	BUSHES1, //anime, pas obstacle
-	BUSHES3, //anime, pas obstacle
-	BUSHES4, //anime, pas obstacle
+	BUSHE1, //anime, pas obstacle
+	BUSHE2, //anime, pas obstacle
+	BUSHE3, //anime, pas obstacle
 };
 
 class Obstacle

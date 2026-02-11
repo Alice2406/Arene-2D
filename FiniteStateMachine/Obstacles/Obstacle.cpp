@@ -44,7 +44,7 @@ Obstacle::Obstacle(ObstacleType type, const sf::Texture& texture, sf::Vector2f p
         m_frameSize = { 128, 128 }; 
 		m_sprite.setTextureRect(sf::IntRect({ 0, 0 }, { m_frameSize.x, m_frameSize.y }));
         break;
-	case ObstacleType::BUSHES1:
+	case ObstacleType::BUSHE1:
         m_isSolid = true;
 		m_isAnimated = true;
         m_frameCount = 8;    
@@ -52,7 +52,7 @@ Obstacle::Obstacle(ObstacleType type, const sf::Texture& texture, sf::Vector2f p
 		m_frameSize = { 128, 128 }; 
         m_sprite.setTextureRect(sf::IntRect({ 0, 0 }, { m_frameSize.x, m_frameSize.y }));
 		break;
-	case ObstacleType::BUSHES3:
+	case ObstacleType::BUSHE2:
         m_isSolid = false;
         m_isAnimated = true;
         m_frameCount = 8;   
@@ -60,7 +60,7 @@ Obstacle::Obstacle(ObstacleType type, const sf::Texture& texture, sf::Vector2f p
         m_frameSize = { 128, 128 }; 
         m_sprite.setTextureRect(sf::IntRect({ 0, 0 }, { m_frameSize.x, m_frameSize.y }));
         break;
-    case ObstacleType::BUSHES4:
+    case ObstacleType::BUSHE3:
         m_isSolid = false;
         m_isAnimated = true;
         m_frameCount = 8;   

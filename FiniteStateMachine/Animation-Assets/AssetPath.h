@@ -5,7 +5,25 @@ namespace AssetPaths
 {
     namespace Environment
     {
-        static const std::string ROCK = "..\\Assets\\Terrain\\Decorations\\Rocks\\Rock3.png";
+        static const std::string TILESET_WATER = "..\\Assets\\Terrain\\Tileset\\Water.png";
+        static const std::string TILESET_GROUND = "..\\Assets\\Terrain\\Tileset\\map.png";
+        static const std::string LEVEL_1_DATA = "..\\Assets\\Levels\\Level1.txt";
+
+        static const std::string ROCK1 = "..\\Assets\\Terrain\\Decorations\\Rocks\\Rock1.png";
+        static const std::string ROCK2 = "..\\Assets\\Terrain\\Decorations\\Rocks\\Rock2.png";
+        static const std::string ROCK3 = "..\\Assets\\Terrain\\Decorations\\Rocks\\Rock3.png";
+        static const std::string ROCK4 = "..\\Assets\\Terrain\\Decorations\\Rocks\\Rock4.png";
+        static const std::string TREE = "..\\Assets\\Terrain\\Decorations\\Tree.png";
+
+        static const std::string BUSH1 = "..\\Assets\\Terrain\\Decorations\\Bushes\\Bushe1.png";
+        static const std::string BUSH2 = "..\\Assets\\Terrain\\Decorations\\Bushes\\Bushe3.png";
+        static const std::string BUSH3 = "..\\Assets\\Terrain\\Decorations\\Bushes\\Bushe4.png";
+    }
+
+    namespace Animals
+    {
+        static const std::string SHEEP_WHITE = "..\\Assets\\Terrain\\Decorations\\Sheep_Grass.png";
+        static const std::string SHEEP_BLACK = "..\\Assets\\Terrain\\Decorations\\Sheep_Idle.png";
     }
     namespace Tank
     {
