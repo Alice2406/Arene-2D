@@ -25,6 +25,7 @@ private:
     float m_flashTimer = 0.0f;
     const float FLASH_DURATION = 0.15f;
     FSM::StateMachine<NpcContext> fsm;
+    sf::Texture* m_ptrProjectileTexture = nullptr;
 public:
     NpcContext context{};
     Sniper(SniperSkin skinType, sf::Texture &texture) : m_sprite(m_texture), m_animator(m_sprite)
@@ -116,4 +117,7 @@ public:
         return m_currentHealth <= 0;
     }
     sf::Vector2f getPosition() const { return m_sprite.getPosition(); }
+    void SetProjectileTexture(sf::Texture& tex) {
+        m_ptrProjectileTexture = &tex;
+    }
 };

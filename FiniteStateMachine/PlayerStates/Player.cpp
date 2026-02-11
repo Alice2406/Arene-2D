@@ -6,7 +6,7 @@
 #include <iostream>
 
 Player::Player() :
-    frameWidth(0), frameHeight(0), frameCount(0), speed(200.0f),
+    frameWidth(0), frameHeight(0), frameCount(0), speed(300.0f),
     animationSpeed(0.1f), isLooping(false),
     sprite(textureIdle),
     hurtbox({ 35.f, 50.f }, { 0.f, 10.f }),

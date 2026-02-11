@@ -40,7 +40,7 @@ void PlayerAttackState::Execute(PlayerContext& _context)
     }
 
 	if (hasMouvementInput(_context)) {
-		applyMouvement(_context, _context.moveInputX, _context.moveInputY, 200.0f);
+		applyMouvement(_context, _context.moveInputX, _context.moveInputY, 300.0f);
 	}
 
 }

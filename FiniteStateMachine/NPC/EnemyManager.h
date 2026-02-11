@@ -15,7 +15,7 @@ private:
     std::vector<Sniper*> m_snipers;
     std::vector<EnemyProjectile*> m_projectiles;
     ResourceManager m_resources;
-
+    int m_waveNumber = 0;
 public:
     ~EnemyManager();
     template <typename T>
@@ -42,6 +42,7 @@ public:
 
         enemy->setPosition(pos);
     }
+    void HandleWaves(sf::Vector2f mapSize);
     void SpawnTank(TankSkin skin, sf::Vector2f position, sf::Vector2f mapSize);
     void SpawnBerserker(BerserkerSkin skin, sf::Vector2f position, sf::Vector2f mapSize);
     void SpawnSniper(SniperSkin skin, sf::Vector2f position, sf::Vector2f mapSize);

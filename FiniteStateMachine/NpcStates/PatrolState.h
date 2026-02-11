@@ -12,11 +12,13 @@ namespace NpcAi
     {
     private:
         sf::Vector2f targetpos;
+        sf::Vector2f m_lastPosition;
+        float m_stuckTimer;
         sf::Vector2f GetRandomPos(sf::Vector2f bounds)
         {
             if (bounds.x < 100.f || bounds.y < 100.f)
             {
-                std::cout << "[ERREUR] worldBounds est vide (0,0) dans PatrolState !" << std::endl;
+                std::cout << "[ERREUR] worldBounds est vide (0,0) !" << std::endl;
                 targetpos = sf::Vector2f(200.f, 200.f);
                 return targetpos;
             }
@@ -43,9 +45,31 @@ namespace NpcAi
             }
             std::cout << "Enter Patrol _State" << std::endl;
             PickNewDestination(_context);
+            m_stuckTimer = 0.0f;
+            m_lastPosition = _context.npcSprite->getPosition();
         }
         void Execute(NpcContext& _context) override
         {
+            m_stuckTimer += _context.deltaTime;
+
+            if (m_stuckTimer >= 1.0f)
+            {
+                sf::Vector2f currentPos = _context.npcSprite->getPosition();
+
+                float dx = currentPos.x - m_lastPosition.x;
+                float dy = currentPos.y - m_lastPosition.y;
+                float movedDistance = std::sqrt(dx * dx + dy * dy);
+
+                if (movedDistance < 10.0f)
+                {
+                    PickNewDestination(_context);
+                    m_stuckTimer = 0.0f;
+                    m_lastPosition = _context.npcSprite->getPosition();
+                    return; 
+                }
+                m_stuckTimer = 0.0f;
+                m_lastPosition = currentPos;
+            }
             sf::Vector2f currentPos = _context.npcSprite->getPosition();
             sf::Vector2f direction = targetpos - currentPos;
             if (direction.x < 0)

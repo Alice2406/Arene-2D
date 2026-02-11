@@ -16,7 +16,7 @@ int main()
     Player player;
     CollisionManager colManager;
     sf::Texture waterTexture;
-    sf::Vector2u mapSizeInTiles = { 56, 28 };
+    sf::Vector2u mapSizeInTiles = { 35, 20 };
     sf::Vector2u tileSize = { 63, 63 };
 
     sf::Vector2f worldBounds;
@@ -37,20 +37,6 @@ int main()
 
     EnemyManager enemyManager;
 
-
-    for (int i = 0; i < 5; i++)
-    {
-        int randomIndex = rand() % (int)TankSkin::COUNT;
-        TankSkin tankSkin = static_cast<TankSkin>(randomIndex);
-        enemyManager.SpawnTank(tankSkin, { -10.f, -10.f }, worldBounds);
-        randomIndex = rand() % (int)SniperSkin::COUNT;
-        SniperSkin sniperSkin = static_cast<SniperSkin>(randomIndex);
-        enemyManager.SpawnSniper(sniperSkin, { -10.f, -10.f }, worldBounds);
-        randomIndex = rand() % (int)BerserkerSkin::COUNT;
-        BerserkerSkin berserkerSkin = static_cast<BerserkerSkin>(randomIndex);
-        enemyManager.SpawnBerserker(berserkerSkin, { -10.f, -10.f }, worldBounds);
-    }
-
     while (window.isOpen())
     {
         float dt = clock.restart().asSeconds();
@@ -64,6 +50,7 @@ int main()
         window.clear();
         window.setView(camera);
         colManager.checkCollisions();
+        enemyManager.HandleWaves(worldBounds);
         player.Update(window, dt, worldBounds);
         enemyManager.Update(dt, player, worldBounds);
         window.draw(oceanSprite);
@@ -82,10 +69,7 @@ int main()
 }
 
 /*
-* vie player
 * menu fin
-* spawn ennemis par vague/aleatoire
 * collision ennemis
 * obstacles statiques
-* 
 */

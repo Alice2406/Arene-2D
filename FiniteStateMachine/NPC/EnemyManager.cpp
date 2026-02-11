@@ -55,18 +55,31 @@ void EnemyManager::SpawnBerserker(BerserkerSkin skin, sf::Vector2f position, sf:
 
 void EnemyManager::SpawnSniper(SniperSkin skin, sf::Vector2f position, sf::Vector2f mapSize)
 {
+    std::string projectilePath;
     std::string path;
+
     switch (skin) {
-    case SniperSkin::GNOLL: path = AssetPaths::Sniper::Gnoll::WALK; break;
-    case SniperSkin::HARPOONFISH:  path = AssetPaths::Sniper::HarpoonFish::WALK; break;
-    case SniperSkin::SHAMAN:  path = AssetPaths::Sniper::Shaman::WALK; break;
+    case SniperSkin::GNOLL: 
+        path = AssetPaths::Sniper::Gnoll::WALK; break;
+        projectilePath = AssetPaths::Sniper::Gnoll::WEAPON;
+        break;
+    case SniperSkin::HARPOONFISH:  
+        path = AssetPaths::Sniper::HarpoonFish::WALK; break;
+        projectilePath = AssetPaths::Sniper::HarpoonFish::WEAPON;
+        break;
+    case SniperSkin::SHAMAN:  
+        path = AssetPaths::Sniper::Shaman::WALK; break;
+        projectilePath = AssetPaths::Sniper::Shaman::WEAPON;
+        break;
     }
 
     sf::Texture& texture = m_resources.GetTexture(path);
+    sf::Texture& projectileTexture = m_resources.GetTexture(projectilePath);
 
     Sniper* newSniper = new Sniper(skin, texture);
     newSniper->context.worldBounds = mapSize;
     newSniper->setPosition(position);
+    newSniper->SetProjectileTexture(projectileTexture);
     newSniper->Init();
     m_snipers.push_back(newSniper);
 }
@@ -188,6 +201,38 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds)
         else
         {
             ++itProj;
+        }
+    }
+}
+void EnemyManager::HandleWaves(sf::Vector2f mapSize)
+{
+    if (m_tanks.empty() && m_berserkers.empty() && m_snipers.empty())
+    {
+        m_waveNumber++; 
+        std::cout << "--- DEBUT VAGUE " << m_waveNumber << " ---" << std::endl;
+
+
+        int enemyCount = 5 + (m_waveNumber * 2);
+
+        for (int i = 0; i < enemyCount; i++)
+        {
+            int type = rand() % 3;
+
+            if (type == 0) 
+            {
+                int skinIdx = rand() % (int)TankSkin::COUNT;
+                SpawnTank((TankSkin)skinIdx, { -10.f, -10.f }, mapSize);
+            }
+            else if (type == 1) 
+            {
+                int skinIdx = rand() % (int)SniperSkin::COUNT;
+                SpawnSniper((SniperSkin)skinIdx, { -10.f, -10.f }, mapSize);
+            }
+            else 
+            {
+                int skinIdx = rand() % (int)BerserkerSkin::COUNT;
+                SpawnBerserker((BerserkerSkin)skinIdx, { -10.f, -10.f }, mapSize);
+            }
         }
     }
 }

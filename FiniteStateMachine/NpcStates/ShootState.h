@@ -18,6 +18,7 @@ namespace NpcAi
             {
                 sf::Vector2f startPos = _context.npcSprite->getPosition();
 
+
                 EnemyProjectile* newProj = new EnemyProjectile(
                     *_context.weaponTexture,
                     _context.weaponConfig,
