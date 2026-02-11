@@ -9,6 +9,7 @@ Player::Player() :
     frameWidth(0), frameHeight(0), frameCount(0), speed(200.0f),
     animationSpeed(0.1f), isLooping(false),
     sprite(textureIdle),
+    health(100.0f),
     hurtbox({ 35.f, 50.f }, { 0.f, 10.f }),
     hitbox({ 0.f, 0.f }, { 0.f, 0.f }),
     hitbox2({ 0.f, 0.f }, { 0.f, 0.f })
@@ -64,17 +65,6 @@ Player::Player() :
 }
 
 
-void Player::takeDamage(int damage)
-{
-    if (isInvulnerable || hp <= 0) return;
-    hp -= damage;
-    std::cout << "HP: " << hp << "/" << maxHp << std::endl;
-    if (hp > 0) {
-        isInvulnerable = true;
-        invulnTimer = 0.5f;
-    }
-}
-
 void Player::setAnimation(const sf::Texture& tex, int w, int h, int count, float speed, bool loop, int row)
 {
     sprite.setTexture(tex);
@@ -129,7 +119,7 @@ void Player::Update(sf::RenderWindow& window, float _dt, sf::Vector2f worldBound
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)) context.moveInputX -= 1;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)) context.moveInputX += 1;
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::K)) takeDamage(10);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::K)) handleDamage(10.0f);
 
     if (context.moveInputX != 0) sprite.setScale({ (float)context.moveInputX, 1.f });
 
@@ -161,6 +151,19 @@ void Player::Update(sf::RenderWindow& window, float _dt, sf::Vector2f worldBound
     hurtbox.Update(getPosition(), sprite.getScale().x);
     hitbox.Update(getPosition(), sprite.getScale().x);
     hitbox2.Update(getPosition(), sprite.getScale().x);
+}
+
+void Player::handleDamage(float damage)
+{
+    if (isInvulnerable || health.IsDead()) return;
+
+    health.takeDamage(damage);
+    std::cout << "HP: " << health.getHealth() << "/" << health.getMaxHealth() << std::endl;
+
+    if (!health.IsDead()) {
+        isInvulnerable = true;
+        invulnTimer = 0.5f;
+    }
 }
 
 bool Player::CheckHit(const sf::FloatRect& enemyBounds)

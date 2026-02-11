@@ -1,6 +1,7 @@
 #pragma once
 #include "PlayerContext.h"
 #include "../Core/CollisionBox.h"
+#include "../Core/HealthComponent.h"
 #include "../StateMachine/StateMachine.h"
 #include "SFML/Graphics.hpp"
 
@@ -16,9 +17,8 @@ private:
     bool isLooping;
 
     // Statistiques & Gameplay
+    HealthComponent health;
     float speed;
-    int hp = 100;
-    int maxHp = 100;
     bool isInvulnerable = false;
     float invulnTimer = 0.f;
 
@@ -38,13 +38,14 @@ public:
     sf::Vector2f getPosition() const { return sprite.getPosition(); }
     int getCurrentFrame() const { return currentFrame; }
     int getFrameCount() const { return frameCount; }
-    int getHp() const { return hp; }
+    HealthComponent& getHealth() { return health; }
+    float getHp() const { return health.getHealth(); }
     sf::Sprite& getSprite() { return sprite; }
 
     // Méthodes principales
-    void takeDamage(int damage);
     void setAnimation(const sf::Texture& tex, int w, int h, int count, float speed, bool loop, int row);
     void Update(sf::RenderWindow& window, float _dt, sf::Vector2f worldBounds);
+    void handleDamage(float damage);
     bool CheckHit(const sf::FloatRect& enemyBounds);
 
     PlayerContext context;

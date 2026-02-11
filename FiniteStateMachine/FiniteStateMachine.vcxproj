@@ -140,6 +140,7 @@
     <ClCompile Include="Animation-Assets\ResourceManager.cpp" />
     <ClCompile Include="Core\CollisionBox.cpp" />
     <ClCompile Include="Core\CollisionManager.cpp" />
+    <ClCompile Include="Core\HealthComponent.cpp" />
     <ClCompile Include="NPC\Berserker.cpp" />
     <ClCompile Include="NPC\BerserkerDataBase.cpp" />
     <ClCompile Include="NPC\EnemyManager.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="Animation-Assets\SharedData.h" />
     <ClInclude Include="Core\CollisionBox.h" />
     <ClInclude Include="Core\CollisionManager.h" />
+    <ClInclude Include="Core\HealthComponent.h" />
     <ClInclude Include="NPC\EnemyProjectile.h" />
     <ClInclude Include="NPC\EnemyManager.h" />
     <ClInclude Include="NpcStates\GuardState.h" />
