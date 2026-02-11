@@ -25,6 +25,9 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
 
         data.scale = { 0.7f, 0.7f };
         data.moveSpeed = 80.f;
+
+        data.hurtboxSize = { 65.f, 85.f };
+        data.hurtboxOffset = { 0.f, 0.f };
         break;
 
     case BerserkerSkin::GNOME:
@@ -45,6 +48,9 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
 
         data.scale = { 0.7f, 0.7f };
         data.moveSpeed = 80.f;
+
+        data.hurtboxSize = { 48.f, 65.f };
+        data.hurtboxOffset = { 0.f, 0.f };
         break;
 
     case BerserkerSkin::LANCER:
@@ -65,6 +71,9 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
 
         data.scale = { 0.7f, 0.7f };
         data.moveSpeed = 80.f;
+
+        data.hurtboxSize = { 60.f, 90.f };
+        data.hurtboxOffset = { 0.f, 0.f };
         break;
 
     case BerserkerSkin::PADDLEFISH:
@@ -85,6 +94,9 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
 
         data.scale = { 0.7f, 0.7f };
         data.moveSpeed = 80.f;
+
+        data.hurtboxSize = { 50.f, 70.f };
+        data.hurtboxOffset = { 0.f, 0.f };
         break;
 
     case BerserkerSkin::THIEF:
@@ -105,6 +117,9 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
 
         data.scale = { 0.7f, 0.7f };
         data.moveSpeed = 80.f;
+
+        data.hurtboxSize = { 45.f, 68.f };
+        data.hurtboxOffset = { 0.f, 0.f };
         break;
 
     case BerserkerSkin::TROLL:
@@ -125,6 +140,9 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
 
         data.scale = { 0.7f, 0.7f };
         data.moveSpeed = 80.f;
+
+        data.hurtboxSize = { 100.f, 130.f };
+        data.hurtboxOffset = { 0.f, -10.f };
         break;
     }
     return data;

@@ -31,4 +31,18 @@ sf::Sprite& Berserker::getSprite()
 void Berserker::Draw(sf::RenderWindow& window)
 {
     window.draw(m_sprite);
+    hurtbox.debugDraw(window);
+}
+
+void Berserker::handleDamage(float amount)
+{
+        if (health.IsDead()) return;
+
+        health.takeDamage(amount);
+
+        m_sprite.setColor(sf::Color(255, 100, 100));
+        m_flashTimer = FLASH_DURATION;
+
+        std::cout << "Tank - Vie restante : " << health.getHealth()
+            << "/" << health.getMaxHealth() << std::endl;
 }
