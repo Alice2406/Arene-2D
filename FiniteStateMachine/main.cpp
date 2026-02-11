@@ -42,23 +42,6 @@ int main()
 
     EnemyManager enemyManager;
 
-    enemyManager.SpawnTank(TankSkin::TURTLE, { -10.f, -10.f });
-    enemyManager.SpawnTank(TankSkin::PANDA, { -10.f, -10.f });
-    enemyManager.SpawnTank(TankSkin::MINOTAUR, { -10.f, -10.f });
-    enemyManager.SpawnTank(TankSkin::SKULL, { -10.f, -10.f });
-
-    enemyManager.SpawnBerserker(BerserkerSkin::BEAR, { -10.f, -10.f });
-    enemyManager.SpawnBerserker(BerserkerSkin::PADDLEFISH, { -10.f, -10.f });
-    enemyManager.SpawnBerserker(BerserkerSkin::LANCER, { -10.f, -10.f });
-    enemyManager.SpawnBerserker(BerserkerSkin::GNOME, { -10.f, -10.f });
-    enemyManager.SpawnBerserker(BerserkerSkin::TROLL, { -10.f, -10.f });
-    enemyManager.SpawnBerserker(BerserkerSkin::THIEF, { -10.f, -10.f });
-
-    enemyManager.SpawnSniper(SniperSkin::GNOLL, { -10.f, -10.f });
-    enemyManager.SpawnSniper(SniperSkin::HARPOONFISH, { -10.f, -10.f });
-    enemyManager.SpawnSniper(SniperSkin::SHAMAN, { -10.f, -10.f });
-
-
     while (window.isOpen())
     {
         float dt = clock.restart().asSeconds();
@@ -77,7 +60,8 @@ int main()
         collisionMgr.checkCollisions();
         collisionMgr.clear();
         player.Update(window, dt, worldBounds);
-        enemyManager.Update(dt, player, worldBounds, collisionMgr);
+        enemyManager.Update(dt, player, worldBounds, obstacleManager.GetObstacles(), collisionMgr);
+        collisionMgr.CheckMapCollisions(player.getSprite(), obstacleManager.GetObstacles());
         window.draw(oceanSprite);
         window.draw(map);
         obstacleManager.Draw(window);

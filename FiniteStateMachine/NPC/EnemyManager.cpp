@@ -84,7 +84,7 @@ void EnemyManager::SpawnSniper(SniperSkin skin, sf::Vector2f position, sf::Vecto
     m_snipers.push_back(newSniper);
 }
 
-void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, CollisionManager& collisionMgr)
+void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, const std::vector<Obstacle>& obstacles, CollisionManager& collisionMgr)
 {
     collisionMgr.addHitbox(&player.hitbox);
     collisionMgr.addHitbox(&player.hitbox2);
@@ -100,7 +100,7 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, Co
         t->context.worldBounds = worldBounds;
 
         t->Update(dt);
-
+        collisionMgr.CheckMapCollisions(t->getSprite(), obstacles);
         keepInsideMap(t, worldBounds);
 
         collisionMgr.addHurtbox(&t->hurtbox);
@@ -125,6 +125,7 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, Co
         b->context.playerPos = player.getPosition();
         b->context.worldBounds = worldBounds;
         b->Update(dt);
+        collisionMgr.CheckMapCollisions(b->getSprite(), obstacles);
 
         keepInsideMap(b, worldBounds);
 
@@ -151,6 +152,7 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, Co
         s->context.playerPos = player.getPosition();
         s->context.worldBounds = worldBounds;
         s->Update(dt);
+        collisionMgr.CheckMapCollisions(s->getSprite(), obstacles);
 
         keepInsideMap(s, worldBounds);
 
