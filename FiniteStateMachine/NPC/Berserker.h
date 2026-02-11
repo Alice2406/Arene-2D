@@ -26,10 +26,10 @@ private:
     FSM::StateMachine<NpcContext> fsm;
 public:
     NpcContext context{};
-    Berserker(BerserkerSkin skinType) : m_sprite(m_texture), m_animator(m_sprite) 
+    Berserker(BerserkerSkin skinType, sf::Texture &texture) : m_sprite(m_texture), m_animator(m_sprite)
     {
          m_data = BerserkerDatabase::GetData(skinType);
-
+         m_sprite.setTexture(texture);
          context.npcSprite = &m_sprite;
          context.animator = &m_animator;
          context.speed = m_data.moveSpeed;

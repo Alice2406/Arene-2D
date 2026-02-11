@@ -12,12 +12,23 @@ namespace NpcAi
     {
     private:
         sf::Vector2f targetpos;
-        void PickNewDestination()
+        sf::Vector2f GetRandomPos(sf::Vector2f bounds)
         {
-            float x = static_cast<float>(rand() % 1900);
-            float y = static_cast<float>(rand() % 800);
-            targetpos = sf::Vector2f(x, y);
-            std::cout << "Nouvelle cible : " << x << ", " << y << std::endl;
+            if (bounds.x < 100.f || bounds.y < 100.f)
+            {
+                std::cout << "[ERREUR] worldBounds est vide (0,0) dans PatrolState !" << std::endl;
+                targetpos = sf::Vector2f(200.f, 200.f);
+                return targetpos;
+            }
+            float x = static_cast<float>(rand() % (int)bounds.x);
+            float y = static_cast<float>(rand() % (int)bounds.y);
+            return sf::Vector2f(x, y);
+        }
+
+        void PickNewDestination(NpcContext& _context) 
+        {
+            targetpos = GetRandomPos(_context.worldBounds);
+            std::cout << "Nouvelle cible : " << targetpos.x << ", " << targetpos.y << std::endl;
         }
     public:
         void Enter(NpcContext& _context) override
@@ -28,12 +39,10 @@ namespace NpcAi
             }
             if (_context.npcSprite->getPosition() == sf::Vector2f(-10.f, -10.f))
             {
-                float i = rand() % 1900;
-                float j = rand() % 800;
-                _context.npcSprite->setPosition({ i, j });
+                _context.npcSprite->setPosition(GetRandomPos(_context.worldBounds));
             }
             std::cout << "Enter Patrol _State" << std::endl;
-            PickNewDestination();
+            PickNewDestination(_context);
         }
         void Execute(NpcContext& _context) override
         {
@@ -50,7 +59,7 @@ namespace NpcAi
             float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 
             if (distance < 5.0f)
-                PickNewDestination();
+                PickNewDestination(_context);
             else
             {
                 sf::Vector2f normalizedDir = direction / distance;

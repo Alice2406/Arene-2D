@@ -7,7 +7,8 @@ enum class TankSkin {
     TURTLE,
     MINOTAUR,
     PANDA,
-    SKULL
+    SKULL,
+    COUNT,
 };
 
 struct TankData {

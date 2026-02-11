@@ -27,10 +27,10 @@ private:
     FSM::StateMachine<NpcContext> fsm;
 public:
     NpcContext context{};
-    Sniper(SniperSkin skinType) : m_sprite(m_texture), m_animator(m_sprite)
+    Sniper(SniperSkin skinType, sf::Texture &texture) : m_sprite(m_texture), m_animator(m_sprite)
     {
         m_data = SniperDatabase::GetData(skinType);
-
+        m_sprite.setTexture(texture);
         context.npcSprite = &m_sprite;
         context.animator = &m_animator;
         context.speed = m_data.moveSpeed;

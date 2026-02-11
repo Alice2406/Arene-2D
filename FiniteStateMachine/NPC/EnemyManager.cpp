@@ -13,25 +13,59 @@ EnemyManager::~EnemyManager()
     m_snipers.clear();
 }
 
-void EnemyManager::SpawnTank(TankSkin skin, sf::Vector2f position)
+void EnemyManager::SpawnTank(TankSkin skin, sf::Vector2f position, sf::Vector2f mapSize)
 {
-    Tank* newTank = new Tank(skin);
+    std::string path;
+    switch (skin) {
+    case TankSkin::TURTLE: path = AssetPaths::Tank::Turtle::WALK; break;
+    case TankSkin::PANDA:  path = AssetPaths::Tank::Panda::WALK; break;
+    case TankSkin::MINOTAUR:  path = AssetPaths::Tank::Minotaur::WALK; break;
+    case TankSkin::SKULL:  path = AssetPaths::Tank::Skull::WALK; break;
+    }
+
+    sf::Texture& texture = m_resources.GetTexture(path);
+
+    Tank* newTank = new Tank(skin, texture);
+    newTank->context.worldBounds = mapSize;
     newTank->setPosition(position);
     newTank->Init();
     m_tanks.push_back(newTank);
 }
 
-void EnemyManager::SpawnBerserker(BerserkerSkin skin, sf::Vector2f position)
+void EnemyManager::SpawnBerserker(BerserkerSkin skin, sf::Vector2f position, sf::Vector2f mapSize)
 {
-    Berserker* newBerserker = new Berserker(skin);
+    std::string path;
+    switch (skin) {
+    case BerserkerSkin::BEAR: path = AssetPaths::Berserker::Bear::WALK; break;
+    case BerserkerSkin::LANCER:  path = AssetPaths::Berserker::Lancer::WALK; break;
+    case BerserkerSkin::PADDLEFISH:  path = AssetPaths::Berserker::PaddleFish::WALK; break;
+    case BerserkerSkin::THIEF:  path = AssetPaths::Berserker::Thief::WALK; break;
+    case BerserkerSkin::TROLL:  path = AssetPaths::Berserker::Troll::WALK; break;
+    case BerserkerSkin::GNOME:  path = AssetPaths::Berserker::Gnome::WALK; break;
+    }
+
+    sf::Texture& texture = m_resources.GetTexture(path);
+
+    Berserker* newBerserker = new Berserker(skin, texture);
+    newBerserker->context.worldBounds = mapSize;
     newBerserker->setPosition(position);
     newBerserker->Init();
     m_berserkers.push_back(newBerserker);
 }
 
-void EnemyManager::SpawnSniper(SniperSkin skin, sf::Vector2f position)
+void EnemyManager::SpawnSniper(SniperSkin skin, sf::Vector2f position, sf::Vector2f mapSize)
 {
-    Sniper* newSniper = new Sniper(skin);
+    std::string path;
+    switch (skin) {
+    case SniperSkin::GNOLL: path = AssetPaths::Sniper::Gnoll::WALK; break;
+    case SniperSkin::HARPOONFISH:  path = AssetPaths::Sniper::HarpoonFish::WALK; break;
+    case SniperSkin::SHAMAN:  path = AssetPaths::Sniper::Shaman::WALK; break;
+    }
+
+    sf::Texture& texture = m_resources.GetTexture(path);
+
+    Sniper* newSniper = new Sniper(skin, texture);
+    newSniper->context.worldBounds = mapSize;
     newSniper->setPosition(position);
     newSniper->Init();
     m_snipers.push_back(newSniper);
@@ -46,6 +80,7 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds)
 
         t->context.deltaTime = dt;
         t->context.playerPos = player.getPosition();
+        t->context.worldBounds = worldBounds;
 
         t->Update(dt);
 
@@ -75,7 +110,7 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds)
 
         b->context.deltaTime = dt;
         b->context.playerPos = player.getPosition();
-
+        b->context.worldBounds = worldBounds;
         b->Update(dt);
 
         keepInsideMap(b, worldBounds);
@@ -105,7 +140,7 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds)
         s->context.projectileList = &m_projectiles;
         s->context.deltaTime = dt;
         s->context.playerPos = player.getPosition();
-
+        s->context.worldBounds = worldBounds;
         s->Update(dt);
 
         keepInsideMap(s, worldBounds);

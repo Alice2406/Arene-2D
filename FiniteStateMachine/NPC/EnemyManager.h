@@ -14,6 +14,7 @@ private:
     std::vector<Berserker*> m_berserkers;
     std::vector<Sniper*> m_snipers;
     std::vector<EnemyProjectile*> m_projectiles;
+    ResourceManager m_resources;
 
 public:
     ~EnemyManager();
@@ -41,9 +42,9 @@ public:
 
         enemy->setPosition(pos);
     }
-    void SpawnTank(TankSkin skin, sf::Vector2f position);
-    void SpawnBerserker(BerserkerSkin skin, sf::Vector2f position);
-    void SpawnSniper(SniperSkin skin, sf::Vector2f position);
+    void SpawnTank(TankSkin skin, sf::Vector2f position, sf::Vector2f mapSize);
+    void SpawnBerserker(BerserkerSkin skin, sf::Vector2f position, sf::Vector2f mapSize);
+    void SpawnSniper(SniperSkin skin, sf::Vector2f position, sf::Vector2f mapSize);
     void Update(float dt, Player& player, sf::Vector2f worldBounds);
 
     void Draw(sf::RenderWindow& window);

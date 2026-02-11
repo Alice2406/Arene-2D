@@ -37,12 +37,19 @@ int main()
 
     EnemyManager enemyManager;
 
-    enemyManager.SpawnTank(TankSkin::TURTLE, { -10.f, -10.f });
-    enemyManager.SpawnTank(TankSkin::PANDA, { -10.f, -10.f });
-    enemyManager.SpawnBerserker(BerserkerSkin::THIEF, { -10.f, -10.f });
-    enemyManager.SpawnBerserker(BerserkerSkin::LANCER, { -10.f, -10.f });
-    enemyManager.SpawnSniper(SniperSkin::GNOLL, { -10.f, -10.f });
-    enemyManager.SpawnSniper(SniperSkin::SHAMAN, { -10.f, -10.f });
+
+    for (int i = 0; i < 5; i++)
+    {
+        int randomIndex = rand() % (int)TankSkin::COUNT;
+        TankSkin tankSkin = static_cast<TankSkin>(randomIndex);
+        enemyManager.SpawnTank(tankSkin, { -10.f, -10.f }, worldBounds);
+        randomIndex = rand() % (int)SniperSkin::COUNT;
+        SniperSkin sniperSkin = static_cast<SniperSkin>(randomIndex);
+        enemyManager.SpawnSniper(sniperSkin, { -10.f, -10.f }, worldBounds);
+        randomIndex = rand() % (int)BerserkerSkin::COUNT;
+        BerserkerSkin berserkerSkin = static_cast<BerserkerSkin>(randomIndex);
+        enemyManager.SpawnBerserker(berserkerSkin, { -10.f, -10.f }, worldBounds);
+    }
 
     while (window.isOpen())
     {
@@ -73,3 +80,12 @@ int main()
 
     return 0;
 }
+
+/*
+* vie player
+* menu fin
+* spawn ennemis par vague/aleatoire
+* collision ennemis
+* obstacles statiques
+* 
+*/

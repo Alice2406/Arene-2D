@@ -30,10 +30,10 @@ private:
     const float FLASH_DURATION = 0.15f;
 public:
     NpcContext context{};
-    Tank(TankSkin skinType) : m_sprite(m_texture), m_animator(m_sprite)
+    Tank(TankSkin skinType, sf::Texture& texture) : m_sprite(m_texture), m_animator(m_sprite)
     {
         m_data = TankDatabase::GetData(skinType);
-
+        m_sprite.setTexture(texture);
         context.npcSprite = &m_sprite;
         context.animator = &m_animator;
         context.speed = m_data.moveSpeed;

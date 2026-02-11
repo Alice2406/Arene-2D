@@ -18,4 +18,5 @@ public:
     std::vector<EnemyProjectile*>* projectileList = nullptr;
     sf::Texture* weaponTexture = nullptr;
     AnimConfig weaponConfig;
+    sf::Vector2f worldBounds;
 };

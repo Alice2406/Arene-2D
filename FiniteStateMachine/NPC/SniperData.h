@@ -6,7 +6,8 @@
 enum class SniperSkin {
     GNOLL,
     HARPOONFISH,
-    SHAMAN
+    SHAMAN,
+    COUNT,
 };
 
 struct SniperData {

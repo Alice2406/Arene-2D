@@ -9,7 +9,8 @@ enum class BerserkerSkin {
     LANCER,
     PADDLEFISH,
     THIEF,
-    TROLL
+    TROLL,
+    COUNT,
 };
 
 struct BerserkerData {
