@@ -84,8 +84,12 @@ void EnemyManager::SpawnSniper(SniperSkin skin, sf::Vector2f position, sf::Vecto
     m_snipers.push_back(newSniper);
 }
 
-void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds)
+void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, CollisionManager& collisionMgr)
 {
+    collisionMgr.addHitbox(&player.hitbox);
+    collisionMgr.addHitbox(&player.hitbox2);
+    collisionMgr.addHurtbox(&player.hurtbox);
+
     auto itTank = m_tanks.begin();
     while (itTank != m_tanks.end())
     {
@@ -99,11 +103,7 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds)
 
         keepInsideMap(t, worldBounds);
 
-        sf::FloatRect enemyBounds = t->GetGlobalBounds();
-        if (player.CheckHit(enemyBounds) && !t->IsHit())
-        {
-            t->TakeDamage(25);
-        }
+        collisionMgr.addHurtbox(&t->hurtbox);
 
         if (t->IsDead())
         {
@@ -127,12 +127,6 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds)
         b->Update(dt);
 
         keepInsideMap(b, worldBounds);
-
-        sf::FloatRect enemyBounds = b->GetGlobalBounds();
-        if (player.CheckHit(enemyBounds) && !b->IsHit())
-        {
-            b->TakeDamage(20);
-        }
 
         if (b->IsDead())
         {
@@ -158,12 +152,6 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds)
 
         keepInsideMap(s, worldBounds);
 
-        sf::FloatRect enemyBounds = s->GetGlobalBounds();
-        if (player.CheckHit(enemyBounds) && !s->IsHit())
-        {
-            s->TakeDamage(35);
-        }
-
         if (s->IsDead())
         {
             delete s;
@@ -181,11 +169,6 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds)
         EnemyProjectile* p = *itProj;
 
         p->Update(dt);
-
-        if (player.CheckHit(p->GetGlobalBounds()))
-        {
-            p->Destroy();
-        }
 
         sf::Vector2f pos = p->getPosition();
         if (pos.x < 0 || pos.y < 0 || pos.x > worldBounds.x || pos.y > worldBounds.y)

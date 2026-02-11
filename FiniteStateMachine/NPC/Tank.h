@@ -1,6 +1,9 @@
 #pragma once
 #include "../StateMachine/StateMachine.h"
 #include "SFML/Graphics.hpp"
+#include "../Core/HealthComponent.h"
+#include "../Core/CollisionManager.h"
+#include "../Core/CollisionBox.h"
 #include "../NpcStates/ChaseState.h"
 #include "../NpcStates/AttackState.h"
 #include "../NpcStates/GuardState.h"
@@ -15,11 +18,10 @@
 using namespace NpcAi;
 
 
-class Tank
+class Tank : public IDamageable
 {
 private:
-    int value = 100;
-    int m_currentHealth;
+    HealthComponent health;
     sf::Sprite m_sprite;
     sf::Texture m_texture;
     ResourceManager m_resources;
@@ -28,7 +30,9 @@ private:
     FSM::StateMachine<NpcContext> fsm;
     float m_flashTimer = 0.0f;
     const float FLASH_DURATION = 0.15f;
+
 public:
+    CollisionBox hurtbox;
     NpcContext context{};
     Tank(TankSkin skinType, sf::Texture& texture) : m_sprite(m_texture), m_animator(m_sprite)
     {
@@ -50,7 +54,12 @@ public:
         m_sprite.setOrigin({ m_data.idle.frameSize.x / 2.f, m_data.idle.frameSize.y / 2.f });
 
         m_animator.SwitchAnimation("Idle");
-        m_currentHealth = m_data.health;
+
+        hurtbox = CollisionBox(m_data.hurtboxSize, m_data.hurtboxOffset);
+        hurtbox.owner = this;
+        hurtbox.isActive = true;
+
+        health = HealthComponent(m_data.health);
     }
     void Init()
     {
@@ -86,30 +95,48 @@ public:
         fsm.Init(patrolState, context);
     }
 
-    void TakeDamage(int damageAmount)
+    void handleDamage(float amount) override
     {
-        m_currentHealth -= damageAmount;
+        if (health.IsDead()) return;
+
+        health.takeDamage(amount);
 
         m_sprite.setColor(sf::Color(255, 100, 100));
         m_flashTimer = FLASH_DURATION;
 
     }
 
-    bool IsDead() const
+    bool IsDead() const override 
     {
-        return m_currentHealth <= 0;
+        return health.IsDead();
     }
+
+    bool IsHit() const {
+        return m_flashTimer > 0.0f;
+    }
+
     void setPosition(const sf::Vector2f& position)
     {
         m_sprite.setPosition(position);
     }
 
-    sf::Sprite& getSprite() { return m_sprite; }
+    sf::Vector2f getPosition() const 
+    {
+        return m_sprite.getPosition();
+    }
+
+    sf::Sprite& getSprite() 
+    {
+        return m_sprite;
+    }
 
     void Update(float dt)
     {
         fsm.Update(context);
         m_animator.Update(dt);
+
+        hurtbox.Update(m_sprite.getPosition(), m_sprite.getScale().x);
+        
         if (m_flashTimer > 0)
         {
             m_flashTimer -= dt;
@@ -122,13 +149,10 @@ public:
 
     sf::FloatRect GetGlobalBounds() const { return m_sprite.getGlobalBounds(); }
 
-    bool IsHit() const {
-        return m_flashTimer > 0.0f;
-    }
-
     void Draw(sf::RenderWindow& window)
     {
         window.draw(m_sprite);
+
+        hurtbox.debugDraw(window);
     }
-    sf::Vector2f getPosition() const { return m_sprite.getPosition(); }
 };
