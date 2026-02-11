@@ -1,6 +1,7 @@
 #include "NPC/EnemyManager.h" 
 #include "PlayerStates/Player.h"
 #include "Core/CollisionManager.h"
+#include "Obstacles/ObstacleManager.h"
 #include <SFML/Graphics.hpp>
 #include "TileMap.h"
 
@@ -15,11 +16,13 @@ int main()
     TileMap map;
     Player player;
     CollisionManager colManager;
+    ResourceManager resourceManager;
     sf::Texture waterTexture;
     sf::Vector2u mapSizeInTiles = { 35, 20 };
     sf::Vector2u tileSize = { 63, 63 };
-
     sf::Vector2f worldBounds;
+    ObstacleManager obstacleManager;
+
     worldBounds.x = mapSizeInTiles.x * tileSize.x;
     worldBounds.y = mapSizeInTiles.y * tileSize.y;
     if (!waterTexture.loadFromFile("..\\Assets\\Terrain\\Tileset\\Water.png")) return -1;
@@ -31,6 +34,7 @@ int main()
     {
         return -1;
     }
+    obstacleManager.Initialize(20, worldBounds, resourceManager);
     colManager.addHurtbox(&player.hurtbox); 
     colManager.addHitbox(&player.hitbox);
     colManager.addHitbox(&player.hitbox2);
@@ -55,6 +59,7 @@ int main()
         enemyManager.Update(dt, player, worldBounds);
         window.draw(oceanSprite);
         window.draw(map);
+        obstacleManager.Draw(window);
         enemyManager.Draw(window);
 
         window.draw(player.getSprite());

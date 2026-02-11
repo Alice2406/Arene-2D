@@ -5,13 +5,11 @@
 
 void PlayerIdleState::Enter(PlayerContext& _context)
 {
-	std::cout << "Player enter Idle state" << std::endl;
 	getPlayer(_context)->setAnimation(getPlayer(_context)->textureIdle, 1536, 192, 8, 0.15f, true, 0);
 }
 
 void PlayerIdleState::Exit(PlayerContext& _context)
 {
-	std::cout << "Player exit Idle state" << std::endl;
 }
 
 void PlayerIdleState::Execute(PlayerContext& _context) {}

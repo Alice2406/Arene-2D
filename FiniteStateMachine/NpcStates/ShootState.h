@@ -12,7 +12,6 @@ namespace NpcAi
     public:
         void Enter(NpcContext& _context) override
         {
-            std::cout << "SHOOT !!!" << std::endl;
             if (_context.animator) _context.animator->SwitchAnimation("Attack");
             if (_context.projectileList && _context.weaponTexture)
             {

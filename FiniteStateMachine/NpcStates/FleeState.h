@@ -12,7 +12,6 @@ namespace NpcAi
     {
         void Enter(NpcContext& _context) override
         {
-            std::cout << "Enter Flee _State" << std::endl;
             if (_context.animator)
             {
                 _context.animator->SwitchAnimation("Walk");
@@ -42,7 +41,6 @@ namespace NpcAi
         }
         void Exit(NpcContext& _context) override
         {
-            std::cout << "Exit Flee _State" << std::endl;
         }
     };
 }

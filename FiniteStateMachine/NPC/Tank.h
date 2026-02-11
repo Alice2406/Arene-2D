@@ -93,7 +93,6 @@ public:
         m_sprite.setColor(sf::Color(255, 100, 100));
         m_flashTimer = FLASH_DURATION;
 
-        std::cout << "Aie ! Vie restante : " << m_currentHealth << std::endl;
     }
 
     bool IsDead() const

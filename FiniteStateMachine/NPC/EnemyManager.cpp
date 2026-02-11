@@ -211,7 +211,6 @@ void EnemyManager::HandleWaves(sf::Vector2f mapSize)
         m_waveNumber++; 
         std::cout << "--- DEBUT VAGUE " << m_waveNumber << " ---" << std::endl;
 
-
         int enemyCount = 5 + (m_waveNumber * 2);
 
         for (int i = 0; i < enemyCount; i++)

@@ -11,7 +11,6 @@ namespace NpcAi
     public:
         void Enter(NpcContext& _context) override
         {
-            std::cout << "ATTACK !!!" << std::endl;
             if (_context.animator)
             {
                 _context.animator->SwitchAnimation("Attack");

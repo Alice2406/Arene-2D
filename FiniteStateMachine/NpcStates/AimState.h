@@ -12,7 +12,6 @@ namespace NpcAi
         void Enter(NpcContext& _context) override
         {
             _context.currentTimer = 0.0f;
-            std::cout << "Cible en vue" << std::endl;
         }
 
         void Execute(NpcContext& _context) override

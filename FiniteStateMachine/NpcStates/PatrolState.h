@@ -30,7 +30,6 @@ namespace NpcAi
         void PickNewDestination(NpcContext& _context) 
         {
             targetpos = GetRandomPos(_context.worldBounds);
-            std::cout << "Nouvelle cible : " << targetpos.x << ", " << targetpos.y << std::endl;
         }
     public:
         void Enter(NpcContext& _context) override
@@ -43,7 +42,6 @@ namespace NpcAi
             {
                 _context.npcSprite->setPosition(GetRandomPos(_context.worldBounds));
             }
-            std::cout << "Enter Patrol _State" << std::endl;
             PickNewDestination(_context);
             m_stuckTimer = 0.0f;
             m_lastPosition = _context.npcSprite->getPosition();
@@ -92,7 +90,6 @@ namespace NpcAi
         }
         void Exit(NpcContext& _context) override
         {
-            std::cout << "Exit Patrol _State" << std::endl;
         }
     };
 }

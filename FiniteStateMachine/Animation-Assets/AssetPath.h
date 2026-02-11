@@ -3,6 +3,10 @@
 
 namespace AssetPaths
 {
+    namespace Environment
+    {
+        static const std::string ROCK = "..\\Assets\\Terrain\\Decorations\\Rocks\\Rock3.png";
+    }
     namespace Tank
     {
         namespace Turtle

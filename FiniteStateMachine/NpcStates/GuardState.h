@@ -14,7 +14,6 @@ namespace NpcAi
             _context.currentTimer = 0.0f;
             _context.isInvulnerable = true;
             _context.triggerGuard = false;
-            std::cout << "GuardState" << std::endl;
             if (_context.animator)
             {
                 _context.animator->SwitchAnimation("Guard");
