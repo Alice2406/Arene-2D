@@ -1,11 +1,12 @@
 #pragma once
 #include "PlayerContext.h"
+#include "../Core/CollisionManager.h"
 #include "../Core/CollisionBox.h"
 #include "../Core/HealthComponent.h"
 #include "../StateMachine/StateMachine.h"
 #include "SFML/Graphics.hpp"
 
-class Player
+class Player : public IDamageable
 {
 private:
     // Animation
@@ -45,8 +46,8 @@ public:
     // Méthodes principales
     void setAnimation(const sf::Texture& tex, int w, int h, int count, float speed, bool loop, int row);
     void Update(sf::RenderWindow& window, float _dt, sf::Vector2f worldBounds);
-    void handleDamage(float damage);
-    bool CheckHit(const sf::FloatRect& enemyBounds);
+    void handleDamage(float damage) override;
+    bool IsDead() const override { return health.IsDead(); }
 
     PlayerContext context;
     FSM::StateMachine<PlayerContext> fsm;

@@ -19,4 +19,7 @@ struct TankData {
     AnimConfig walk;
     AnimConfig attack;
     AnimConfig guard;
+
+    sf::Vector2f hurtboxSize;
+    sf::Vector2f hurtboxOffset;
 };

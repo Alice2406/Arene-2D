@@ -34,6 +34,9 @@ public:
 
             data.scale = { 0.7f, 0.7f };
             data.moveSpeed = 80.f;
+
+            data.hurtboxSize = { 80.f, 100.f };
+            data.hurtboxOffset = { 0.f, 0.f };
             break;
 
         case TankSkin::PANDA:
@@ -59,6 +62,9 @@ public:
 
             data.scale = { 0.7f, 0.7f };
             data.moveSpeed = 120.f;
+
+            data.hurtboxSize = { 65.f, 85.f };
+            data.hurtboxOffset = { 0.f, 0.f };
             break;
 
         case TankSkin::MINOTAUR:
@@ -84,6 +90,9 @@ public:
 
             data.scale = { 0.7f, 0.7f };
             data.moveSpeed = 120.f;
+
+            data.hurtboxSize = { 85.f, 110.f };
+            data.hurtboxOffset = { 0.f, -5.f };
             break;
 
         case TankSkin::SKULL:
@@ -109,6 +118,9 @@ public:
 
             data.scale = { 0.7f, 0.7f };
             data.moveSpeed = 120.f;
+
+            data.hurtboxSize = { 50.f, 70.f };
+            data.hurtboxOffset = { 0.f, 5.f };
             break;
         }
         return data;

@@ -14,7 +14,7 @@ int main()
     sf::Clock clock;
     TileMap map;
     Player player;
-    CollisionManager colManager;
+    CollisionManager collisionMgr;
     sf::Texture waterTexture;
     sf::Vector2u mapSizeInTiles = { 56, 28 };
     sf::Vector2u tileSize = { 63, 63 };
@@ -31,18 +31,16 @@ int main()
     {
         return -1;
     }
-    colManager.addHurtbox(&player.hurtbox); 
-    colManager.addHitbox(&player.hitbox);
-    colManager.addHitbox(&player.hitbox2);
+    collisionMgr.addHurtbox(&player.hurtbox);
+    collisionMgr.addHitbox(&player.hitbox);
+    collisionMgr.addHitbox(&player.hitbox2);
 
     EnemyManager enemyManager;
 
     enemyManager.SpawnTank(TankSkin::TURTLE, { -10.f, -10.f });
     enemyManager.SpawnTank(TankSkin::PANDA, { -10.f, -10.f });
-    enemyManager.SpawnBerserker(BerserkerSkin::THIEF, { -10.f, -10.f });
-    enemyManager.SpawnBerserker(BerserkerSkin::LANCER, { -10.f, -10.f });
-    enemyManager.SpawnSniper(SniperSkin::GNOLL, { -10.f, -10.f });
-    enemyManager.SpawnSniper(SniperSkin::SHAMAN, { -10.f, -10.f });
+    enemyManager.SpawnTank(TankSkin::MINOTAUR, { -10.f, -10.f });
+    enemyManager.SpawnTank(TankSkin::SKULL, { -10.f, -10.f });
 
     while (window.isOpen())
     {
@@ -56,15 +54,15 @@ int main()
         camera.setCenter(player.getPosition());
         window.clear();
         window.setView(camera);
-        colManager.checkCollisions();
+        collisionMgr.checkCollisions();
+        collisionMgr.clear();
         player.Update(window, dt, worldBounds);
-        enemyManager.Update(dt, player, worldBounds);
+        enemyManager.Update(dt, player, worldBounds, collisionMgr);
         window.draw(oceanSprite);
         window.draw(map);
         enemyManager.Draw(window);
 
         window.draw(player.getSprite());
-
         player.hurtbox.debugDraw(window);
         player.hitbox.debugDraw(window);
         player.hitbox2.debugDraw(window);

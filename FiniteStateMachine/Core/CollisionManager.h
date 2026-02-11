@@ -1,17 +1,23 @@
 #pragma once
-#include "CollisionBox.h"
 #include <vector>
 
-class CollisionManager
-{
-private :
-	std::vector<CollisionBox*> hurtboxes;
-	std::vector<CollisionBox*> hitboxes;
+class CollisionBox;
 
+class IDamageable {
 public:
-	void addHurtbox(CollisionBox* _box);
-	void addHitbox(CollisionBox* _box);
-	void checkCollisions();
-
+    virtual void handleDamage(float amount) = 0;
+    virtual bool IsDead() const = 0;
+    virtual ~IDamageable() = default;
 };
 
+class CollisionManager {
+private:
+    std::vector<CollisionBox*> hitboxes;
+    std::vector<CollisionBox*> hurtboxes;
+
+public:
+    void addHitbox(CollisionBox* _box);
+    void addHurtbox(CollisionBox* _box);
+    void checkCollisions();
+    void clear();
+};
