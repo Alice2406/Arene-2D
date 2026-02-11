@@ -43,6 +43,9 @@ public:
 
         enemy->setPosition(pos);
     }
+    //test debug collision box ennemy
+    void DebugDrawCollisions(sf::RenderWindow& window, CollisionManager& colManager);
+
     void HandleWaves(sf::Vector2f mapSize);
     void SpawnTank(TankSkin skin, sf::Vector2f position, sf::Vector2f mapSize);
     void SpawnBerserker(BerserkerSkin skin, sf::Vector2f position, sf::Vector2f mapSize);

@@ -5,6 +5,49 @@
 #include <SFML/Graphics.hpp>
 #include "TileMap.h"
 
+//void SpawnRandomObstacles(int count, sf::Vector2f mapSize)
+//{
+//    for (int i = 0; i < count; i++)
+//    {
+//        // Position aléatoire
+//        float x = rand() % (int)mapSize.x;
+//        float y = rand() % (int)mapSize.y;
+//
+//        // Choix du type (0 à 4)
+//        int randomType = rand() % 5;
+//        ObstacleType type;
+//        sf::Texture* texture = nullptr; // Pointeur vers la texture à utiliser
+//
+//        switch (randomType) {
+//        case 0:
+//            type = ObstacleType::ROCK;
+//            texture = &rm.GetTexture("rock.png");
+//            break;
+//        case 1:
+//            type = ObstacleType::TREE;
+//            texture = &rm.GetTexture("tree.png");
+//            break;
+//        case 2:
+//            type = ObstacleType::FOUNTAIN;
+//            texture = &rm.GetTexture("fountain_sheet.png"); // Texture avec les 4 frames
+//            break;
+//        case 3:
+//            type = ObstacleType::FLOWER;
+//            texture = &rm.GetTexture("flower.png");
+//            break;
+//        case 4:
+//            type = ObstacleType::GRASS;
+//            texture = &rm.GetTexture("grass.png");
+//            break;
+//        }
+//
+//        // Création et ajout
+//        if (texture) {
+//            m_obstacles.push_back(Obstacle(type, *texture, { x, y }));
+//        }
+//    }
+//}
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode({ 1900, 800 }), "Arene 2D");
@@ -35,7 +78,7 @@ int main()
     {
         return -1;
     }
-    obstacleManager.Initialize(20, worldBounds, resourceManager);
+    obstacleManager.Initialize(40, worldBounds, resourceManager);
     collisionMgr.addHurtbox(&player.hurtbox);
     collisionMgr.addHitbox(&player.hitbox);
     collisionMgr.addHitbox(&player.hitbox2);
@@ -68,6 +111,9 @@ int main()
         enemyManager.Draw(window);
 
         window.draw(player.getSprite());
+		//test debug
+//        collisionMgr.DebugDrawFeetBox(window, player.getSprite());
+//        enemyManager.DebugDrawCollisions(window, collisionMgr);
         player.hurtbox.debugDraw(window);
         player.hitbox.debugDraw(window);
         player.hitbox2.debugDraw(window);
@@ -80,5 +126,4 @@ int main()
 /*
 * menu fin
 * collision ennemis
-* obstacles statiques
 */

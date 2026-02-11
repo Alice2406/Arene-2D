@@ -41,23 +41,63 @@ void CollisionManager::clear()
     hurtboxes.clear();
 }
 
-void CollisionManager::CheckMapCollisions(sf::Sprite& entitySprite, const std::vector<Obstacle>& obstacles)
+//test debug collision box player
+void CollisionManager::DebugDrawFeetBox(sf::RenderWindow& window, const sf::Sprite& entitySprite)
 {
-    sf::FloatRect entityBounds = entitySprite.getGlobalBounds();
-    float entityHeight = entityBounds.size.y * 0.3f;
+    sf::FloatRect globalBounds = entitySprite.getGlobalBounds();
+
+    float boxWidth = 30.f;
+    float boxHeight = 15.f;
+    float verticalOffset = 68.f; 
+
+    float feetCenterX = globalBounds.position.x + globalBounds.size.x / 2.f;
+    float feetCenterY = (globalBounds.position.y + globalBounds.size.y) - verticalOffset;
 
     sf::FloatRect feetBox(
-        { entityBounds.position.x + 10.f, entityBounds.position.y + entityBounds.size.y - entityHeight }, 
-        { entityBounds.size.x - 20.f, entityHeight }
+        { feetCenterX - (boxWidth / 2.f),
+        feetCenterY - boxHeight },
+        { boxWidth,
+        boxHeight }
     );
+
+    // Dessin
+    sf::RectangleShape debugShape;
+    debugShape.setSize({ feetBox.size.x, feetBox.size.y });
+    debugShape.setPosition(feetBox.position);
+    debugShape.setFillColor(sf::Color::Transparent);
+    debugShape.setOutlineColor(sf::Color::Magenta);
+    debugShape.setOutlineThickness(2.f);
+    window.draw(debugShape);
+}
+
+void CollisionManager::CheckMapCollisions(sf::Sprite& entitySprite, const std::vector<Obstacle>& obstacles)
+{
+    sf::FloatRect globalBounds = entitySprite.getGlobalBounds();
+
+    float boxWidth = 30.f;
+    float boxHeight = 15.f;
+
+    float verticalOffset = 68.f;
+
+    float feetCenterX = globalBounds.position.x + globalBounds.size.x / 2.f;
+
+    float feetCenterY = (globalBounds.position.y + globalBounds.size.y) - verticalOffset;
+
+    sf::FloatRect feetBox(
+        { feetCenterX - (boxWidth / 2.f),
+        feetCenterY - boxHeight },
+        { boxWidth,
+        boxHeight }
+    );
+
 
     for (const auto& obs : obstacles)
     {
-        sf::FloatRect obsBox = obs.GetHitbox(); 
+        if (!obs.IsSolid()) continue;
 
+        sf::FloatRect obsBox = obs.GetHitbox();
         if (feetBox.findIntersection(obsBox))
         {
-
             sf::Vector2f feetCenter = { feetBox.position.x + feetBox.size.x / 2.f, feetBox.position.y + feetBox.size.y / 2.f };
             sf::Vector2f obsCenter = { obsBox.position.x + obsBox.size.x / 2.f, obsBox.position.y + obsBox.size.y / 2.f };
 
@@ -67,18 +107,21 @@ void CollisionManager::CheckMapCollisions(sf::Sprite& entitySprite, const std::v
             float intersectX = std::abs(dx) - (feetBox.size.x / 2.f + obsBox.size.x / 2.f);
             float intersectY = std::abs(dy) - (feetBox.size.y / 2.f + obsBox.size.y / 2.f);
 
-            if (intersectX > intersectY) 
+            if (intersectX > intersectY)
             {
-                if (dx > 0) entitySprite.move({ -intersectX, 0.f }); 
-                else        entitySprite.move({ intersectX, 0.f });  
+                float moveX = (dx > 0) ? -intersectX : intersectX;
+                entitySprite.move({ moveX, 0.f });
             }
             else
             {
-                if (dy > 0) entitySprite.move({ 0.f, -intersectY }); 
-                else        entitySprite.move({ 0.f, intersectY });  
+                float moveY = (dy > 0) ? -intersectY : intersectY;
+                entitySprite.move({ 0.f, moveY });
             }
-            entityBounds = entitySprite.getGlobalBounds();
-            feetBox.position = { entityBounds.position.x + 10.f, entityBounds.position.y + entityBounds.size.y - entityHeight };
+            globalBounds = entitySprite.getGlobalBounds();
+            feetCenterX = globalBounds.position.x + globalBounds.size.x / 2.f;
+            feetCenterY = globalBounds.position.y + globalBounds.size.y;
+
+            feetBox.position = { feetCenterX - (boxWidth / 2.f), feetCenterY - boxHeight };
         }
     }
 }

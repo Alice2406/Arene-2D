@@ -195,6 +195,25 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, co
         }
     }
 }
+//test debug collision box ennemy
+void EnemyManager::DebugDrawCollisions(sf::RenderWindow& window, CollisionManager& colManager)
+{
+    for (auto* tank : m_tanks)
+    {
+        colManager.DebugDrawFeetBox(window, tank->getSprite());
+    }
+
+    for (auto* berserker : m_berserkers)
+    {
+        colManager.DebugDrawFeetBox(window, berserker->getSprite());
+    }
+
+    for (auto* sniper : m_snipers)
+    {
+        colManager.DebugDrawFeetBox(window, sniper->getSprite());
+    }
+}
+
 void EnemyManager::HandleWaves(sf::Vector2f mapSize)
 {
     if (m_tanks.empty() && m_berserkers.empty() && m_snipers.empty())

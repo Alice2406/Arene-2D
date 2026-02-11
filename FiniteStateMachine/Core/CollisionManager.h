@@ -16,6 +16,9 @@ private:
     std::vector<CollisionBox*> hurtboxes;
 
 public:
+	//test debug collision box player
+    void DebugDrawFeetBox(sf::RenderWindow& window, const sf::Sprite& entitySprite);
+
     void CheckMapCollisions(sf::Sprite& entitySprite, const std::vector<Obstacle>& obstacles);
     void addHitbox(CollisionBox* _box);
     void addHurtbox(CollisionBox* _box);
