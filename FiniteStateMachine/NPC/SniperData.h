@@ -18,4 +18,7 @@ struct SniperData {
     AnimConfig walk;
     AnimConfig attack;
     AnimConfig weapon;
+
+    sf::Vector2f hurtboxSize;
+    sf::Vector2f hurtboxOffset;
 };

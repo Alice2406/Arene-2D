@@ -80,6 +80,8 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, Co
 
         keepInsideMap(b, worldBounds);
 
+        collisionMgr.addHurtbox(&b->hurtbox);
+
         if (b->IsDead())
         {
             delete b;
@@ -104,6 +106,8 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, Co
 
         keepInsideMap(s, worldBounds);
 
+        collisionMgr.addHurtbox(&s->hurtbox);
+
         if (s->IsDead())
         {
             delete s;
@@ -121,6 +125,8 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, Co
         EnemyProjectile* p = *itProj;
 
         p->Update(dt);
+
+       /* collisionMgr.addHitbox(&p->hitbox);*/
 
         sf::Vector2f pos = p->getPosition();
         if (pos.x < 0 || pos.y < 0 || pos.x > worldBounds.x || pos.y > worldBounds.y)

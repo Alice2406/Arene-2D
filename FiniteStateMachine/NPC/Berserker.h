@@ -1,6 +1,9 @@
 #pragma once
 #include "../StateMachine/StateMachine.h"
 #include "SFML/Graphics.hpp"
+#include "../Core/HealthComponent.h"
+#include "../Core/CollisionManager.h"
+#include "../Core/CollisionBox.h"
 #include "../NpcStates/ChaseState.h"
 #include "../NpcStates/AttackState.h"
 #include "../NpcStates/Conditions.h"
@@ -11,11 +14,10 @@
 
 using namespace NpcAi;
 
-class Berserker
+class Berserker : public IDamageable
 {
 private:
-    int value = 100;
-    int m_currentHealth;
+    HealthComponent health;
     float m_flashTimer = 0.0f;
     const float FLASH_DURATION = 0.15f;
     sf::Sprite m_sprite;
@@ -24,9 +26,12 @@ private:
     Animator m_animator;
     BerserkerData m_data;
     FSM::StateMachine<NpcContext> fsm;
+
 public:
+    CollisionBox hurtbox;
     NpcContext context{};
-    Berserker(BerserkerSkin skinType) : m_sprite(m_texture), m_animator(m_sprite) 
+
+    Berserker(BerserkerSkin skinType) : m_sprite(m_texture), m_animator(m_sprite)
     {
          m_data = BerserkerDatabase::GetData(skinType);
 
@@ -42,8 +47,13 @@ public:
          m_animator.AddAnimation("Walk", texWalk, m_data.walk.frameSize, m_data.walk.frameCount, m_data.walk.speed);
          m_animator.AddAnimation("Attack", texAttack, m_data.attack.frameSize, m_data.attack.frameCount, m_data.attack.speed);
          m_sprite.setOrigin({ m_data.idle.frameSize.x / 2.f, m_data.idle.frameSize.y / 2.f });
-         m_currentHealth = m_data.health;
          m_animator.SwitchAnimation("Idle");
+
+         hurtbox = CollisionBox(m_data.hurtboxSize, m_data.hurtboxOffset);
+         hurtbox.owner = this;
+         hurtbox.isActive = true;
+
+         health = HealthComponent(m_data.health);
     }
     void Init();
     void setPosition(const sf::Vector2f& position);
@@ -60,6 +70,8 @@ public:
                 m_sprite.setColor(sf::Color::White);
             }
         }
+
+        hurtbox.Update(m_sprite.getPosition(), m_sprite.getScale().x);
     }
 
     sf::FloatRect GetGlobalBounds() const { return m_sprite.getGlobalBounds(); }
@@ -70,19 +82,11 @@ public:
 
     void Draw(sf::RenderWindow& window);
 
-    void TakeDamage(int damageAmount)
-    {
-        m_currentHealth -= damageAmount;
-
-        m_sprite.setColor(sf::Color(255, 100, 100));
-        m_flashTimer = FLASH_DURATION;
-
-        std::cout << "Aie ! Vie restante : " << m_currentHealth << std::endl;
-    }
+    void handleDamage(float amount) override;
 
     bool IsDead() const
     {
-        return m_currentHealth <= 0;
+        return health.IsDead();
     }
     sf::Vector2f getPosition() const { return m_sprite.getPosition(); }
 };

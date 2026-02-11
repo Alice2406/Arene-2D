@@ -34,6 +34,9 @@ public:
 
             data.scale = { 0.7f, 0.7f };
             data.moveSpeed = 80.f;
+
+            data.hurtboxSize = { 42.f, 65.f };
+            data.hurtboxOffset = { 0.f, 0.f };
             break;
 
         case SniperSkin::HARPOONFISH:
@@ -59,6 +62,9 @@ public:
 
             data.scale = { 0.7f, 0.7f };
             data.moveSpeed = 80.f;
+
+            data.hurtboxSize = { 50.f, 60.f };
+            data.hurtboxOffset = { 0.f, 0.f };
             break;
 
         case SniperSkin::SHAMAN:
@@ -84,6 +90,9 @@ public:
 
             data.scale = { 0.7f, 0.7f };
             data.moveSpeed = 80.f;
+
+            data.hurtboxSize = { 45.f, 68.f };
+            data.hurtboxOffset = { 0.f, 0.f };
             break;
         }
         return data;
