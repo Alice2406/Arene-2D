@@ -71,3 +71,11 @@ void ObstacleManager::Draw(sf::RenderWindow& window)
         obs.Draw(window);
     }
 }
+
+void ObstacleManager::DebugDraw(sf::RenderWindow& window)
+{
+    for (auto& obs : m_obstacles)
+    {
+        obs.DebugDraw(window);
+    }
+}

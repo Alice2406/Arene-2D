@@ -18,4 +18,6 @@ public:
     void Draw(sf::RenderWindow& window);
 
     const std::vector<Obstacle>& GetObstacles() const { return m_obstacles; }
+
+    void DebugDraw(sf::RenderWindow& window);
 };

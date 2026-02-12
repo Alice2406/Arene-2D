@@ -27,6 +27,9 @@ private:
     float m_frameTime; 
     float m_timer;
     sf::Vector2i m_frameSize; 
+    float m_hitboxWidthScale; 
+    float m_hitboxHeightScale; 
+    float m_hitboxOffsetY;
 
 public:
     Obstacle(ObstacleType type, const sf::Texture& texture, sf::Vector2f position);
@@ -37,4 +40,6 @@ public:
     sf::FloatRect GetHitbox() const;
     const sf::Sprite& GetSprite() const { return m_sprite; }
     bool IsSolid() const { return m_isSolid; } 
+
+    void DebugDraw(sf::RenderWindow& window);
 };

@@ -6,6 +6,10 @@ Obstacle::Obstacle(ObstacleType type, const sf::Texture& texture, sf::Vector2f p
     m_sprite.setTexture(texture);
     m_sprite.setPosition(position);
 
+    m_hitboxWidthScale = 0.6f;
+    m_hitboxHeightScale = 1.f;
+    m_hitboxOffsetY = 0.f;
+
     switch (type)
     {
     case ObstacleType::ROCK1:
@@ -31,6 +35,9 @@ Obstacle::Obstacle(ObstacleType type, const sf::Texture& texture, sf::Vector2f p
 	case ObstacleType::SHEEP1:
         m_isSolid = true;
         m_isAnimated = true;
+        m_hitboxWidthScale = 0.3f;
+        m_hitboxHeightScale = 0.2f;
+        m_hitboxOffsetY = -55.f;
         m_frameCount = 12;   
         m_frameTime = 0.15f;   
         m_frameSize = { 128, 128 };
@@ -39,7 +46,10 @@ Obstacle::Obstacle(ObstacleType type, const sf::Texture& texture, sf::Vector2f p
     case ObstacleType::SHEEP2:
         m_isSolid = true;
         m_isAnimated = true;
-        m_frameCount = 6;     
+        m_frameCount = 6;
+        m_hitboxWidthScale = 0.3f;
+        m_hitboxHeightScale = 0.2f;
+        m_hitboxOffsetY = -55.f;
         m_frameTime = 0.15f;  
         m_frameSize = { 128, 128 }; 
 		m_sprite.setTextureRect(sf::IntRect({ 0, 0 }, { m_frameSize.x, m_frameSize.y }));
@@ -47,7 +57,10 @@ Obstacle::Obstacle(ObstacleType type, const sf::Texture& texture, sf::Vector2f p
 	case ObstacleType::BUSHE1:
         m_isSolid = true;
 		m_isAnimated = true;
-        m_frameCount = 8;    
+        m_frameCount = 8;
+        m_hitboxWidthScale = 0.3f;
+        m_hitboxHeightScale = 0.2f;
+        m_hitboxOffsetY = -55.f;
         m_frameTime = 0.2f; 
 		m_frameSize = { 128, 128 }; 
         m_sprite.setTextureRect(sf::IntRect({ 0, 0 }, { m_frameSize.x, m_frameSize.y }));
@@ -91,39 +104,37 @@ void Obstacle::Update(float dt)
 
 sf::FloatRect Obstacle::GetHitbox() const
 {
-    if (!m_isSolid)
-        return sf::FloatRect({ 0.f, 0.f }, { 0.f, 0.f });
+    if (!m_isSolid) return sf::FloatRect({ 0, 0 }, { 0, 0 });
 
     sf::FloatRect bounds = m_sprite.getGlobalBounds();
 
-    float widthFactor = 0.6f;   
-    float heightFactor = 0.25f; 
-
-    float offsetY = 0.f;
-
-    float hitWidth = bounds.size.x * widthFactor;
-    float hitHeight = bounds.size.y * heightFactor;
+    float hitWidth = bounds.size.x * m_hitboxWidthScale;  
+    float hitHeight = bounds.size.y * m_hitboxHeightScale;
 
     float hitX = bounds.position.x + (bounds.size.x - hitWidth) / 2.f;
 
-    float hitY = bounds.position.y + bounds.size.y - hitHeight + offsetY;
+    float hitY = bounds.position.y + bounds.size.y - hitHeight + m_hitboxOffsetY;
 
     return sf::FloatRect({ hitX, hitY }, { hitWidth, hitHeight });
 }
+
 void Obstacle::Draw(sf::RenderWindow& window)
 {
     window.draw(m_sprite);
-    if (m_isSolid)
-    {
-        sf::FloatRect hit = GetHitbox();
+}
 
-        sf::RectangleShape debugBox({ hit.size.x, hit.size.y });
-        debugBox.setPosition(hit.position);
+void Obstacle::DebugDraw(sf::RenderWindow& window)
+{
+    if (!m_isSolid) return;
 
-        debugBox.setFillColor(sf::Color::Transparent); 
-        debugBox.setOutlineColor(sf::Color::Red); 
-        debugBox.setOutlineThickness(1.f);
+    sf::FloatRect hit = GetHitbox();
 
-        window.draw(debugBox);
-    }
+    sf::RectangleShape debugBox({ hit.size.x, hit.size.y });
+    debugBox.setPosition(hit.position);
+
+    debugBox.setFillColor(sf::Color::Transparent);
+    debugBox.setOutlineColor(sf::Color::Red);
+    debugBox.setOutlineThickness(1.f);
+
+    window.draw(debugBox);
 }
