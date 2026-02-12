@@ -10,6 +10,12 @@ public:
     virtual ~IDamageable() = default;
 };
 
+class IDestructible {
+public:
+    virtual void Destroy() = 0;
+    virtual ~IDestructible() = default;
+};
+
 class CollisionManager {
 private:
     std::vector<CollisionBox*> hitboxes;

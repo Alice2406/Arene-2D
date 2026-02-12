@@ -1,7 +1,10 @@
 #pragma once
 #include "../Animation-Assets/Animator.h"
+#include "../Animation-Assets/SharedData.h"
 #include "../NPC/EnemyProjectile.h"
 #include "SFML/Graphics.hpp"
+
+class EnemyProjectile;
 
 class NpcContext
 {

@@ -1,69 +1,108 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "../Animation-Assets/Animator.h"
-#include "../Animation-Assets/SharedData.h"
 #include <cmath>
+#include "../Core/CollisionBox.h"
+#include "../Core/CollisionManager.h"
 
-class EnemyProjectile
+class EnemyProjectile : public IDestructible
 {
 private:
     sf::Sprite m_sprite;
-    Animator m_animator;
-    sf::Texture m_texture;
-    sf::Vector2f m_direction;
-    sf::Vector2f m_targetPos;
-    float m_speed;
-    bool m_active = true;
+    const sf::Texture* m_texture;
+    sf::Vector2f m_velocity;
+    bool m_isActive;
+    float m_lifetime;
+    const float MAX_LIFETIME = 5.0f;
+    float m_damage;
 
 public:
-    EnemyProjectile(sf::Texture& texture, const AnimConfig& config, sf::Vector2f startPos, sf::Vector2f targetPos)
-        : m_sprite(m_texture), m_animator(m_sprite), m_speed(350.0f), m_targetPos(targetPos) 
+    CollisionBox hitbox;
+
+    EnemyProjectile(
+        const sf::Texture& texture,
+        sf::Vector2f position,
+        sf::Vector2f direction,
+        float speed,
+        sf::Vector2i frameSize,
+        float damage = 10.0f
+    )
+        : m_sprite(texture),
+        m_texture(&texture),
+        m_velocity(),
+        m_isActive(true),
+        m_lifetime(0.0f),
+        m_damage(damage),
+        hitbox(sf::Vector2f(frameSize.x * 0.6f, frameSize.y * 0.6f), sf::Vector2f(0.f, 0.f))
     {
-        m_sprite.setPosition(startPos);
+        m_sprite.setPosition(position);
 
-        sf::Vector2f diff = targetPos - startPos;
-        float length = std::sqrt(diff.x * diff.x + diff.y * diff.y);
+        sf::IntRect textureRect(sf::Vector2i(0, 0), frameSize);
+        m_sprite.setTextureRect(textureRect);
 
+        m_sprite.setOrigin(sf::Vector2f(frameSize) / 2.f);
+
+        float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
         if (length != 0)
-            m_direction = diff / length;
+        {
+            m_velocity = sf::Vector2f(
+                (direction.x / length) * speed,
+                (direction.y / length) * speed
+            );
+
+            float angleDegrees = std::atan2(direction.y, direction.x) * 180.f / 3.14159f;
+            m_sprite.setRotation(sf::degrees(angleDegrees));
+        }
         else
-            m_direction = { 1, 0 };
+        {
+            m_velocity = sf::Vector2f(speed, 0.f);
+        }
 
-        m_animator.AddAnimation("Travel", texture, config.frameSize, config.frameCount, config.speed, true);
-        m_animator.SwitchAnimation("Travel");
-
-        m_sprite.setOrigin({ config.frameSize.x / 2.f, config.frameSize.y / 2.f });
-
-        float angle = std::atan2(m_direction.y, m_direction.x) * 180 / 3.14159f;
-        m_sprite.setRotation(sf::degrees(angle));
+        hitbox.owner = this;
+        hitbox.isActive = true;
     }
 
     void Update(float dt)
     {
-        if (!m_active) return;
+        if (!m_isActive) return;
 
-        sf::Vector2f toTarget = m_targetPos - m_sprite.getPosition();
-        float distance = std::sqrt(toTarget.x * toTarget.x + toTarget.y * toTarget.y);
+        m_sprite.setPosition(m_sprite.getPosition() + m_velocity * dt);
+        hitbox.Update(m_sprite.getPosition(), 1.0f);
 
-        float moveStep = m_speed * dt;
+        m_lifetime += dt;
 
-        if (distance <= moveStep)
+        if (m_lifetime >= MAX_LIFETIME)
         {
-            m_sprite.setPosition(m_targetPos);
-
-            Destroy(); 
+            Destroy();
         }
-        else
-        {
-            m_sprite.move(m_direction * moveStep);
-        }
-
-        m_animator.Update(dt);
     }
 
-    void Draw(sf::RenderWindow& window) { window.draw(m_sprite); }
-    sf::FloatRect GetGlobalBounds() const { return m_sprite.getGlobalBounds(); }
-    bool IsActive() const { return m_active; }
-    void Destroy() { m_active = false; }
-    sf::Vector2f getPosition() const { return m_sprite.getPosition(); }
+    void Draw(sf::RenderWindow& window)
+    {
+        if (m_isActive)
+        {
+            window.draw(m_sprite);
+            hitbox.debugDraw(window);
+        }
+    }
+
+    bool IsActive() const
+    {
+        return m_isActive;
+    }
+
+    void Destroy() override
+    {
+        m_isActive = false;
+        hitbox.isActive = false;
+    }
+
+    sf::Vector2f getPosition() const
+    {
+        return m_sprite.getPosition();
+    }
+
+    float getDamage() const
+    {
+        return m_damage;
+    }
 };

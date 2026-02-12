@@ -176,7 +176,7 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, co
 
         p->Update(dt);
 
-       /* collisionMgr.addHitbox(&p->hitbox);*/
+        collisionMgr.addHitbox(&p->hitbox);
 
         sf::Vector2f pos = p->getPosition();
         if (pos.x < 0 || pos.y < 0 || pos.x > worldBounds.x || pos.y > worldBounds.y)
