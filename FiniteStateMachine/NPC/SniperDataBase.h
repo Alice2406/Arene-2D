@@ -36,7 +36,7 @@ public:
             data.hurtboxSize = { 42.f, 65.f };
             data.hurtboxOffset = { 0.f, 0.f };
 
-            data.projectileHitboxSize = { 38.4f, 38.4f };  // 64 * 0.6
+            data.projectileHitboxSize = { 38.4f, 38.4f };
             data.projectileHitboxOffset = { 0.f, 0.f };
             data.projectileSpeed = 400.0f;
             data.projectileDamage = 12.0f;

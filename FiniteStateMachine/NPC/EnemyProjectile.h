@@ -77,6 +77,7 @@ public:
         hitbox.isActive = true;
         hitbox.isProjectile = true;
         hitbox.projectileOwner = sniperOwner;
+        hitbox.damage = damage;
     }
 
     void Update(float dt)

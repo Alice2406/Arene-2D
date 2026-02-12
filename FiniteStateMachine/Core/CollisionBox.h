@@ -1,4 +1,4 @@
-#pragma once
+    #pragma once
 #include "SFML/Graphics.hpp"
 
 class CollisionBox
@@ -17,6 +17,7 @@ public:
     bool isPlayer = false;
 
     float rotation = 0.f;
+    float damage = 10.0f;
 
     CollisionBox(sf::Vector2f size = { 0, 0 }, sf::Vector2f _offset = { 0, 0 });
     void Update(sf::Vector2f ownerPos, float scaleX, float rotationAngle = 0.f);

@@ -42,7 +42,7 @@ void CollisionManager::checkCollisions()
                 IDamageable* victim = static_cast<IDamageable*>(target->owner);
                 if (victim && !victim->IsDead())
                 {
-                    victim->handleDamage(10.0f);
+                    victim->handleDamage(attack->damage);
                 }
 
                 if (attack->isProjectile)
@@ -65,7 +65,6 @@ void CollisionManager::clear()
     hurtboxes.clear();
 }
 
-// Debug collision box player
 void CollisionManager::DebugDrawFeetBox(sf::RenderWindow& window, const sf::Sprite& entitySprite)
 {
     sf::FloatRect globalBounds = entitySprite.getGlobalBounds();
@@ -82,7 +81,6 @@ void CollisionManager::DebugDrawFeetBox(sf::RenderWindow& window, const sf::Spri
         sf::Vector2f(boxWidth, boxHeight)
     );
 
-    // Dessin
     sf::RectangleShape debugShape;
     debugShape.setSize(feetBox.size);
     debugShape.setPosition(feetBox.position);

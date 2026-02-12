@@ -9,7 +9,7 @@ Player::Player() :
     frameWidth(0), frameHeight(0), frameCount(0), speed(300.0f),
     animationSpeed(0.1f), isLooping(false),
     sprite(textureIdle),
-    health(10000.0f),
+    health(1000.0f),
     hurtbox({ 35.f, 50.f }, { 0.f, 10.f }),
     hitbox({ 60.f, 90.f }, { 28.f, 0.f }),
     hitbox2({ 100.f, 40.f }, { 0.f, 40.f })
@@ -19,6 +19,8 @@ Player::Player() :
     hurtbox.isPlayer = true;
     hitbox.isPlayer = true;
     hitbox2.isPlayer = true;
+    hitbox.damage = 25.0f;
+    hitbox2.damage = 25.0f;
 
     hurtbox.owner = this;
     hitbox.owner = this;

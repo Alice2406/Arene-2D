@@ -61,6 +61,7 @@ public:
          hitbox = CollisionBox(m_data.hitboxSize, m_data.hitboxOffset);
          hitbox.owner = this;
          hitbox.isActive = false;
+         hitbox.damage = m_data.attackDamage;
 
          health = HealthComponent(m_data.health);
     }
@@ -101,4 +102,6 @@ public:
         return health.IsDead();
     }
     sf::Vector2f getPosition() const { return m_sprite.getPosition(); }
+
+    float getAttackDamage() const { return m_data.attackDamage; }
 };
