@@ -46,8 +46,6 @@ void MenuScene::BuildRibbonGiant(sf::Vector2u windowSize)
     m_titleText.setString("Arene Survivor");
     m_titleText.setCharacterSize(static_cast<unsigned int>(30 * scaleFactor));
     m_titleText.setFillColor(sf::Color::White);
-    //m_titleText.setOutlineColor(sf::Color::Black);
-    //m_titleText.setOutlineThickness(2.f * scaleFactor);
 
     sf::FloatRect tBounds = m_titleText.getLocalBounds();
 

@@ -84,8 +84,9 @@ void EnemyManager::SpawnSniper(SniperSkin skin, sf::Vector2f position, sf::Vecto
     m_snipers.push_back(newSniper);
 }
 
-void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, const std::vector<Obstacle>& obstacles, CollisionManager& collisionMgr)
+int EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, const std::vector<Obstacle>& obstacles, CollisionManager& collisionMgr)
 {
+    int pointsGagnesCeTour = 0;
     collisionMgr.addHitbox(&player.hitbox);
     collisionMgr.addHitbox(&player.hitbox2);
     collisionMgr.addHurtbox(&player.hurtbox);
@@ -107,6 +108,7 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, co
 
         if (t->IsDead())
         {
+            pointsGagnesCeTour += 30;
             delete t;
             itTank = m_tanks.erase(itTank);
         }
@@ -133,6 +135,7 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, co
 
         if (b->IsDead())
         {
+            pointsGagnesCeTour += 10;
             delete b;
             itBerserker = m_berserkers.erase(itBerserker);
         }
@@ -160,6 +163,7 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, co
 
         if (s->IsDead())
         {
+            pointsGagnesCeTour += 40;
             delete s;
             itSniper = m_snipers.erase(itSniper);
         }
@@ -194,6 +198,7 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, co
             ++itProj;
         }
     }
+    return pointsGagnesCeTour;
 }
 //test debug collision box ennemy
 void EnemyManager::DebugDrawCollisions(sf::RenderWindow& window, CollisionManager& colManager)

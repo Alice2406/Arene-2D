@@ -50,6 +50,6 @@ public:
     void SpawnTank(TankSkin skin, sf::Vector2f position, sf::Vector2f mapSize);
     void SpawnBerserker(BerserkerSkin skin, sf::Vector2f position, sf::Vector2f mapSize);
     void SpawnSniper(SniperSkin skin, sf::Vector2f position, sf::Vector2f mapSize);
-    void Update(float dt, Player& player, sf::Vector2f worldBounds, const std::vector<Obstacle>& obstacles, CollisionManager& collisionMgr);
+    int Update(float dt, Player& player, sf::Vector2f worldBounds, const std::vector<Obstacle>& obstacles, CollisionManager& collisionMgr);
     void Draw(sf::RenderWindow& window);
 };

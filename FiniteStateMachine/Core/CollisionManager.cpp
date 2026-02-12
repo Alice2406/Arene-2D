@@ -23,7 +23,6 @@ void CollisionManager::checkCollisions()
             if (attack->owner == target->owner) continue;
 
             if (attack->bounds.findIntersection(target->bounds)) {
-                std::cout << "COLLISION DETECTEE !" << std::endl;
 
                 IDamageable* victim = static_cast<IDamageable*>(target->owner);
 

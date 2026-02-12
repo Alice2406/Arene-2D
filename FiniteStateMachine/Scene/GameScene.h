@@ -22,16 +22,25 @@ private:
     ObstacleManager m_obstacleManager;
     CollisionManager m_collisionManager;
     EnemyManager m_enemyManager;
-
+    sf::Font m_font;
     TileMap m_map;
     Player m_player;
     sf::Sprite m_oceanSprite;
-
+    int m_score;
+    sf::Text m_scoreText;
     sf::Vector2f m_worldBounds;
 
-public:
-    GameScene(sf::RenderWindow& window, ResourceManager& rm);
+    bool m_isGameOver;
+    sf::RectangleShape m_darkOverlay;
+    sf::Text m_gameOverTitle; 
+    sf::Text m_finalScoreText;
 
+    sf::Sprite m_btnQuit;       
+    sf::Text   m_textQuit;
+
+public:
+    void InitGameOverUI(sf::Vector2u windowSize);
+    GameScene(sf::RenderWindow& window, ResourceManager& rm);
     virtual SceneType Update(float dt, sf::RenderWindow& window) override;
     virtual void Draw(sf::RenderWindow& window) override;
 };
