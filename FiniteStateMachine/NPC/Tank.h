@@ -32,15 +32,20 @@ private:
     const float FLASH_DURATION = 0.15f;
 
 public:
+	TankSkin m_skinType;
     CollisionBox hurtbox;
+    CollisionBox hitbox;
+	CollisionBox hitbox2;
     NpcContext context{};
-    Tank(TankSkin skinType, sf::Texture& texture) : m_sprite(m_texture), m_animator(m_sprite)
+
+    Tank(TankSkin skinType, sf::Texture& texture) : m_sprite(m_texture), m_animator(m_sprite), m_skinType(skinType)
     {
         m_data = TankDatabase::GetData(skinType);
         m_sprite.setTexture(texture);
         context.npcSprite = &m_sprite;
         context.animator = &m_animator;
         context.speed = m_data.moveSpeed;
+        context.tank = this;
 
         sf::Texture& texIdle = m_resources.GetTexture(m_data.idle.texturePath);
         sf::Texture& texWalk = m_resources.GetTexture(m_data.walk.texturePath);
@@ -59,6 +64,17 @@ public:
         hurtbox.owner = this;
         hurtbox.isActive = true;
         hurtbox.isPlayer = false;
+
+        hitbox = CollisionBox(m_data.hitboxSize, m_data.hitboxOffset);
+        hitbox.owner = this;
+        hitbox.isActive = false;
+
+        if (skinType == TankSkin::PANDA)
+        {
+            hitbox2 = CollisionBox(m_data.hitbox2Size, m_data.hitbox2Offset);
+            hitbox2.owner = this;
+            hitbox2.isActive = false;
+        }
 
         health = HealthComponent(m_data.health);
     }
@@ -137,7 +153,13 @@ public:
         m_animator.Update(dt);
 
         hurtbox.Update(m_sprite.getPosition(), m_sprite.getScale().x);
-        
+        hitbox.Update(m_sprite.getPosition(), m_sprite.getScale().x);
+
+        if (m_skinType == TankSkin::PANDA)
+        {
+            hitbox2.Update(m_sprite.getPosition(), m_sprite.getScale().x);
+        }
+
         if (m_flashTimer > 0)
         {
             m_flashTimer -= dt;

@@ -2,7 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <optional> 
-#include "Animation-Assets/AssetPath.h" // <--- Pour les chemins
+#include "Animation-Assets/AssetPath.h"
 #include "NPC/EnemyManager.h" 
 #include "PlayerStates/Player.h"
 #include "Core/CollisionManager.h"
@@ -110,10 +110,6 @@ int main()
         }
         enemyManager.Draw(window);
 
-        // 3. Debug (Par dessus tout)
-        // collisionMgr.DebugDrawFeetBox(window, player.getSprite());
-        // enemyManager.DebugDrawCollisions(window, collisionMgr); // Si tu as implémenté la fonction
-
         player.hurtbox.debugDraw(window);
         player.hitbox.debugDraw(window);
         player.hitbox2.debugDraw(window);
@@ -123,8 +119,3 @@ int main()
 
     return 0;
 }
-
-/*
-* menu fin
-* collision ennemis
-*/

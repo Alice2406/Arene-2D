@@ -71,7 +71,6 @@ public:
             data.hurtboxSize = { 65.f, 85.f };
             data.hurtboxOffset = { 0.f, 0.f };
 
-            // ✅ HITBOX D'ATTAQUE - Panda (spin 360°) - DEUX HITBOX
             data.hitboxSize = { 90.f, 65.f };
             data.hitboxOffset = { 65.f, 0.f };
             data.hitbox2Size = { 90.f, 65.f };
@@ -139,7 +138,6 @@ public:
             data.hurtboxSize = { 50.f, 70.f };
             data.hurtboxOffset = { 0.f, 5.f };
 
-            // ✅ HITBOX D'ATTAQUE - Skull (dague)
             data.hitboxSize = { 55.f, 50.f };
             data.hitboxOffset = { 45.f, 0.f };
             data.attackDamage = 28.0f;

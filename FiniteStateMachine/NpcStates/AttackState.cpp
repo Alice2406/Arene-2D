@@ -50,7 +50,6 @@ namespace NpcAi
         {
             _context.tank->hitbox.isActive = true;
 
-            // Si c'est un Panda, activer la 2ème hitbox
             if (_context.tank->m_skinType == TankSkin::PANDA)
             {
                 _context.tank->hitbox2.isActive = true;
