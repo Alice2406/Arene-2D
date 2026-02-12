@@ -38,13 +38,16 @@ namespace NpcAi
                     damage = 12.0f;
                 }
 
+                void* sniperPtr = nullptr;
+
                 EnemyProjectile* newProj = new EnemyProjectile(
                     *_context.weaponTexture,
                     startPos,
                     direction,
                     speed,
                     frameSize,
-                    damage
+                    damage,
+                    _context.ownerSniper
                 );
 
                 _context.projectileList->push_back(newProj);

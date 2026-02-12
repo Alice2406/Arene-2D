@@ -52,6 +52,7 @@ public:
          hurtbox = CollisionBox(m_data.hurtboxSize, m_data.hurtboxOffset);
          hurtbox.owner = this;
          hurtbox.isActive = true;
+         hurtbox.isPlayer = false;
 
          health = HealthComponent(m_data.health);
     }

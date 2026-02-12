@@ -32,6 +32,7 @@ private:
 public:
     CollisionBox hurtbox;
     NpcContext context{};
+
     Sniper(SniperSkin skinType, sf::Texture &texture) : m_sprite(m_texture), m_animator(m_sprite)
     {
         m_data = SniperDatabase::GetData(skinType);
@@ -39,6 +40,8 @@ public:
         context.npcSprite = &m_sprite;
         context.animator = &m_animator;
         context.speed = m_data.moveSpeed;
+        context.ownerSniper = this;
+
         sf::Texture& texIdle = m_resources.GetTexture(m_data.idle.texturePath);
         sf::Texture& texWalk = m_resources.GetTexture(m_data.walk.texturePath);
         sf::Texture& texAttack = m_resources.GetTexture(m_data.attack.texturePath);
@@ -56,6 +59,7 @@ public:
         hurtbox = CollisionBox(m_data.hurtboxSize, m_data.hurtboxOffset);
         hurtbox.owner = this;
         hurtbox.isActive = true;
+        hurtbox.isPlayer = false;
 
         health = HealthComponent(m_data.health);
     }

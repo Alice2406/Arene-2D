@@ -14,6 +14,7 @@ private:
     float m_lifetime;
     const float MAX_LIFETIME = 5.0f;
     float m_damage;
+    void* m_sniperOwner;
 
 public:
     CollisionBox hitbox;
@@ -24,7 +25,8 @@ public:
         sf::Vector2f direction,
         float speed,
         sf::Vector2i frameSize,
-        float damage = 10.0f
+        float damage = 10.0f,
+        void* sniperOwner = nullptr
     )
         : m_sprite(texture),
         m_texture(&texture),
@@ -32,6 +34,7 @@ public:
         m_isActive(true),
         m_lifetime(0.0f),
         m_damage(damage),
+        m_sniperOwner(sniperOwner),
         hitbox(sf::Vector2f(frameSize.x * 0.6f, frameSize.y * 0.6f), sf::Vector2f(0.f, 0.f))
     {
         m_sprite.setPosition(position);
@@ -59,6 +62,8 @@ public:
 
         hitbox.owner = this;
         hitbox.isActive = true;
+        hitbox.isProjectile = true;
+        hitbox.projectileOwner = sniperOwner;
     }
 
     void Update(float dt)
@@ -104,5 +109,10 @@ public:
     float getDamage() const
     {
         return m_damage;
+    }
+
+    void* getSniperOwner() const
+    {
+        return m_sniperOwner;
     }
 };

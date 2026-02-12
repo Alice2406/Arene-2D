@@ -16,6 +16,10 @@ Player::Player() :
 {
     context.player = this;
 
+    hurtbox.isPlayer = true;
+    hitbox.isPlayer = true;
+    hitbox2.isPlayer = true;
+
     hurtbox.owner = this;
     hitbox.owner = this;
     hitbox2.owner = this;

@@ -1,6 +1,7 @@
 ﻿#include "CollisionManager.h"
 #include "CollisionBox.h"
 #include "../PlayerStates/Player.h"
+#include "../NPC/EnemyProjectile.h"
 #include <cmath>
 #include <iostream>
 
@@ -23,7 +24,16 @@ void CollisionManager::checkCollisions()
         for (auto* target : hurtboxes)
         {
             if (!target->isActive) continue;
+
             if (attack->owner == target->owner) continue;
+
+            if (attack->isProjectile)
+            {
+                if (!target->isPlayer)
+                {
+                    continue;
+                }
+            }
 
             if (attack->bounds.findIntersection(target->bounds))
             {
@@ -35,11 +45,14 @@ void CollisionManager::checkCollisions()
                     victim->handleDamage(10.0f);
                 }
 
-                IDestructible* destructible = static_cast<IDestructible*>(attack->owner);
-                if (destructible)
+                if (attack->isProjectile)
                 {
-                    destructible->Destroy();
-                    attack->isActive = false;
+                    IDestructible* projectile = static_cast<IDestructible*>(attack->owner);
+                    if (projectile)
+                    {
+                        projectile->Destroy();
+                        attack->isActive = false;
+                    }
                 }
             }
         }

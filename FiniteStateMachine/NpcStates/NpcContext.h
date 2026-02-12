@@ -22,4 +22,5 @@ public:
     sf::Texture* weaponTexture = nullptr;
     AnimConfig weaponConfig;
     sf::Vector2f worldBounds;
+    void* ownerSniper = nullptr;
 };
