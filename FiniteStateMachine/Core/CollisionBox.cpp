@@ -21,7 +21,7 @@ void CollisionBox::Update(sf::Vector2f ownerPos, float scaleX, float rotationAng
 	bounds.position.y = ownerPos.y + offset.y - (bounds.size.y / 2.f);
 
 	debugShape.setSize(bounds.size);
-	debugShape.setPosition(ownerPos);
+	debugShape.setPosition({ bounds.position.x + bounds.size.x / 2.f, bounds.position.y + bounds.size.y / 2.f });
 	debugShape.setRotation(sf::degrees(rotation));
 }
 

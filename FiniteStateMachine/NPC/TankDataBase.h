@@ -8,7 +8,7 @@ public:
         TankData data;
 
         data.moveSpeed = 100.f;
-        data.health = 100;
+        data.health = 1000;
 
         switch (skin) {
         case TankSkin::TURTLE:
@@ -39,8 +39,8 @@ public:
             data.hurtboxOffset = { 0.f, 0.f };
 
             // ✅ HITBOX D'ATTAQUE - Turtle (marteau)
-            data.hitboxSize = { 100.f, 70.f };
-            data.hitboxOffset = { 70.f, 0.f };
+            data.hitboxSize = { 100.f, 35.f };
+            data.hitboxOffset = { 70.f, 10.f };
             data.attackDamage = 30.0f;
             break;
 
@@ -72,9 +72,7 @@ public:
             data.hurtboxOffset = { 0.f, 0.f };
 
             data.hitboxSize = { 90.f, 65.f };
-            data.hitboxOffset = { 65.f, 0.f };
-            data.hitbox2Size = { 90.f, 65.f };
-            data.hitbox2Offset = { -65.f, 0.f };
+            data.hitboxOffset = { 65.f, 25.f };
             data.attackDamage = 35.0f;
             break;
 
@@ -105,9 +103,8 @@ public:
             data.hurtboxSize = { 85.f, 110.f };
             data.hurtboxOffset = { 0.f, -5.f };
 
-            // ✅ HITBOX D'ATTAQUE - Minotaur (massue)
-            data.hitboxSize = { 95.f, 80.f };
-            data.hitboxOffset = { 65.f, 0.f };
+            data.hitboxSize = { 95.f, 180.f };
+            data.hitboxOffset = { 70.f, 0.f };
             data.attackDamage = 32.0f;
             break;
 
@@ -138,8 +135,8 @@ public:
             data.hurtboxSize = { 50.f, 70.f };
             data.hurtboxOffset = { 0.f, 5.f };
 
-            data.hitboxSize = { 55.f, 50.f };
-            data.hitboxOffset = { 45.f, 0.f };
+            data.hitboxSize = { 50.f, 25.f };
+            data.hitboxOffset = { 50.f, 10.f };
             data.attackDamage = 28.0f;
             break;
         }

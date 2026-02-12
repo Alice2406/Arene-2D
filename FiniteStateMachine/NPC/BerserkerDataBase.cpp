@@ -3,7 +3,7 @@
 BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
     BerserkerData data;
 
-    data.moveSpeed = 100.f;
+    data.moveSpeed = 200.f;
     data.health = 100;
 
     switch (skin) {

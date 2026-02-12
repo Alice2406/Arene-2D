@@ -9,7 +9,7 @@ Player::Player() :
     frameWidth(0), frameHeight(0), frameCount(0), speed(300.0f),
     animationSpeed(0.1f), isLooping(false),
     sprite(textureIdle),
-    health(100.0f),
+    health(10000.0f),
     hurtbox({ 35.f, 50.f }, { 0.f, 10.f }),
     hitbox({ 0.f, 0.f }, { 0.f, 0.f }),
     hitbox2({ 0.f, 0.f }, { 0.f, 0.f })

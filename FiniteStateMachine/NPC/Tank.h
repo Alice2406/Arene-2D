@@ -35,7 +35,6 @@ public:
 	TankSkin m_skinType;
     CollisionBox hurtbox;
     CollisionBox hitbox;
-	CollisionBox hitbox2;
     NpcContext context{};
 
     Tank(TankSkin skinType, sf::Texture& texture) : m_sprite(m_texture), m_animator(m_sprite), m_skinType(skinType)
@@ -68,13 +67,6 @@ public:
         hitbox = CollisionBox(m_data.hitboxSize, m_data.hitboxOffset);
         hitbox.owner = this;
         hitbox.isActive = false;
-
-        if (skinType == TankSkin::PANDA)
-        {
-            hitbox2 = CollisionBox(m_data.hitbox2Size, m_data.hitbox2Offset);
-            hitbox2.owner = this;
-            hitbox2.isActive = false;
-        }
 
         health = HealthComponent(m_data.health);
     }
@@ -155,11 +147,6 @@ public:
         hurtbox.Update(m_sprite.getPosition(), m_sprite.getScale().x);
         hitbox.Update(m_sprite.getPosition(), m_sprite.getScale().x);
 
-        if (m_skinType == TankSkin::PANDA)
-        {
-            hitbox2.Update(m_sprite.getPosition(), m_sprite.getScale().x);
-        }
-
         if (m_flashTimer > 0)
         {
             m_flashTimer -= dt;
@@ -179,10 +166,5 @@ public:
         hurtbox.debugDraw(window);
         hurtbox.debugDraw(window);
         hitbox.debugDraw(window);
-
-        if (m_skinType == TankSkin::PANDA)
-        {
-            hitbox2.debugDraw(window);
-        }
     }
 };

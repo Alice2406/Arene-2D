@@ -106,11 +106,6 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, co
         collisionMgr.addHurtbox(&t->hurtbox);
         collisionMgr.addHitbox(&t->hitbox);
 
-        if (t->m_skinType == TankSkin::PANDA)
-        {
-            collisionMgr.addHitbox(&t->hitbox2);
-        }
-
         if (t->IsDead())
         {
             delete t;
@@ -233,7 +228,9 @@ void EnemyManager::HandleWaves(sf::Vector2f mapSize)
         m_waveNumber++; 
         std::cout << "--- DEBUT VAGUE " << m_waveNumber << " ---" << std::endl;
 
-        int enemyCount = 5 + (m_waveNumber * 2);
+        SpawnTank(TankSkin::TURTLE, { 500.f, 300.f }, mapSize);
+
+        /*int enemyCount = 5 + (m_waveNumber * 2);
 
         for (int i = 0; i < enemyCount; i++)
         {
@@ -254,7 +251,7 @@ void EnemyManager::HandleWaves(sf::Vector2f mapSize)
                 int skinIdx = rand() % (int)BerserkerSkin::COUNT;
                 SpawnBerserker((BerserkerSkin)skinIdx, { -10.f, -10.f }, mapSize);
             }
-        }
+        }*/
     }
 }
 void EnemyManager::Draw(sf::RenderWindow& window)
