@@ -189,9 +189,4 @@ void GameScene::Draw(sf::RenderWindow& window)
         window.draw(m_btnQuit);        
         window.draw(m_textQuit);       
     }
-
-    //m_player.hurtbox.debugDraw(window);
-    //m_player.hitbox.debugDraw(window);
-    //m_player.hitbox2.debugDraw(window);
-    //m_obstacleManager.DebugDraw(window);
 }

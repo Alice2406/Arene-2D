@@ -141,6 +141,11 @@
     <ClCompile Include="Core\CollisionBox.cpp" />
     <ClCompile Include="Core\CollisionManager.cpp" />
     <ClCompile Include="Core\HealthComponent.cpp" />
+    <ClCompile Include="NPC\EnemyProjectile.cpp" />
+    <ClCompile Include="NPC\Sniper.cpp" />
+    <ClCompile Include="NPC\SniperDataBase.cpp" />
+    <ClCompile Include="NPC\Tank.cpp" />
+    <ClCompile Include="NPC\TankDataBase.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\MenuScene.cpp" />
     <ClCompile Include="NPC\Berserker.cpp" />
@@ -164,6 +169,7 @@
     <ClInclude Include="Core\CollisionBox.h" />
     <ClInclude Include="Core\CollisionManager.h" />
     <ClInclude Include="Core\HealthComponent.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\MenuScene.h" />
     <ClInclude Include="NPC\EnemyProjectile.h" />
@@ -201,8 +207,12 @@
     <ClInclude Include="TileMap.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="NPC\EnemyManager.inl" />
     <None Include="StateMachine\State.inl" />
     <None Include="StateMachine\StateMachine.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="FiniteStateMachine.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

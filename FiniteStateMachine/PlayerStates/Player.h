@@ -9,7 +9,6 @@
 class Player : public IDamageable
 {
 private:
-    // Animation
     sf::IntRect currentRect;
     int frameWidth, frameHeight, frameCount;
     int currentFrame = 0;
@@ -17,25 +16,21 @@ private:
     float animationSpeed;
     bool isLooping;
 
-    // Statistiques & Gameplay
     HealthComponent health;
     float speed;
     bool isInvulnerable = false;
     float invulnTimer = 0.f;
 
 public:
-    // Assets
     sf::Texture textureIdle, textureRun, textureAttack, textureDeath;
     sf::Sprite sprite;
 
-    // Physique
     CollisionBox hurtbox;
     CollisionBox hitbox;
     CollisionBox hitbox2;
 
     Player();
 
-    // Getters / Setters
     sf::Vector2f getPosition() const { return sprite.getPosition(); }
     int getCurrentFrame() const { return currentFrame; }
     int getFrameCount() const { return frameCount; }
@@ -43,7 +38,6 @@ public:
     float getHp() const { return health.getHealth(); }
     sf::Sprite& getSprite() { return sprite; }
 
-    // Méthodes principales
     void setAnimation(const sf::Texture& tex, int w, int h, int count, float speed, bool loop, int row);
     void Update(sf::RenderWindow& window, float _dt, sf::Vector2f worldBounds);
     void handleDamage(float damage) override;

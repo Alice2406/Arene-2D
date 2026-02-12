@@ -1,41 +1,38 @@
 #include "ResourceManager.h"
-#include "../Animation-Assets/AssetPath.h" // <--- TRES IMPORTANT
+#include "../Animation-Assets/AssetPath.h"
 
 void ResourceManager::LoadTexture(const std::string& name, const std::string& path)
 {
     sf::Texture tex;
     if (tex.loadFromFile(path))
-    {
         m_textures[name] = tex; 
-    }
     else
-    {
         std::cerr << "ERREUR: Impossible de charger " << path << std::endl;
-    }
 }
 
 void ResourceManager::LoadAllGameTextures()
 {
+    //Menu
     LoadTexture("MenuBackground", AssetPaths::UI::MENU_BG);
     LoadTexture("MenuTitle", AssetPaths::UI::TITLE);
     LoadTexture("BtnPlay", AssetPaths::UI::BTN_PLAY);
     LoadTexture("BtnQuit", AssetPaths::UI::BTN_QUIT);
-    // 1. Map
+    //Map
     LoadTexture("Water", AssetPaths::Environment::TILESET_WATER);
     LoadTexture("MapTiles", AssetPaths::Environment::TILESET_GROUND);
 
-    // 2. Obstacles Solides
+    //Obstacles Solides
     LoadTexture("Rock1", AssetPaths::Environment::ROCK1);
     LoadTexture("Rock2", AssetPaths::Environment::ROCK2);
     LoadTexture("Rock3", AssetPaths::Environment::ROCK3);
     LoadTexture("Rock4", AssetPaths::Environment::ROCK4);
     LoadTexture("Tree", AssetPaths::Environment::TREE);
 
-    // 3. Animaux
+    //Animaux
     LoadTexture("Sheep1", AssetPaths::Animals::SHEEP_WHITE);
     LoadTexture("Sheep2", AssetPaths::Animals::SHEEP_BLACK);
 
-    // 4. Décorations
+    //Décorations
     LoadTexture("Bush1", AssetPaths::Environment::BUSH1);
     LoadTexture("Bush2", AssetPaths::Environment::BUSH2);
     LoadTexture("Bush3", AssetPaths::Environment::BUSH3);

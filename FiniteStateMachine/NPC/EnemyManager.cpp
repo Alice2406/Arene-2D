@@ -180,8 +180,6 @@ int EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, con
 
         p->Update(dt);
 
-       /* collisionMgr.addHitbox(&p->hitbox);*/
-
         sf::Vector2f pos = p->getPosition();
         if (pos.x < 0 || pos.y < 0 || pos.x > worldBounds.x || pos.y > worldBounds.y)
         {
@@ -199,24 +197,6 @@ int EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, con
         }
     }
     return pointsGagnesCeTour;
-}
-//test debug collision box ennemy
-void EnemyManager::DebugDrawCollisions(sf::RenderWindow& window, CollisionManager& colManager)
-{
-    for (auto* tank : m_tanks)
-    {
-        colManager.DebugDrawFeetBox(window, tank->getSprite());
-    }
-
-    for (auto* berserker : m_berserkers)
-    {
-        colManager.DebugDrawFeetBox(window, berserker->getSprite());
-    }
-
-    for (auto* sniper : m_snipers)
-    {
-        colManager.DebugDrawFeetBox(window, sniper->getSprite());
-    }
 }
 
 void EnemyManager::HandleWaves(sf::Vector2f mapSize)
@@ -253,20 +233,11 @@ void EnemyManager::HandleWaves(sf::Vector2f mapSize)
 void EnemyManager::Draw(sf::RenderWindow& window)
 {
     for (Tank* t : m_tanks)
-    {
         t->Draw(window);
-    }
-
     for (auto* b : m_berserkers)
-    {
         b->Draw(window);
-    }
     for (auto* s : m_snipers)
-    {
         s->Draw(window);
-    }
     for (auto* p : m_projectiles)
-    {
         p->Draw(window);
-    }
 }

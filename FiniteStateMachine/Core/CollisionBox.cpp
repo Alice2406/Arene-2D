@@ -21,20 +21,3 @@ void CollisionBox::Update(sf::Vector2f ownerPos, float scaleX)
 	debugShape.setPosition(bounds.position);
 }
 
-void CollisionBox::debugDraw(sf::RenderWindow& window)
-{
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F1))
-	{
-		if (isActive) {
-			debugShape.setFillColor(sf::Color(255, 0, 0, 100));
-			debugShape.setOutlineColor(sf::Color::Red);
-		}
-		else {
-			debugShape.setFillColor(sf::Color::Transparent);
-			debugShape.setOutlineColor(sf::Color(100, 100, 100));
-		}
-
-		window.draw(debugShape);
-	}
-	
-}

@@ -15,9 +15,7 @@ namespace NpcAi
             _context.isInvulnerable = true;
             _context.triggerGuard = false;
             if (_context.animator)
-            {
                 _context.animator->SwitchAnimation("Guard");
-            }
         }
         void Execute(NpcContext& _context) override
         {

@@ -18,7 +18,7 @@ namespace NpcAi
         {
             if (bounds.x < 100.f || bounds.y < 100.f)
             {
-                std::cout << "[ERREUR] worldBounds est vide (0,0) !" << std::endl;
+                std::cout << "ERREUR :worldBounds est vide (0,0) !" << std::endl;
                 targetpos = sf::Vector2f(200.f, 200.f);
                 return targetpos;
             }
@@ -31,17 +31,14 @@ namespace NpcAi
         {
             targetpos = GetRandomPos(_context.worldBounds);
         }
+
     public:
         void Enter(NpcContext& _context) override
         {
             if (_context.animator)
-            {
                 _context.animator->SwitchAnimation("Walk");
-            }
             if (_context.npcSprite->getPosition() == sf::Vector2f(-10.f, -10.f))
-            {
                 _context.npcSprite->setPosition(GetRandomPos(_context.worldBounds));
-            }
             PickNewDestination(_context);
             m_stuckTimer = 0.0f;
             m_lastPosition = _context.npcSprite->getPosition();
@@ -71,13 +68,9 @@ namespace NpcAi
             sf::Vector2f currentPos = _context.npcSprite->getPosition();
             sf::Vector2f direction = targetpos - currentPos;
             if (direction.x < 0)
-            {
                 _context.npcSprite->setScale({ -_context.baseScale.x, _context.baseScale.y });
-            }
             else if (direction.x > 0)
-            {
                 _context.npcSprite->setScale({ _context.baseScale.x, _context.baseScale.y });
-            }
             float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 
             if (distance < 5.0f)

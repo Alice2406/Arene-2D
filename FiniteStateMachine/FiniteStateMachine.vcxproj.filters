@@ -20,6 +20,11 @@
     <ClCompile Include="PlayerStates\PlayerMoveState.cpp" />
     <ClCompile Include="Scene\MenuScene.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
+    <ClCompile Include="NPC\EnemyProjectile.cpp" />
+    <ClCompile Include="NPC\Sniper.cpp" />
+    <ClCompile Include="NPC\SniperDataBase.cpp" />
+    <ClCompile Include="NPC\Tank.cpp" />
+    <ClCompile Include="NPC\TankDataBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation-Assets\Animator.h" />
@@ -64,9 +69,14 @@
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\MenuScene.h" />
     <ClInclude Include="Scene\GameScene.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="StateMachine\State.inl" />
     <None Include="StateMachine\StateMachine.inl" />
+    <None Include="NPC\EnemyManager.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="FiniteStateMachine.rc" />
   </ItemGroup>
 </Project>

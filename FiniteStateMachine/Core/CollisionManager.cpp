@@ -40,35 +40,6 @@ void CollisionManager::clear()
     hurtboxes.clear();
 }
 
-//test debug collision box player
-void CollisionManager::DebugDrawFeetBox(sf::RenderWindow& window, const sf::Sprite& entitySprite)
-{
-    sf::FloatRect globalBounds = entitySprite.getGlobalBounds();
-
-    float boxWidth = 30.f;
-    float boxHeight = 15.f;
-    float verticalOffset = 68.f; 
-
-    float feetCenterX = globalBounds.position.x + globalBounds.size.x / 2.f;
-    float feetCenterY = (globalBounds.position.y + globalBounds.size.y) - verticalOffset;
-
-    sf::FloatRect feetBox(
-        { feetCenterX - (boxWidth / 2.f),
-        feetCenterY - boxHeight },
-        { boxWidth,
-        boxHeight }
-    );
-
-    // Dessin
-    sf::RectangleShape debugShape;
-    debugShape.setSize({ feetBox.size.x, feetBox.size.y });
-    debugShape.setPosition(feetBox.position);
-    debugShape.setFillColor(sf::Color::Transparent);
-    debugShape.setOutlineColor(sf::Color::Magenta);
-    debugShape.setOutlineThickness(2.f);
-    window.draw(debugShape);
-}
-
 void CollisionManager::CheckMapCollisions(sf::Sprite& entitySprite, const std::vector<Obstacle>& obstacles)
 {
     sf::FloatRect globalBounds = entitySprite.getGlobalBounds();

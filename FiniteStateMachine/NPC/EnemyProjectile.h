@@ -16,27 +16,7 @@ private:
     bool m_active = true;
 
 public:
-    EnemyProjectile(sf::Texture& texture, const AnimConfig& config, sf::Vector2f startPos, sf::Vector2f targetPos)
-        : m_sprite(m_texture), m_animator(m_sprite), m_speed(350.0f), m_targetPos(targetPos) 
-    {
-        m_sprite.setPosition(startPos);
-
-        sf::Vector2f diff = targetPos - startPos;
-        float length = std::sqrt(diff.x * diff.x + diff.y * diff.y);
-
-        if (length != 0)
-            m_direction = diff / length;
-        else
-            m_direction = { 1, 0 };
-
-        m_animator.AddAnimation("Travel", texture, config.frameSize, config.frameCount, config.speed, true);
-        m_animator.SwitchAnimation("Travel");
-
-        m_sprite.setOrigin({ config.frameSize.x / 2.f, config.frameSize.y / 2.f });
-
-        float angle = std::atan2(m_direction.y, m_direction.x) * 180 / 3.14159f;
-        m_sprite.setRotation(sf::degrees(angle));
-    }
+    explicit EnemyProjectile(sf::Texture& texture, const AnimConfig& config, sf::Vector2f startPos, sf::Vector2f targetPos);
 
     void Update(float dt)
     {
@@ -61,9 +41,9 @@ public:
         m_animator.Update(dt);
     }
 
-    void Draw(sf::RenderWindow& window) { window.draw(m_sprite); }
-    sf::FloatRect GetGlobalBounds() const { return m_sprite.getGlobalBounds(); }
-    bool IsActive() const { return m_active; }
-    void Destroy() { m_active = false; }
-    sf::Vector2f getPosition() const { return m_sprite.getPosition(); }
+    void Draw(sf::RenderWindow& window);
+    sf::FloatRect GetGlobalBounds() const;
+    bool IsActive() const;
+    void Destroy();
+    sf::Vector2f getPosition() const;
 };

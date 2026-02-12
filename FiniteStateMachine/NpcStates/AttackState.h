@@ -12,9 +12,7 @@ namespace NpcAi
         void Enter(NpcContext& _context) override
         {
             if (_context.animator)
-            {
                 _context.animator->SwitchAnimation("Attack");
-            }
         }
 
         void Execute(NpcContext& _context) override

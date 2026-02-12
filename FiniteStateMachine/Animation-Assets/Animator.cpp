@@ -54,13 +54,9 @@ void Animator::Update(float dt)
         if (m_currentFrameIndex >= m_currentAnim->frames.size())
         {
             if (m_currentAnim->looping)
-            {
                 m_currentFrameIndex = 0;
-            }
             else
-            {
                 m_currentFrameIndex = (int)m_currentAnim->frames.size() - 1;
-            }
         }
 
         m_sprite.setTextureRect(m_currentAnim->frames[m_currentFrameIndex]);
