@@ -1,6 +1,7 @@
 # Documentation du Projet : Arene Survivor
 
 **Auteurs :** UWINEZA Job et NIEZGODZKI Alice
+
 **Langage :** C++ / SFML 3.0.2
 
 ---
@@ -22,8 +23,6 @@ Le joueur incarne un chevalier solitaire piégé dans une zone hostile. L'object
 ---
 
 ## 2. Fonctionnalités Réalisées
-
-Le projet implémente une architecture orientée objet (OOP) en C++.
 
 ### Moteur & Core
 * **Game Loop :** Gestion du temps (`DeltaTime`) pour assurer la fluidité du jeu.
