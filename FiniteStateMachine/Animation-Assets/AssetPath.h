@@ -3,6 +3,14 @@
 
 namespace AssetPaths
 {
+    namespace UI
+    {
+        static const std::string MAIN_FONT = "..\\Assets\\Fonts\\Ancient.ttf";
+        static const std::string MENU_BG = "..\\Assets\\UI\\Banner1.png";
+        static const std::string TITLE = "..\\Assets\\UI\\RibbonRed.png";
+        static const std::string BTN_PLAY = "..\\Assets\\UI\\SwordYellow2.png";
+        static const std::string BTN_QUIT = "..\\Assets\\UI\\SwordYellow.png";
+    }
     namespace Environment
     {
         static const std::string TILESET_WATER = "..\\Assets\\Terrain\\Tileset\\Water.png";

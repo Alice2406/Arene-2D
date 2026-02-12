@@ -16,6 +16,10 @@ void ResourceManager::LoadTexture(const std::string& name, const std::string& pa
 
 void ResourceManager::LoadAllGameTextures()
 {
+    LoadTexture("MenuBackground", AssetPaths::UI::MENU_BG);
+    LoadTexture("MenuTitle", AssetPaths::UI::TITLE);
+    LoadTexture("BtnPlay", AssetPaths::UI::BTN_PLAY);
+    LoadTexture("BtnQuit", AssetPaths::UI::BTN_QUIT);
     // 1. Map
     LoadTexture("Water", AssetPaths::Environment::TILESET_WATER);
     LoadTexture("MapTiles", AssetPaths::Environment::TILESET_GROUND);
