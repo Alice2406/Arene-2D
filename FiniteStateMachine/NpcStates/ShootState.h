@@ -47,7 +47,9 @@ namespace NpcAi
                     speed,
                     frameSize,
                     damage,
-                    _context.ownerSniper
+                    _context.ownerSniper,
+                    _context.weaponConfig.frameCount,
+                    _context.weaponConfig.speed
                 );
 
                 _context.projectileList->push_back(newProj);
