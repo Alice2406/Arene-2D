@@ -7,9 +7,6 @@ public:
     static SniperData GetData(SniperSkin skin) {
         SniperData data;
 
-        data.moveSpeed = 100.f;
-        data.health = 100;
-
         switch (skin) {
         case SniperSkin::GNOLL:
             data.idle.texturePath = AssetPaths::Sniper::Gnoll::IDLE;
@@ -33,7 +30,8 @@ public:
             data.weapon.speed = 0.15f;
 
             data.scale = { 0.7f, 0.7f };
-            data.moveSpeed = 80.f;
+			data.moveSpeed = 110.f;
+			data.health = 60.f;
 
             data.hurtboxSize = { 42.f, 65.f };
             data.hurtboxOffset = { 0.f, 0.f };
@@ -66,7 +64,8 @@ public:
             data.weapon.speed = 0.15f;
 
             data.scale = { 0.7f, 0.7f };
-            data.moveSpeed = 80.f;
+            data.moveSpeed = 100.f;
+			data.health = 70.f;
 
             data.hurtboxSize = { 50.f, 60.f };
             data.hurtboxOffset = { 0.f, 0.f };
@@ -99,7 +98,8 @@ public:
             data.weapon.speed = 0.15f;
 
             data.scale = { 0.7f, 0.7f };
-            data.moveSpeed = 80.f;
+            data.moveSpeed = 105.f;
+			data.health = 80.f;
 
             data.hurtboxSize = { 45.f, 68.f };
             data.hurtboxOffset = { 0.f, 0.f };

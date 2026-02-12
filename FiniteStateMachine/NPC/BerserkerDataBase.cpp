@@ -3,9 +3,6 @@
 BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
     BerserkerData data;
 
-    data.moveSpeed = 200.f;
-    data.health = 100;
-
     switch (skin) {
     case BerserkerSkin::BEAR:
         data.idle.texturePath = AssetPaths::Berserker::Bear::IDLE;
@@ -24,7 +21,8 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
         data.attack.speed = 0.15f;
 
         data.scale = { 0.7f, 0.7f };
-        data.moveSpeed = 80.f;
+        data.moveSpeed = 120.f;
+		data.health = 100;
 
         data.hurtboxSize = { 65.f, 85.f };
         data.hurtboxOffset = { 0.f, 0.f };
@@ -51,7 +49,8 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
         data.attack.speed = 0.15f;
 
         data.scale = { 0.7f, 0.7f };
-        data.moveSpeed = 80.f;
+        data.moveSpeed = 135.f;
+		data.health = 80;
 
         data.hurtboxSize = { 50.f, 65.f };
         data.hurtboxOffset = { 0.f, 0.f };
@@ -78,7 +77,8 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
         data.attack.speed = 0.15f;
 
         data.scale = { 0.7f, 0.7f };
-        data.moveSpeed = 80.f;
+        data.moveSpeed = 140.f;
+		data.health = 90;
 
         data.hurtboxSize = { 60.f, 90.f };
         data.hurtboxOffset = { 0.f, 0.f };
@@ -105,7 +105,8 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
         data.attack.speed = 0.15f;
 
         data.scale = { 0.7f, 0.7f };
-        data.moveSpeed = 80.f;
+        data.moveSpeed = 130.f;
+		data.health = 85;
 
         data.hurtboxSize = { 50.f, 70.f };
         data.hurtboxOffset = { 0.f, 0.f };
@@ -132,7 +133,8 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
         data.attack.speed = 0.15f;
 
         data.scale = { 0.7f, 0.7f };
-        data.moveSpeed = 80.f;
+        data.moveSpeed = 160.f;
+		data.health = 70;
 
         data.hurtboxSize = { 45.f, 68.f };
         data.hurtboxOffset = { 0.f, 0.f };
@@ -159,7 +161,8 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
         data.attack.speed = 0.15f;
 
         data.scale = { 0.7f, 0.7f };
-        data.moveSpeed = 80.f;
+        data.moveSpeed = 100.f;
+		data.health = 120;
 
         data.hurtboxSize = { 100.f, 130.f };
         data.hurtboxOffset = { 0.f, -10.f };

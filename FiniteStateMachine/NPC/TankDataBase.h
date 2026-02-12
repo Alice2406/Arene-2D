@@ -7,9 +7,6 @@ public:
     static TankData GetData(TankSkin skin) {
         TankData data;
 
-        data.moveSpeed = 100.f;
-        data.health = 1000;
-
         switch (skin) {
         case TankSkin::TURTLE:
             data.idle.texturePath = AssetPaths::Tank::Turtle::IDLE;
@@ -34,6 +31,7 @@ public:
 
             data.scale = { 0.7f, 0.7f };
             data.moveSpeed = 80.f;
+			data.health = 150;
 
             data.hurtboxSize = { 80.f, 100.f };
             data.hurtboxOffset = { 0.f, 0.f };
@@ -66,6 +64,7 @@ public:
 
             data.scale = { 0.7f, 0.7f };
             data.moveSpeed = 120.f;
+			data.health = 120;
 
             data.hurtboxSize = { 65.f, 85.f };
             data.hurtboxOffset = { 0.f, 0.f };
@@ -97,7 +96,8 @@ public:
             data.guard.speed = 0.15f;
 
             data.scale = { 0.7f, 0.7f };
-            data.moveSpeed = 120.f;
+            data.moveSpeed = 90.f;
+			data.health = 200;
 
             data.hurtboxSize = { 85.f, 110.f };
             data.hurtboxOffset = { 0.f, -5.f };
@@ -129,7 +129,8 @@ public:
             data.guard.speed = 0.15f;
 
             data.scale = { 0.7f, 0.7f };
-            data.moveSpeed = 120.f;
+            data.moveSpeed = 100.f;
+			data.health = 100;
 
             data.hurtboxSize = { 50.f, 70.f };
             data.hurtboxOffset = { 0.f, 5.f };
