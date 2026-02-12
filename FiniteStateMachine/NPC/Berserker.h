@@ -62,13 +62,6 @@ public:
          hitbox.owner = this;
          hitbox.isActive = false;
 
-         if (skinType == BerserkerSkin::LANCER)
-         {
-             hitbox2 = CollisionBox(m_data.hitbox2Size, m_data.hitbox2Offset);
-             hitbox2.owner = this;
-             hitbox2.isActive = false;
-         }
-
          health = HealthComponent(m_data.health);
     }
     void Init();
@@ -82,11 +75,6 @@ public:
 
         hurtbox.Update(m_sprite.getPosition(), m_sprite.getScale().x);
         hitbox.Update(m_sprite.getPosition(), m_sprite.getScale().x);
-
-        if (m_skinType == BerserkerSkin::LANCER)
-        {
-            hitbox2.Update(m_sprite.getPosition(), m_sprite.getScale().x);
-        }
 
         if (m_flashTimer > 0)
         {

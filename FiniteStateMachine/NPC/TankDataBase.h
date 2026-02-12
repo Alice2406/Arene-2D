@@ -38,7 +38,6 @@ public:
             data.hurtboxSize = { 80.f, 100.f };
             data.hurtboxOffset = { 0.f, 0.f };
 
-            // ✅ HITBOX D'ATTAQUE - Turtle (marteau)
             data.hitboxSize = { 100.f, 35.f };
             data.hitboxOffset = { 70.f, 10.f };
             data.attackDamage = 30.0f;

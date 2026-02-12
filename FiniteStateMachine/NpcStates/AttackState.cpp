@@ -19,30 +19,36 @@ namespace NpcAi
     {
         m_attackTimer += _context.deltaTime;
 
-        // ✅ Timings différents selon le type d'ennemi
         float hitboxStart = HITBOX_START;
         float hitboxEnd = HITBOX_END;
 
-        // Ajuster selon le type
         if (_context.berserker)
         {
             switch (_context.berserker->m_skinType)
             {
             case BerserkerSkin::BEAR:
-                hitboxStart = 0.3f;
-                hitboxEnd = 0.7f;
+                hitboxStart = 0.9f;
+                hitboxEnd = 1.f;
                 break;
             case BerserkerSkin::LANCER:
-                hitboxStart = 0.2f;  // Spin rapide
-                hitboxEnd = 0.6f;
+                hitboxStart = 0.7f;
+                hitboxEnd = 0.8f;
                 break;
             case BerserkerSkin::THIEF:
-                hitboxStart = 0.15f;  // Attaque très rapide
-                hitboxEnd = 0.35f;
+                hitboxStart = 0.45f;
+                hitboxEnd = 0.6f;
                 break;
             case BerserkerSkin::TROLL:
-                hitboxStart = 0.35f;  // Attaque lente
-                hitboxEnd = 0.8f;
+                hitboxStart = 0.45f;
+                hitboxEnd = 0.75f;
+                break;
+			case BerserkerSkin::PADDLEFISH:
+                hitboxStart = 0.55f;
+                hitboxEnd = 0.70f;
+                break;
+			case BerserkerSkin::GNOME:
+                hitboxStart = 0.6f;
+                hitboxEnd = 0.75f;
                 break;
             default:
                 break;
@@ -54,15 +60,15 @@ namespace NpcAi
             switch (_context.tank->m_skinType)
             {
             case TankSkin::SKULL:
-                hitboxStart = 0.45f;  // Frames 3-5 (épée sortie)
+                hitboxStart = 0.45f;
                 hitboxEnd = 0.75f;
                 break;
             case TankSkin::TURTLE:
-                hitboxStart = 0.9f;  // Marteau plus lent
+                hitboxStart = 0.9f;
                 hitboxEnd = 1.35f;
                 break;
             case TankSkin::PANDA:
-                hitboxStart = 0.9f;  // Spin 360°
+                hitboxStart = 0.9f;
                 hitboxEnd = 1.65f;
                 break;
             case TankSkin::MINOTAUR:
@@ -72,7 +78,6 @@ namespace NpcAi
             }
         }
 
-        // ✅ Activer selon les timings calculés
         if (m_attackTimer >= hitboxStart && m_attackTimer <= hitboxEnd)
         {
             ActivateHitboxes(_context);
@@ -93,11 +98,6 @@ namespace NpcAi
         if (_context.berserker)
         {
             _context.berserker->hitbox.isActive = true;
-
-            if (_context.berserker->m_skinType == BerserkerSkin::LANCER)
-            {
-                _context.berserker->hitbox2.isActive = true;
-            }
         }
 
         if (_context.tank)
@@ -111,11 +111,6 @@ namespace NpcAi
         if (_context.berserker)
         {
             _context.berserker->hitbox.isActive = false;
-
-            if (_context.berserker->m_skinType == BerserkerSkin::LANCER)
-            {
-                _context.berserker->hitbox2.isActive = false;
-            }
         }
 
         if (_context.tank)

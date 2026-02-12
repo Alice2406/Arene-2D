@@ -133,11 +133,6 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, co
         collisionMgr.addHurtbox(&b->hurtbox);
         collisionMgr.addHitbox(&b->hitbox);
 
-        if (b->m_skinType == BerserkerSkin::LANCER)
-        {
-            collisionMgr.addHitbox(&b->hitbox2);
-        }
-
         if (b->IsDead())
         {
             delete b;
@@ -228,7 +223,7 @@ void EnemyManager::HandleWaves(sf::Vector2f mapSize)
         m_waveNumber++; 
         std::cout << "--- DEBUT VAGUE " << m_waveNumber << " ---" << std::endl;
 
-        SpawnTank(TankSkin::TURTLE, { 500.f, 300.f }, mapSize);
+		SpawnBerserker(BerserkerSkin::GNOME, { 100.f, 100.f }, mapSize);
 
         /*int enemyCount = 5 + (m_waveNumber * 2);
 

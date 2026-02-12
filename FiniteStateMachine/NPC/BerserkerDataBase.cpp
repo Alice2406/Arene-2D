@@ -29,8 +29,8 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
         data.hurtboxSize = { 65.f, 85.f };
         data.hurtboxOffset = { 0.f, 0.f };
 
-        data.hitboxSize = { 70.f, 60.f };
-        data.hitboxOffset = { 50.f, 0.f };
+        data.hitboxSize = { 70.f, 100.f };
+        data.hitboxOffset = { 50.f, 20.f };
         data.attackDamage = 20.0f;
         break;
 
@@ -53,11 +53,11 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
         data.scale = { 0.7f, 0.7f };
         data.moveSpeed = 80.f;
 
-        data.hurtboxSize = { 48.f, 65.f };
+        data.hurtboxSize = { 50.f, 65.f };
         data.hurtboxOffset = { 0.f, 0.f };
 
-        data.hitboxSize = { 80.f, 70.f };
-        data.hitboxOffset = { 55.f, 0.f };
+        data.hitboxSize = { 40.f, 30.f };
+        data.hitboxOffset = { 45.f, 15.f };
         data.attackDamage = 25.0f;
         break;
 
@@ -85,8 +85,6 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
 
         data.hitboxSize = { 90.f, 60.f };
         data.hitboxOffset = { 60.f, 0.f };
-        data.hitbox2Size = { 90.f, 60.f };
-        data.hitbox2Offset = { -60.f, 0.f };
         data.attackDamage = 30.0f;
         break;
 
@@ -113,7 +111,7 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
         data.hurtboxOffset = { 0.f, 0.f };
 
         data.hitboxSize = { 65.f, 55.f };
-        data.hitboxOffset = { 45.f, 0.f };
+        data.hitboxOffset = { 50.f, 0.f };
         data.attackDamage = 22.0f;
         break;
 
@@ -140,7 +138,7 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
         data.hurtboxOffset = { 0.f, 0.f };
 
         data.hitboxSize = { 50.f, 45.f };
-        data.hitboxOffset = { 40.f, 0.f };
+        data.hitboxOffset = { 50.f, 0.f };
         data.attackDamage = 15.0f;
         break;
 
@@ -166,8 +164,8 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
         data.hurtboxSize = { 100.f, 130.f };
         data.hurtboxOffset = { 0.f, -10.f };
 
-        data.hitboxSize = { 110.f, 100.f };
-        data.hitboxOffset = { 80.f, 0.f };
+        data.hitboxSize = { 120.f, 160.f };
+        data.hitboxOffset = { 60.f, -10.f };
         data.attackDamage = 35.0f;
         break;
     }
