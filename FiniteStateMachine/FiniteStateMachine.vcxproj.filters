@@ -19,6 +19,7 @@
     <ClCompile Include="PlayerStates\PlayerIdleState.cpp" />
     <ClCompile Include="PlayerStates\PlayerMoveState.cpp" />
     <ClCompile Include="NpcStates\AttackState.cpp" />
+    <ClCompile Include="HealthBar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation-Assets\Animator.h" />
@@ -60,6 +61,7 @@
     <ClInclude Include="StateMachine\StateMachine.h" />
     <ClInclude Include="NPC\Tank.h" />
     <ClInclude Include="TileMap.h" />
+    <ClInclude Include="HealthBar.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="StateMachine\State.inl" />

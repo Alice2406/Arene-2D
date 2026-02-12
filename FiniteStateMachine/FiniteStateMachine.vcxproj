@@ -141,6 +141,7 @@
     <ClCompile Include="Core\CollisionBox.cpp" />
     <ClCompile Include="Core\CollisionManager.cpp" />
     <ClCompile Include="Core\HealthComponent.cpp" />
+    <ClCompile Include="HealthBar.cpp" />
     <ClCompile Include="NpcStates\AttackState.cpp" />
     <ClCompile Include="NPC\Berserker.cpp" />
     <ClCompile Include="NPC\BerserkerDataBase.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Core\CollisionBox.h" />
     <ClInclude Include="Core\CollisionManager.h" />
     <ClInclude Include="Core\HealthComponent.h" />
+    <ClInclude Include="HealthBar.h" />
     <ClInclude Include="NPC\EnemyProjectile.h" />
     <ClInclude Include="NPC\EnemyManager.h" />
     <ClInclude Include="NpcStates\GuardState.h" />

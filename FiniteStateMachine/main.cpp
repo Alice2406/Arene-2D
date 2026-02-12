@@ -9,6 +9,7 @@
 #include "Obstacles/ObstacleManager.h"
 #include "Animation-Assets/ResourceManager.h"
 #include "TileMap.h"
+#include "HealthBar.h"
 
 struct RenderObject {
     const sf::Sprite* sprite;
@@ -19,6 +20,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode({ 1900, 800 }), "Arene 2D");
     sf::View camera(sf::Vector2f(0.f, 0.f), sf::Vector2f(1900.f, 800.f));
+    sf::View uiView(sf::Vector2f(950.f, 400.f), sf::Vector2f(1900.f, 800.f));
     window.setFramerateLimit(60);
     srand(static_cast<unsigned int>(time(NULL)));
 
@@ -51,6 +53,9 @@ int main()
 
     Player player;
 
+    HealthBar healthBar({ 400.f, 40.f });
+    healthBar.SetPosition({ (1900.f - 400.f) / 2.f, 800.f - 70.f });
+
     CollisionManager collisionMgr;
     collisionMgr.addHurtbox(&player.hurtbox);
     collisionMgr.addHitbox(&player.hitbox);
@@ -73,6 +78,8 @@ int main()
         enemyManager.HandleWaves(worldBounds);
 
         player.Update(window, dt, worldBounds);
+
+        healthBar.Update(player.getHp(), player.getHealth().getMaxHealth());
 
         obstacleManager.Update(dt);
 
@@ -113,6 +120,9 @@ int main()
         player.hurtbox.debugDraw(window);
         player.hitbox.debugDraw(window);
         player.hitbox2.debugDraw(window);
+
+        window.setView(uiView);
+        healthBar.Draw(window);
 
         window.display();
     }
