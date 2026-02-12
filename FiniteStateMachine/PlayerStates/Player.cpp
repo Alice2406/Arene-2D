@@ -11,8 +11,8 @@ Player::Player() :
     sprite(textureIdle),
     health(10000.0f),
     hurtbox({ 35.f, 50.f }, { 0.f, 10.f }),
-    hitbox({ 0.f, 0.f }, { 0.f, 0.f }),
-    hitbox2({ 0.f, 0.f }, { 0.f, 0.f })
+    hitbox({ 60.f, 90.f }, { 28.f, 0.f }),
+    hitbox2({ 100.f, 40.f }, { 0.f, 40.f })
 {
     context.player = this;
 

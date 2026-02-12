@@ -32,7 +32,7 @@ private:
     const float FLASH_DURATION = 0.15f;
 
 public:
-	TankSkin m_skinType;
+    TankSkin m_skinType;
     CollisionBox hurtbox;
     CollisionBox hitbox;
     NpcContext context{};
@@ -83,22 +83,22 @@ public:
             return !Conditions::IsSeeingPlayer(ctx);
             }, patrolState);
 
-        patrolState->AddTransition([](NpcContext& ctx) { 
-            return ctx.triggerGuard; 
+        patrolState->AddTransition([](NpcContext& ctx) {
+            return ctx.triggerGuard;
             }, guardState);
 
-        chaseState->AddTransition([](NpcContext& ctx) { 
-            return ctx.triggerGuard; 
+        chaseState->AddTransition([](NpcContext& ctx) {
+            return ctx.triggerGuard;
             }, guardState);
 
-        guardState->AddTransition([](NpcContext& ctx) { 
-            return ctx.currentTimer >= 1.0f; 
+        guardState->AddTransition([](NpcContext& ctx) {
+            return ctx.currentTimer >= 1.0f;
             }, chaseState);
 
         chaseState->AddTransition(Conditions::IsInAttackRange, attackState);
-        attackState->AddTransition([](NpcContext& ctx)
+        attackState->AddTransition([attackState](NpcContext& ctx)
             {
-                return !Conditions::IsInAttackRange(ctx);
+                return attackState->IsFinished();
             }, chaseState);
 
         fsm.Init(patrolState, context);
@@ -115,7 +115,7 @@ public:
 
     }
 
-    bool IsDead() const override 
+    bool IsDead() const override
     {
         return health.IsDead();
     }
@@ -129,12 +129,12 @@ public:
         m_sprite.setPosition(position);
     }
 
-    sf::Vector2f getPosition() const 
+    sf::Vector2f getPosition() const
     {
         return m_sprite.getPosition();
     }
 
-    sf::Sprite& getSprite() 
+    sf::Sprite& getSprite()
     {
         return m_sprite;
     }

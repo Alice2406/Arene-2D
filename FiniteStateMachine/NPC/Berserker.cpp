@@ -11,9 +11,9 @@ void Berserker::Init()
         {
             return !Conditions::IsSeeingPlayer(_context);
         }, patrolState);
-    attackState->AddTransition([](const NpcContext _context)
+    attackState->AddTransition([attackState](const NpcContext _context)
         {
-            return !Conditions::IsInAttackRange(_context);
+            return attackState->IsFinished();
         }, chaseState);
     fsm.Init(patrolState, context);
 }
@@ -23,9 +23,9 @@ void Berserker::setPosition(const sf::Vector2f& position)
     m_sprite.setPosition(position);
 }
 
-sf::Sprite& Berserker::getSprite() 
-{ 
-    return m_sprite; 
+sf::Sprite& Berserker::getSprite()
+{
+    return m_sprite;
 }
 
 void Berserker::Draw(sf::RenderWindow& window)
@@ -37,13 +37,13 @@ void Berserker::Draw(sf::RenderWindow& window)
 
 void Berserker::handleDamage(float amount)
 {
-        if (health.IsDead()) return;
+    if (health.IsDead()) return;
 
-        health.takeDamage(amount);
+    health.takeDamage(amount);
 
-        m_sprite.setColor(sf::Color(255, 100, 100));
-        m_flashTimer = FLASH_DURATION;
+    m_sprite.setColor(sf::Color(255, 100, 100));
+    m_flashTimer = FLASH_DURATION;
 
-        std::cout << "Tank - Vie restante : " << health.getHealth()
-            << "/" << health.getMaxHealth() << std::endl;
+    std::cout << "Tank - Vie restante : " << health.getHealth()
+        << "/" << health.getMaxHealth() << std::endl;
 }

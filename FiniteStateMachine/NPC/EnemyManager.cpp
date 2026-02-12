@@ -223,9 +223,7 @@ void EnemyManager::HandleWaves(sf::Vector2f mapSize)
         m_waveNumber++; 
         std::cout << "--- DEBUT VAGUE " << m_waveNumber << " ---" << std::endl;
 
-		SpawnBerserker(BerserkerSkin::GNOME, { 100.f, 100.f }, mapSize);
-
-        /*int enemyCount = 5 + (m_waveNumber * 2);
+        int enemyCount = 5 + (m_waveNumber * 2);
 
         for (int i = 0; i < enemyCount; i++)
         {
@@ -246,7 +244,7 @@ void EnemyManager::HandleWaves(sf::Vector2f mapSize)
                 int skinIdx = rand() % (int)BerserkerSkin::COUNT;
                 SpawnBerserker((BerserkerSkin)skinIdx, { -10.f, -10.f }, mapSize);
             }
-        }*/
+        }
     }
 }
 void EnemyManager::Draw(sf::RenderWindow& window)

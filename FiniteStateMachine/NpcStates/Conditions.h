@@ -26,7 +26,7 @@ namespace NpcAi
 
             float distance = std::sqrt((deltaX * deltaX) + (deltaY * deltaY));
 
-            return distance < 50.0f;
+            return distance < 75.0f;
         }
         static bool IsTooClose(NpcContext context)
         {

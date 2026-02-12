@@ -4,7 +4,6 @@
 #include "SFML/Graphics.hpp"
 #include <iostream>
 
-// ✅ Forward declarations seulement
 class Berserker;
 class Tank;
 enum class BerserkerSkin;
@@ -15,16 +14,19 @@ namespace NpcAi
     {
     private:
         float m_attackTimer = 0.0f;
+        float m_attackDuration = 1.0f;
         const float HITBOX_START = 0.2f;
         const float HITBOX_END = 0.5f;
+        bool m_isFinished = false;
+
+        void ActivateHitboxes(NpcContext& _context);
+        void DeactivateHitboxes(NpcContext& _context);
 
     public:
         void Enter(NpcContext& _context) override;
         void Execute(NpcContext& _context) override;
         void Exit(NpcContext& _context) override;
 
-    private:
-        void ActivateHitboxes(NpcContext& _context);
-        void DeactivateHitboxes(NpcContext& _context);
+        bool IsFinished() const { return m_isFinished; }
     };
 }
