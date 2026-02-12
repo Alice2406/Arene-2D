@@ -18,7 +18,7 @@ struct RenderObject {
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode({ 1900, 800 }), "Arene 2D");
+    sf::RenderWindow window(sf::VideoMode({ 1280, 720 }), "Arene 2D");
     sf::View camera(sf::Vector2f(0.f, 0.f), sf::Vector2f(1900.f, 800.f));
     sf::View uiView(sf::Vector2f(950.f, 400.f), sf::Vector2f(1900.f, 800.f));
     window.setFramerateLimit(60);

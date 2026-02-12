@@ -53,19 +53,30 @@ void CollisionManager::checkCollisions()
 
                 std::cout << "COLLISION DETECTEE !" << std::endl;
 
-                IDamageable* victim = dynamic_cast<IDamageable*>(static_cast<sf::Drawable*>(target->owner));
+                // owner is stored as a void* to the entity that implements IDamageable
+                IDamageable* victim = reinterpret_cast<IDamageable*>(target->owner);
                 if (victim && !victim->IsDead())
                 {
                     victim->handleDamage(attack->damage);
 
+                    // mark this hitbox as having hit
                     attack->hasHit = true;
+
+                    // Prevent other hitboxes from the same attacker from dealing damage
+                    for (auto* hb : hitboxes)
+                    {
+                        if (hb->owner == attack->owner)
+                        {
+                            hb->hasHit = true;
+                        }
+                    }
 
                     std::cout << "Degats infliges: " << attack->damage << std::endl;
                 }
 
                 if (attack->isProjectile)
                 {
-                    IDestructible* projectile = static_cast<IDestructible*>(attack->owner);
+                    IDestructible* projectile = reinterpret_cast<IDestructible*>(attack->owner);
                     if (projectile)
                     {
                         projectile->Destroy();

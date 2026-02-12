@@ -26,7 +26,7 @@ void PlayerAttackState::Execute(PlayerContext& _context)
 	timer += _context.deltaTime;
 	Player* p = getPlayer(_context);
 
-	if (timer >= 0.f && timer < 0.60f)
+	if (timer >= 0.30f && timer < 0.60f)
 	{
 		p->hitbox.isActive = true;
 		p->hitbox2.isActive = true;
