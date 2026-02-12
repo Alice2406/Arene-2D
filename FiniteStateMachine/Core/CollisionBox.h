@@ -16,8 +16,10 @@ public:
     void* projectileOwner = nullptr;
     bool isPlayer = false;
 
+    float rotation = 0.f;
+
     CollisionBox(sf::Vector2f size = { 0, 0 }, sf::Vector2f _offset = { 0, 0 });
-    void Update(sf::Vector2f ownerPos, float scaleX);
+    void Update(sf::Vector2f ownerPos, float scaleX, float rotationAngle = 0.f);
     void debugDraw(sf::RenderWindow& window);
 };
 

@@ -41,6 +41,7 @@ public:
         context.animator = &m_animator;
         context.speed = m_data.moveSpeed;
         context.ownerSniper = this;
+        context.sniperData = &m_data;
 
         sf::Texture& texIdle = m_resources.GetTexture(m_data.idle.texturePath);
         sf::Texture& texWalk = m_resources.GetTexture(m_data.walk.texturePath);
@@ -49,6 +50,7 @@ public:
 
         context.weaponTexture = &texWeapon;
         context.weaponConfig = m_data.weapon;
+
         m_animator.AddAnimation("Idle", texIdle, m_data.idle.frameSize, m_data.idle.frameCount, m_data.idle.speed);
         m_animator.AddAnimation("Walk", texWalk, m_data.walk.frameSize, m_data.walk.frameCount, m_data.walk.speed);
         m_animator.AddAnimation("Attack", texAttack, m_data.attack.frameSize, m_data.attack.frameCount, m_data.attack.speed);

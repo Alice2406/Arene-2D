@@ -1,4 +1,4 @@
-#include "BerserkerDataBase.h"
+﻿#include "BerserkerDataBase.h"
 
 BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
     BerserkerData data;
@@ -28,6 +28,10 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
 
         data.hurtboxSize = { 65.f, 85.f };
         data.hurtboxOffset = { 0.f, 0.f };
+
+        data.hitboxSize = { 70.f, 60.f };
+        data.hitboxOffset = { 50.f, 0.f };
+        data.attackDamage = 20.0f;
         break;
 
     case BerserkerSkin::GNOME:
@@ -51,6 +55,10 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
 
         data.hurtboxSize = { 48.f, 65.f };
         data.hurtboxOffset = { 0.f, 0.f };
+
+        data.hitboxSize = { 80.f, 70.f };
+        data.hitboxOffset = { 55.f, 0.f };
+        data.attackDamage = 25.0f;
         break;
 
     case BerserkerSkin::LANCER:
@@ -74,6 +82,12 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
 
         data.hurtboxSize = { 60.f, 90.f };
         data.hurtboxOffset = { 0.f, 0.f };
+
+        data.hitboxSize = { 90.f, 60.f };
+        data.hitboxOffset = { 60.f, 0.f };
+        data.hitbox2Size = { 90.f, 60.f };
+        data.hitbox2Offset = { -60.f, 0.f };
+        data.attackDamage = 30.0f;
         break;
 
     case BerserkerSkin::PADDLEFISH:
@@ -97,6 +111,10 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
 
         data.hurtboxSize = { 50.f, 70.f };
         data.hurtboxOffset = { 0.f, 0.f };
+
+        data.hitboxSize = { 65.f, 55.f };
+        data.hitboxOffset = { 45.f, 0.f };
+        data.attackDamage = 22.0f;
         break;
 
     case BerserkerSkin::THIEF:
@@ -120,6 +138,10 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
 
         data.hurtboxSize = { 45.f, 68.f };
         data.hurtboxOffset = { 0.f, 0.f };
+
+        data.hitboxSize = { 50.f, 45.f };
+        data.hitboxOffset = { 40.f, 0.f };
+        data.attackDamage = 15.0f;
         break;
 
     case BerserkerSkin::TROLL:
@@ -143,6 +165,10 @@ BerserkerData BerserkerDatabase::GetData(BerserkerSkin skin) {
 
         data.hurtboxSize = { 100.f, 130.f };
         data.hurtboxOffset = { 0.f, -10.f };
+
+        data.hitboxSize = { 110.f, 100.f };
+        data.hitboxOffset = { 80.f, 0.f };
+        data.attackDamage = 35.0f;
         break;
     }
     return data;

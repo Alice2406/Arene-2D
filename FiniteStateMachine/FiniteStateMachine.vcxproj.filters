@@ -1,26 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="Animation-Assets\Animator.cpp" />
+    <ClCompile Include="Animation-Assets\ResourceManager.cpp" />
     <ClCompile Include="Core\CollisionBox.cpp" />
     <ClCompile Include="Core\CollisionManager.cpp" />
+    <ClCompile Include="Core\HealthComponent.cpp" />
+    <ClCompile Include="NPC\Berserker.cpp" />
+    <ClCompile Include="NPC\BerserkerDataBase.cpp" />
     <ClCompile Include="NPC\EnemyManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Obstacles\ObstacleManager.cpp" />
+    <ClCompile Include="Obstacles\Obstacle.cpp" />
     <ClCompile Include="PlayerStates\PlayerDeadState.cpp" />
     <ClCompile Include="PlayerStates\Player.cpp" />
     <ClCompile Include="PlayerStates\PlayerAttackState.cpp" />
     <ClCompile Include="PlayerStates\PlayerBaseState.cpp" />
     <ClCompile Include="PlayerStates\PlayerIdleState.cpp" />
     <ClCompile Include="PlayerStates\PlayerMoveState.cpp" />
-    <ClCompile Include="Animation-Assets\Animator.cpp" />
-    <ClCompile Include="Animation-Assets\ResourceManager.cpp" />
-    <ClCompile Include="NPC\Berserker.cpp" />
-    <ClCompile Include="NPC\BerserkerDataBase.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="Obstacles\Obstacle.cpp" />
-    <ClCompile Include="Obstacles\ObstacleManager.cpp" />
-=======
-    <ClCompile Include="Core\HealthComponent.cpp" />
->>>>>>> 4dbe90e (Added HealthComponent)
+    <ClCompile Include="NpcStates\AttackState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation-Assets\Animator.h" />
@@ -29,6 +27,8 @@
     <ClInclude Include="Animation-Assets\SharedData.h" />
     <ClInclude Include="Core\CollisionBox.h" />
     <ClInclude Include="Core\CollisionManager.h" />
+    <ClInclude Include="Core\HealthComponent.h" />
+    <ClInclude Include="NPC\EnemyProjectile.h" />
     <ClInclude Include="NPC\EnemyManager.h" />
     <ClInclude Include="NpcStates\GuardState.h" />
     <ClInclude Include="NpcStates\AimState.h" />
@@ -47,6 +47,8 @@
     <ClInclude Include="NPC\TankDataBase.h" />
     <ClInclude Include="NPC\Sniper.h" />
     <ClInclude Include="NpcStates\ShootState.h" />
+    <ClInclude Include="Obstacles\ObstacleManager.h" />
+    <ClInclude Include="Obstacles\Obstacle.h" />
     <ClInclude Include="PlayerStates\PlayerDeadState.h" />
     <ClInclude Include="PlayerStates\Player.h" />
     <ClInclude Include="PlayerStates\PlayerAttackState.h" />
@@ -57,14 +59,7 @@
     <ClInclude Include="StateMachine\State.h" />
     <ClInclude Include="StateMachine\StateMachine.h" />
     <ClInclude Include="NPC\Tank.h" />
-    <ClInclude Include="NPC\EnemyProjectile.h" />
     <ClInclude Include="TileMap.h" />
-<<<<<<< HEAD
-    <ClInclude Include="Obstacles\Obstacle.h" />
-    <ClInclude Include="Obstacles\ObstacleManager.h" />
-=======
-    <ClInclude Include="Core\HealthComponent.h" />
->>>>>>> 4dbe90e (Added HealthComponent)
   </ItemGroup>
   <ItemGroup>
     <None Include="StateMachine\State.inl" />

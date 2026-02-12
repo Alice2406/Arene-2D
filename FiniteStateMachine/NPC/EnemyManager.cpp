@@ -104,6 +104,12 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, co
         keepInsideMap(t, worldBounds);
 
         collisionMgr.addHurtbox(&t->hurtbox);
+        collisionMgr.addHitbox(&t->hitbox);
+
+        if (t->m_skinType == TankSkin::PANDA)
+        {
+            collisionMgr.addHitbox(&t->hitbox2);
+        }
 
         if (t->IsDead())
         {
@@ -130,6 +136,12 @@ void EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, co
         keepInsideMap(b, worldBounds);
 
         collisionMgr.addHurtbox(&b->hurtbox);
+        collisionMgr.addHitbox(&b->hitbox);
+
+        if (b->m_skinType == BerserkerSkin::LANCER)
+        {
+            collisionMgr.addHitbox(&b->hitbox2);
+        }
 
         if (b->IsDead())
         {

@@ -155,5 +155,12 @@ public:
         window.draw(m_sprite);
 
         hurtbox.debugDraw(window);
+        hurtbox.debugDraw(window);
+        hitbox.debugDraw(window);
+
+        if (m_skinType == TankSkin::PANDA)
+        {
+            hitbox2.debugDraw(window);
+        }
     }
 };

@@ -141,6 +141,7 @@
     <ClCompile Include="Core\CollisionBox.cpp" />
     <ClCompile Include="Core\CollisionManager.cpp" />
     <ClCompile Include="Core\HealthComponent.cpp" />
+    <ClCompile Include="NpcStates\AttackState.cpp" />
     <ClCompile Include="NPC\Berserker.cpp" />
     <ClCompile Include="NPC\BerserkerDataBase.cpp" />
     <ClCompile Include="NPC\EnemyManager.cpp" />

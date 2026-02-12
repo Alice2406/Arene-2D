@@ -17,6 +17,7 @@ private:
     float m_damage;
     void* m_sniperOwner;
     Animator m_animator;
+    float m_rotationAngle;
 
 public:
     CollisionBox hitbox;
@@ -30,7 +31,9 @@ public:
         float damage = 10.0f,
         void* sniperOwner = nullptr,
         int frameCount = 4,
-        float animSpeed = 0.1f
+        float animSpeed = 0.1f,
+        sf::Vector2f hitboxSize = { 0.f, 0.f },
+        sf::Vector2f hitboxOffset = { 0.f, 0.f }
     )
         : m_sprite(texture),
         m_texture(&texture),
@@ -40,7 +43,11 @@ public:
         m_damage(damage),
         m_sniperOwner(sniperOwner),
         m_animator(m_sprite),
-        hitbox(sf::Vector2f(frameSize.x * 0.6f, frameSize.y * 0.6f), sf::Vector2f(0.f, 0.f))
+        m_rotationAngle(0.f),
+        hitbox(
+            hitboxSize.x > 0.f ? hitboxSize : sf::Vector2f(frameSize.x * 0.6f, frameSize.y * 0.6f),
+            hitboxOffset
+        )
     {
         m_sprite.setPosition(position);
 
@@ -58,6 +65,7 @@ public:
             );
 
             float angleDegrees = std::atan2(direction.y, direction.x) * 180.f / 3.14159f;
+            m_rotationAngle = angleDegrees;
             m_sprite.setRotation(sf::degrees(angleDegrees));
         }
         else
@@ -76,7 +84,7 @@ public:
         if (!m_isActive) return;
 
         m_sprite.setPosition(m_sprite.getPosition() + m_velocity * dt);
-        hitbox.Update(m_sprite.getPosition(), 1.0f);
+        hitbox.Update(m_sprite.getPosition(), 1.0f, m_rotationAngle);
 
         m_animator.Update(dt);
 

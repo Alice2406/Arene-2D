@@ -37,6 +37,11 @@ public:
 
             data.hurtboxSize = { 42.f, 65.f };
             data.hurtboxOffset = { 0.f, 0.f };
+
+            data.projectileHitboxSize = { 38.4f, 38.4f };  // 64 * 0.6
+            data.projectileHitboxOffset = { 0.f, 0.f };
+            data.projectileSpeed = 400.0f;
+            data.projectileDamage = 12.0f;
             break;
 
         case SniperSkin::HARPOONFISH:
@@ -56,7 +61,7 @@ public:
             data.attack.speed = 0.15f;
 
             data.weapon.texturePath = AssetPaths::Sniper::HarpoonFish::WEAPON;
-            data.weapon.frameSize = { 64, 64 };
+            data.weapon.frameSize = { 92, 92 };
             data.weapon.frameCount = 1;
             data.weapon.speed = 0.15f;
 
@@ -65,6 +70,11 @@ public:
 
             data.hurtboxSize = { 50.f, 60.f };
             data.hurtboxOffset = { 0.f, 0.f };
+
+            data.projectileHitboxSize = { 72.f, 30.6f };
+            data.projectileHitboxOffset = { 0.f, 0.f };
+            data.projectileSpeed = 300.0f;
+            data.projectileDamage = 15.0f;
             break;
 
         case SniperSkin::SHAMAN:
@@ -93,6 +103,11 @@ public:
 
             data.hurtboxSize = { 45.f, 68.f };
             data.hurtboxOffset = { 0.f, 0.f };
+
+            data.projectileHitboxSize = { 30.f, 30.f };
+            data.projectileHitboxOffset = { 0.f, 0.f };
+            data.projectileSpeed = 250.0f;
+            data.projectileDamage = 25.0f;
             break;
         }
         return data;

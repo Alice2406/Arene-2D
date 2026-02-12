@@ -28,16 +28,20 @@ private:
     FSM::StateMachine<NpcContext> fsm;
 
 public:
+    BerserkerSkin m_skinType;
     CollisionBox hurtbox;
+    CollisionBox hitbox;
+    CollisionBox hitbox2;
     NpcContext context{};
 
-    Berserker(BerserkerSkin skinType, sf::Texture &texture) : m_sprite(m_texture), m_animator(m_sprite)
+    Berserker(BerserkerSkin skinType, sf::Texture &texture) : m_sprite(m_texture), m_animator(m_sprite), m_skinType(skinType)
     {
          m_data = BerserkerDatabase::GetData(skinType);
          m_sprite.setTexture(texture);
          context.npcSprite = &m_sprite;
          context.animator = &m_animator;
          context.speed = m_data.moveSpeed;
+         context.berserker = this;
 
          sf::Texture& texIdle = m_resources.GetTexture(m_data.idle.texturePath);
          sf::Texture& texWalk = m_resources.GetTexture(m_data.walk.texturePath);
@@ -54,15 +58,36 @@ public:
          hurtbox.isActive = true;
          hurtbox.isPlayer = false;
 
+         hitbox = CollisionBox(m_data.hitboxSize, m_data.hitboxOffset);
+         hitbox.owner = this;
+         hitbox.isActive = false;
+
+         if (skinType == BerserkerSkin::LANCER)
+         {
+             hitbox2 = CollisionBox(m_data.hitbox2Size, m_data.hitbox2Offset);
+             hitbox2.owner = this;
+             hitbox2.isActive = false;
+         }
+
          health = HealthComponent(m_data.health);
     }
     void Init();
     void setPosition(const sf::Vector2f& position);
     sf::Sprite& getSprite();
+
     void Update(float dt)
     {
         fsm.Update(context);
         m_animator.Update(dt);
+
+        hurtbox.Update(m_sprite.getPosition(), m_sprite.getScale().x);
+        hitbox.Update(m_sprite.getPosition(), m_sprite.getScale().x);
+
+        if (m_skinType == BerserkerSkin::LANCER)
+        {
+            hitbox2.Update(m_sprite.getPosition(), m_sprite.getScale().x);
+        }
+
         if (m_flashTimer > 0)
         {
             m_flashTimer -= dt;
@@ -71,8 +96,6 @@ public:
                 m_sprite.setColor(sf::Color::White);
             }
         }
-
-        hurtbox.Update(m_sprite.getPosition(), m_sprite.getScale().x);
     }
 
     sf::FloatRect GetGlobalBounds() const { return m_sprite.getGlobalBounds(); }

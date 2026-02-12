@@ -32,6 +32,12 @@ void Berserker::Draw(sf::RenderWindow& window)
 {
     window.draw(m_sprite);
     hurtbox.debugDraw(window);
+    hitbox.debugDraw(window);
+
+    if (m_skinType == BerserkerSkin::LANCER)
+    {
+        hitbox2.debugDraw(window);
+    }
 }
 
 void Berserker::handleDamage(float amount)

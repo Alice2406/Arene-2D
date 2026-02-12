@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "TankData.h"
 #include "../Animation-Assets/AssetPath.h"
 
@@ -37,6 +37,11 @@ public:
 
             data.hurtboxSize = { 80.f, 100.f };
             data.hurtboxOffset = { 0.f, 0.f };
+
+            // ✅ HITBOX D'ATTAQUE - Turtle (marteau)
+            data.hitboxSize = { 100.f, 70.f };
+            data.hitboxOffset = { 70.f, 0.f };
+            data.attackDamage = 30.0f;
             break;
 
         case TankSkin::PANDA:
@@ -65,6 +70,13 @@ public:
 
             data.hurtboxSize = { 65.f, 85.f };
             data.hurtboxOffset = { 0.f, 0.f };
+
+            // ✅ HITBOX D'ATTAQUE - Panda (spin 360°) - DEUX HITBOX
+            data.hitboxSize = { 90.f, 65.f };
+            data.hitboxOffset = { 65.f, 0.f };
+            data.hitbox2Size = { 90.f, 65.f };
+            data.hitbox2Offset = { -65.f, 0.f };
+            data.attackDamage = 35.0f;
             break;
 
         case TankSkin::MINOTAUR:
@@ -93,6 +105,11 @@ public:
 
             data.hurtboxSize = { 85.f, 110.f };
             data.hurtboxOffset = { 0.f, -5.f };
+
+            // ✅ HITBOX D'ATTAQUE - Minotaur (massue)
+            data.hitboxSize = { 95.f, 80.f };
+            data.hitboxOffset = { 65.f, 0.f };
+            data.attackDamage = 32.0f;
             break;
 
         case TankSkin::SKULL:
@@ -121,6 +138,11 @@ public:
 
             data.hurtboxSize = { 50.f, 70.f };
             data.hurtboxOffset = { 0.f, 5.f };
+
+            // ✅ HITBOX D'ATTAQUE - Skull (dague)
+            data.hitboxSize = { 55.f, 50.f };
+            data.hitboxOffset = { 45.f, 0.f };
+            data.attackDamage = 28.0f;
             break;
         }
         return data;

@@ -2,6 +2,7 @@
 #include "NpcContext.h"
 #include "../StateMachine/State.h"
 #include "../NPC/EnemyProjectile.h"
+#include "../NPC/SniperData.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -17,44 +18,31 @@ namespace NpcAi
                 _context.animator->SwitchAnimation("Attack");
             }
 
-            if (_context.projectileList && _context.weaponTexture)
+            if (_context.projectileList && _context.weaponTexture && _context.sniperData)
             {
                 sf::Vector2f startPos = _context.npcSprite->getPosition();
                 sf::Vector2f direction = _context.playerPos - startPos;
 
-                float speed = 300.0f;
-                float damage = 15.0f;
-
-                sf::Vector2i frameSize = _context.weaponConfig.frameSize;
-
-                if (frameSize.x >= 128)
-                {
-                    speed = 250.0f;
-                    damage = 25.0f;
-                }
-                else if (frameSize.x == 64)
-                {
-                    speed = 400.0f;
-                    damage = 12.0f;
-                }
-
-                void* sniperPtr = nullptr;
+                const SniperData* data = _context.sniperData;
 
                 EnemyProjectile* newProj = new EnemyProjectile(
                     *_context.weaponTexture,
                     startPos,
                     direction,
-                    speed,
-                    frameSize,
-                    damage,
+                    data->projectileSpeed,
+                    _context.weaponConfig.frameSize,
+                    data->projectileDamage,
                     _context.ownerSniper,
                     _context.weaponConfig.frameCount,
-                    _context.weaponConfig.speed
+                    _context.weaponConfig.speed,
+                    data->projectileHitboxSize,
+                    data->projectileHitboxOffset
                 );
 
                 _context.projectileList->push_back(newProj);
 
-                std::cout << "Sniper tire ! (Vitesse: " << speed << ", Degats: " << damage << ")" << std::endl;
+                std::cout << "Sniper tire ! (Vitesse: " << data->projectileSpeed
+                    << ", Degats: " << data->projectileDamage << ")" << std::endl;
             }
         }
 

@@ -23,4 +23,10 @@ struct TankData {
 
     sf::Vector2f hurtboxSize;
     sf::Vector2f hurtboxOffset;
+    sf::Vector2f hitboxSize;
+    sf::Vector2f hitboxOffset;
+    sf::Vector2f hitbox2Size;
+    sf::Vector2f hitbox2Offset;
+
+    float attackDamage;
 };
