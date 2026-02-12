@@ -1,26 +1,27 @@
-    #pragma once
+#pragma once
 #include "SFML/Graphics.hpp"
 
 class CollisionBox
 {
-private:
-    sf::RectangleShape debugShape;
-
 public:
     sf::FloatRect bounds;
     sf::Vector2f offset;
-    bool isActive = true;
-    void* owner = nullptr;
-
-    bool isProjectile = false;
-    void* projectileOwner = nullptr;
-    bool isPlayer = false;
-
+    sf::RectangleShape debugShape;
     float rotation = 0.f;
-    float damage = 10.0f;
 
-    CollisionBox(sf::Vector2f size = { 0, 0 }, sf::Vector2f _offset = { 0, 0 });
+    void* owner = nullptr;
+    void* projectileOwner = nullptr;
+    bool isActive = false;
+    bool isPlayer = false;
+    bool isProjectile = false;
+
+    float damage = 10.0f;
+    bool hasHit = false;
+
+    CollisionBox() = default;
+    CollisionBox(sf::Vector2f size, sf::Vector2f _offset);
+
     void Update(sf::Vector2f ownerPos, float scaleX, float rotationAngle = 0.f);
     void debugDraw(sf::RenderWindow& window);
+    void ResetHit();
 };
-

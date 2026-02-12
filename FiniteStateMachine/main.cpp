@@ -87,9 +87,6 @@ int main()
 
         collisionMgr.CheckMapCollisions(player.getSprite(), obstacleManager.GetObstacles());
 
-        collisionMgr.checkCollisions();
-        collisionMgr.clear();
-
         window.clear();
         window.setView(camera);
 

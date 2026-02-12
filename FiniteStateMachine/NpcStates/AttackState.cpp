@@ -17,6 +17,8 @@ namespace NpcAi
 
         if (_context.berserker)
         {
+            _context.berserker->hitbox.ResetHit();
+
             switch (_context.berserker->m_skinType)
             {
             case BerserkerSkin::BEAR:
@@ -45,6 +47,8 @@ namespace NpcAi
 
         if (_context.tank)
         {
+            _context.tank->hitbox.ResetHit();
+
             switch (_context.tank->m_skinType)
             {
             case TankSkin::SKULL:
@@ -64,8 +68,6 @@ namespace NpcAi
                 break;
             }
         }
-
-        std::cout << "AttackState: Entre en attaque (durée: " << m_attackDuration << "s)" << std::endl;
     }
 
     void AttackState::Execute(NpcContext& _context)
@@ -154,7 +156,15 @@ namespace NpcAi
     {
         DeactivateHitboxes(_context);
 
-        std::cout << "AttackState: Sort de l'attaque" << std::endl;
+        if (_context.berserker)
+        {
+            _context.berserker->hitbox.ResetHit();
+        }
+
+        if (_context.tank)
+        {
+            _context.tank->hitbox.ResetHit();
+        }
     }
 
     void AttackState::ActivateHitboxes(NpcContext& _context)
@@ -182,4 +192,4 @@ namespace NpcAi
             _context.tank->hitbox.isActive = false;
         }
     }
-}
+};

@@ -17,6 +17,7 @@ Player::Player() :
     context.player = this;
 
     hurtbox.isPlayer = true;
+	hurtbox.isActive = true;
     hitbox.isPlayer = true;
     hitbox2.isPlayer = true;
     hitbox.damage = 25.0f;

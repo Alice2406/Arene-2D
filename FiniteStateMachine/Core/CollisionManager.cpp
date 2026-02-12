@@ -27,6 +27,8 @@ void CollisionManager::checkCollisions()
 
             if (attack->owner == target->owner) continue;
 
+            if (attack->isPlayer && target->isPlayer) continue;
+
             if (attack->isProjectile)
             {
                 if (!target->isPlayer)
@@ -34,15 +36,31 @@ void CollisionManager::checkCollisions()
                     continue;
                 }
             }
+            else if (attack->isPlayer)
+            {
+                if (target->isPlayer)
+                {
+                    continue;
+                }
+            }
 
             if (attack->bounds.findIntersection(target->bounds))
             {
+                if (attack->hasHit)
+                {
+                    continue;
+                }
+
                 std::cout << "COLLISION DETECTEE !" << std::endl;
 
-                IDamageable* victim = static_cast<IDamageable*>(target->owner);
+                IDamageable* victim = dynamic_cast<IDamageable*>(static_cast<sf::Drawable*>(target->owner));
                 if (victim && !victim->IsDead())
                 {
                     victim->handleDamage(attack->damage);
+
+                    attack->hasHit = true;
+
+                    std::cout << "Degats infliges: " << attack->damage << std::endl;
                 }
 
                 if (attack->isProjectile)
@@ -58,7 +76,6 @@ void CollisionManager::checkCollisions()
         }
     }
 }
-
 void CollisionManager::clear()
 {
     hitboxes.clear();

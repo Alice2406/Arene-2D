@@ -46,5 +46,9 @@ void CollisionBox::debugDraw(sf::RenderWindow& window)
 
 		window.draw(debugShape);
 	}
-	
+}
+
+void CollisionBox::ResetHit()
+{
+	hasHit = false;
 }

@@ -7,12 +7,18 @@ void PlayerAttackState::Enter(PlayerContext& _context)
 {
 	timer = 0.f;
 	getPlayer(_context)->setAnimation(getPlayer(_context)->textureAttack, 768, 192, 4, 0.15f, true, 0);
+
+	getPlayer(_context)->hitbox.ResetHit();
+	getPlayer(_context)->hitbox2.ResetHit();
 }
 
 void PlayerAttackState::Exit(PlayerContext& _context)
 {
 	getPlayer(_context)->hitbox.isActive = false;
 	getPlayer(_context)->hitbox2.isActive = false;
+
+	getPlayer(_context)->hitbox.ResetHit();
+	getPlayer(_context)->hitbox2.ResetHit();
 }
 
 void PlayerAttackState::Execute(PlayerContext& _context)

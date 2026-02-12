@@ -6,6 +6,7 @@ class PlayerAttackState : public PlayerBaseState
 private:
 	float timer = 0.f;
 	float duration = 0.6f;
+	bool hasDealtDamage = false;
 
 public:
 	void Enter(PlayerContext& _context) override;
