@@ -22,6 +22,8 @@ public:
     template <typename T>
     void keepInsideMap(T& enemy, sf::Vector2f worldBounds);
     void HandleWaves(sf::Vector2f mapSize);
+    //test debug collision box ennemy
+    void DebugDrawCollisions(sf::RenderWindow& window, CollisionManager& colManager);
     void SpawnTank(TankSkin skin, sf::Vector2f position, sf::Vector2f mapSize);
     void SpawnBerserker(BerserkerSkin skin, sf::Vector2f position, sf::Vector2f mapSize);
     void SpawnSniper(SniperSkin skin, sf::Vector2f position, sf::Vector2f mapSize);

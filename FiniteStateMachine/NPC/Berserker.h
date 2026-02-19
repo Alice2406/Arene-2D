@@ -28,7 +28,10 @@ private:
     FSM::StateMachine<NpcContext> fsm;
 
 public:
+    BerserkerSkin m_skinType;
     CollisionBox hurtbox;
+    CollisionBox hitbox;
+    CollisionBox hitbox2;
     NpcContext context{};
 
     explicit Berserker(BerserkerSkin skinType, sf::Texture& texture);
@@ -42,4 +45,5 @@ public:
     void handleDamage(float amount) override;
     bool IsDead() const;
     sf::Vector2f getPosition() const { return m_sprite.getPosition(); }
+    float getAttackDamage() const { return m_data.attackDamage; }
 };

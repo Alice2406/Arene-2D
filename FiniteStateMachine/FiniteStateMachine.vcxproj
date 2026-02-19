@@ -141,6 +141,8 @@
     <ClCompile Include="Core\CollisionBox.cpp" />
     <ClCompile Include="Core\CollisionManager.cpp" />
     <ClCompile Include="Core\HealthComponent.cpp" />
+    <ClCompile Include="HealtBar.cpp" />
+    <ClCompile Include="NpcStates\AttackState.cpp" />
     <ClCompile Include="NPC\EnemyProjectile.cpp" />
     <ClCompile Include="NPC\Sniper.cpp" />
     <ClCompile Include="NPC\SniperDataBase.cpp" />
@@ -169,6 +171,7 @@
     <ClInclude Include="Core\CollisionBox.h" />
     <ClInclude Include="Core\CollisionManager.h" />
     <ClInclude Include="Core\HealthComponent.h" />
+    <ClInclude Include="HealthBar.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\MenuScene.h" />

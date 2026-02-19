@@ -38,7 +38,7 @@ GameScene::GameScene(sf::RenderWindow& window, ResourceManager& rm)
     };
 
     m_obstacleManager.Initialize(40, m_worldBounds, m_resourceManager);
-
+    healthBar.SetPosition({ (1900.f - 400.f) / 2.f, 800.f - 70.f });
     m_collisionManager.addHurtbox(&m_player.hurtbox);
     m_collisionManager.addHitbox(&m_player.hitbox);
     m_collisionManager.addHitbox(&m_player.hitbox2);
@@ -121,6 +121,7 @@ SceneType GameScene::Update(float dt, sf::RenderWindow& window)
 
     m_enemyManager.HandleWaves(m_worldBounds);
     m_player.Update(window, dt, m_worldBounds);
+    healthBar.Update(m_player.getHp(), m_player.getHealth().getMaxHealth());
     m_obstacleManager.Update(dt);
 
     int pointsRecuperes = m_enemyManager.Update(dt, m_player, m_worldBounds, m_obstacleManager.GetObstacles(), m_collisionManager);
@@ -176,6 +177,7 @@ void GameScene::Draw(sf::RenderWindow& window)
 
     m_enemyManager.Draw(window);
     window.setView(window.getDefaultView());
+    healthBar.Draw(window);
     if (!m_isGameOver) {
         window.draw(m_scoreText);
     }

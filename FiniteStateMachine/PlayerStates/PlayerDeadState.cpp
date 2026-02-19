@@ -4,10 +4,10 @@
 
 void PlayerDeadState::Enter(PlayerContext& _context)
 {
-	getPlayer(_context)->setAnimation(getPlayer(_context)->textureDeath, 512, 64, 8, 0.15f, false, 0);
-	getPlayer(_context)->hurtbox.isActive = false;
-	getPlayer(_context)->hitbox.isActive = false;
-	getPlayer(_context)->hitbox2.isActive = false;
+    getPlayer(_context)->setAnimation(getPlayer(_context)->textureDeath, 512, 64, 8, 0.15f, false, 0);
+    getPlayer(_context)->hurtbox.isActive = false;
+    getPlayer(_context)->hitbox.isActive = false;
+    getPlayer(_context)->hitbox2.isActive = false;
 }
 
 void PlayerDeadState::Exit(PlayerContext& _context) {}

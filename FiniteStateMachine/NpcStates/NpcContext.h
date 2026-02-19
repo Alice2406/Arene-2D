@@ -1,7 +1,15 @@
 #pragma once
 #include "../Animation-Assets/Animator.h"
+#include "../Animation-Assets/SharedData.h"
 #include "../NPC/EnemyProjectile.h"
+#include "../NPC/SniperData.h"
 #include "SFML/Graphics.hpp"
+
+class EnemyProjectile;
+struct SniperData;
+class Berserker;
+class Tank;
+class Sniper;
 
 class NpcContext
 {
@@ -19,4 +27,10 @@ public:
     sf::Texture* weaponTexture = nullptr;
     AnimConfig weaponConfig;
     sf::Vector2f worldBounds;
+    void* ownerSniper = nullptr;
+    const SniperData* sniperData = nullptr;
+
+    Berserker* berserker = nullptr;
+    Tank* tank = nullptr;
+    Sniper* sniper = nullptr;
 };

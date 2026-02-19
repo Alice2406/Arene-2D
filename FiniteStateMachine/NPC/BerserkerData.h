@@ -25,4 +25,8 @@ struct BerserkerData {
 
     sf::Vector2f hurtboxSize;
     sf::Vector2f hurtboxOffset;
+    sf::Vector2f hitboxSize;
+    sf::Vector2f hitboxOffset;
+
+    float attackDamage;
 };

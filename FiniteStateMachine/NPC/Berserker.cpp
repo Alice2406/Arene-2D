@@ -7,6 +7,7 @@ Berserker::Berserker(BerserkerSkin skinType, sf::Texture& texture) : m_sprite(m_
     context.npcSprite = &m_sprite;
     context.animator = &m_animator;
     context.speed = m_data.moveSpeed;
+    context.berserker = this;
 
     sf::Texture& texIdle = m_resources.GetTexture(m_data.idle.texturePath);
     sf::Texture& texWalk = m_resources.GetTexture(m_data.walk.texturePath);
@@ -21,6 +22,12 @@ Berserker::Berserker(BerserkerSkin skinType, sf::Texture& texture) : m_sprite(m_
     hurtbox = CollisionBox(m_data.hurtboxSize, m_data.hurtboxOffset);
     hurtbox.owner = this;
     hurtbox.isActive = true;
+    hurtbox.isPlayer = false;
+
+    hitbox = CollisionBox(m_data.hitboxSize, m_data.hitboxOffset);
+    hitbox.owner = this;
+    hitbox.isActive = false;
+    hitbox.damage = m_data.attackDamage;
 
     health = HealthComponent(m_data.health);
 }
@@ -57,6 +64,8 @@ sf::Sprite& Berserker::getSprite()
 void Berserker::Draw(sf::RenderWindow& window)
 {
     window.draw(m_sprite);
+    hurtbox.debugDraw(window);
+    hitbox.debugDraw(window);
 }
 
 void Berserker::handleDamage(float amount)
@@ -78,6 +87,8 @@ void Berserker::Update(float dt)
 {
     fsm.Update(context);
     m_animator.Update(dt);
+    hurtbox.Update(m_sprite.getPosition(), m_sprite.getScale().x);
+    hitbox.Update(m_sprite.getPosition(), m_sprite.getScale().x);
     if (m_flashTimer > 0)
     {
         m_flashTimer -= dt;
@@ -86,7 +97,6 @@ void Berserker::Update(float dt)
             m_sprite.setColor(sf::Color::White);
         }
     }
-    hurtbox.Update(m_sprite.getPosition(), m_sprite.getScale().x);
 }
 
 bool Berserker::IsHit() const

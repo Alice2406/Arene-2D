@@ -4,7 +4,7 @@
 
 Player* PlayerBaseState::getPlayer(PlayerContext& _context) const
 {
-    return _context.player;
+	return _context.player;
 }
 
 bool PlayerBaseState::hasMouvementInput(const PlayerContext& _context) const
@@ -16,7 +16,7 @@ void PlayerBaseState::applyMouvement(PlayerContext& _context, float _inputX, flo
 {
 	Player* player = getPlayer(_context);
 	if (!player) return;
-	
+
 	float magnitude = std::sqrt(_inputX * _inputX + _inputY * _inputY);
 	if (magnitude > 1.f) {
 		_inputX /= magnitude;

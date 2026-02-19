@@ -37,6 +37,7 @@ public:
     HealthComponent& getHealth() { return health; }
     float getHp() const { return health.getHealth(); }
     sf::Sprite& getSprite() { return sprite; }
+    float getAttackDamage() const { return 25.0f; }
 
     void setAnimation(const sf::Texture& tex, int w, int h, int count, float speed, bool loop, int row);
     void Update(sf::RenderWindow& window, float _dt, sf::Vector2f worldBounds);

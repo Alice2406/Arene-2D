@@ -6,6 +6,7 @@
 #include "../Core/CollisionManager.h"
 #include "../Animation-Assets/ResourceManager.h"
 #include "../TileMap.h"
+#include "../HealthBar.h"
 
 struct RenderObject {
     const sf::Sprite* sprite;
@@ -29,6 +30,7 @@ private:
     int m_score;
     sf::Text m_scoreText;
     sf::Vector2f m_worldBounds;
+    HealthBar healthBar;
 
     bool m_isGameOver;
     sf::RectangleShape m_darkOverlay;

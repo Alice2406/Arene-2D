@@ -3,9 +3,6 @@
 TankData TankDatabase::GetData(TankSkin skin) {
     TankData data;
 
-    data.moveSpeed = 100.f;
-    data.health = 100;
-
     switch (skin) {
     case TankSkin::TURTLE:
         data.idle.texturePath = AssetPaths::Tank::Turtle::IDLE;
@@ -30,9 +27,14 @@ TankData TankDatabase::GetData(TankSkin skin) {
 
         data.scale = { 0.7f, 0.7f };
         data.moveSpeed = 80.f;
+        data.health = 150;
 
         data.hurtboxSize = { 80.f, 100.f };
         data.hurtboxOffset = { 0.f, 0.f };
+
+        data.hitboxSize = { 100.f, 35.f };
+        data.hitboxOffset = { 70.f, 10.f };
+        data.attackDamage = 30.0f;
         break;
 
     case TankSkin::PANDA:
@@ -58,9 +60,14 @@ TankData TankDatabase::GetData(TankSkin skin) {
 
         data.scale = { 0.7f, 0.7f };
         data.moveSpeed = 120.f;
+        data.health = 120;
 
         data.hurtboxSize = { 65.f, 85.f };
         data.hurtboxOffset = { 0.f, 0.f };
+
+        data.hitboxSize = { 90.f, 65.f };
+        data.hitboxOffset = { 65.f, 25.f };
+        data.attackDamage = 35.0f;
         break;
 
     case TankSkin::MINOTAUR:
@@ -85,10 +92,15 @@ TankData TankDatabase::GetData(TankSkin skin) {
         data.guard.speed = 0.15f;
 
         data.scale = { 0.7f, 0.7f };
-        data.moveSpeed = 120.f;
+        data.moveSpeed = 90.f;
+        data.health = 200;
 
         data.hurtboxSize = { 85.f, 110.f };
         data.hurtboxOffset = { 0.f, -5.f };
+
+        data.hitboxSize = { 95.f, 180.f };
+        data.hitboxOffset = { 70.f, 0.f };
+        data.attackDamage = 32.0f;
         break;
 
     case TankSkin::SKULL:
@@ -113,10 +125,15 @@ TankData TankDatabase::GetData(TankSkin skin) {
         data.guard.speed = 0.15f;
 
         data.scale = { 0.7f, 0.7f };
-        data.moveSpeed = 120.f;
+        data.moveSpeed = 100.f;
+        data.health = 100;
 
         data.hurtboxSize = { 50.f, 70.f };
         data.hurtboxOffset = { 0.f, 5.f };
+
+        data.hitboxSize = { 50.f, 25.f };
+        data.hitboxOffset = { 50.f, 10.f };
+        data.attackDamage = 28.0f;
         break;
     }
     return data;

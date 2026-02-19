@@ -22,4 +22,9 @@ struct SniperData {
 
     sf::Vector2f hurtboxSize;
     sf::Vector2f hurtboxOffset;
+
+    sf::Vector2f projectileHitboxSize;
+    sf::Vector2f projectileHitboxOffset;
+    float projectileSpeed;
+    float projectileDamage;
 };

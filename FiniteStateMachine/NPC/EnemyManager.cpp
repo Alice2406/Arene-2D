@@ -11,6 +11,9 @@ EnemyManager::~EnemyManager()
 
     for (Sniper* s : m_snipers) delete s;
     m_snipers.clear();
+
+    for (EnemyProjectile* p : m_projectiles) delete p;
+    m_projectiles.clear();
 }
 
 void EnemyManager::SpawnTank(TankSkin skin, sf::Vector2f position, sf::Vector2f mapSize)
@@ -87,116 +90,127 @@ void EnemyManager::SpawnSniper(SniperSkin skin, sf::Vector2f position, sf::Vecto
 int EnemyManager::Update(float dt, Player& player, sf::Vector2f worldBounds, const std::vector<Obstacle>& obstacles, CollisionManager& collisionMgr)
 {
     int pointsGagnesCeTour = 0;
-    collisionMgr.addHitbox(&player.hitbox);
-    collisionMgr.addHitbox(&player.hitbox2);
+    collisionMgr.clear();
+
     collisionMgr.addHurtbox(&player.hurtbox);
+    if (player.hitbox.isActive) collisionMgr.addHitbox(&player.hitbox);
+    if (player.hitbox2.isActive) collisionMgr.addHitbox(&player.hitbox2);
 
     auto itTank = m_tanks.begin();
     while (itTank != m_tanks.end())
     {
         Tank* t = *itTank;
+        if (t->IsDead()) {
+            pointsGagnesCeTour += 30;
+            delete t;
+            itTank = m_tanks.erase(itTank);
+            continue;
+        }
 
         t->context.deltaTime = dt;
         t->context.playerPos = player.getPosition();
         t->context.worldBounds = worldBounds;
-
         t->Update(dt);
+
         collisionMgr.CheckMapCollisions(t->getSprite(), obstacles);
         keepInsideMap(t, worldBounds);
 
         collisionMgr.addHurtbox(&t->hurtbox);
+        if (t->hitbox.isActive) collisionMgr.addHitbox(&t->hitbox);
 
-        if (t->IsDead())
-        {
-            pointsGagnesCeTour += 30;
-            delete t;
-            itTank = m_tanks.erase(itTank);
-        }
-        else
-        {
-            ++itTank;
-        }
+        ++itTank;
     }
 
     auto itBerserker = m_berserkers.begin();
     while (itBerserker != m_berserkers.end())
     {
         Berserker* b = *itBerserker;
+        if (b->IsDead()) {
+            pointsGagnesCeTour += 10;
+            delete b;
+            itBerserker = m_berserkers.erase(itBerserker);
+            continue;
+        }
 
         b->context.deltaTime = dt;
         b->context.playerPos = player.getPosition();
         b->context.worldBounds = worldBounds;
         b->Update(dt);
-        collisionMgr.CheckMapCollisions(b->getSprite(), obstacles);
 
+        collisionMgr.CheckMapCollisions(b->getSprite(), obstacles);
         keepInsideMap(b, worldBounds);
 
         collisionMgr.addHurtbox(&b->hurtbox);
+        if (b->hitbox.isActive) collisionMgr.addHitbox(&b->hitbox);
 
-        if (b->IsDead())
-        {
-            pointsGagnesCeTour += 10;
-            delete b;
-            itBerserker = m_berserkers.erase(itBerserker);
-        }
-        else
-        {
-            ++itBerserker;
-        }
+        ++itBerserker;
     }
 
     auto itSniper = m_snipers.begin();
     while (itSniper != m_snipers.end())
     {
         Sniper* s = *itSniper;
+        if (s->IsDead()) {
+            pointsGagnesCeTour += 40;
+            delete s;
+            itSniper = m_snipers.erase(itSniper);
+            continue;
+        }
 
         s->context.projectileList = &m_projectiles;
         s->context.deltaTime = dt;
         s->context.playerPos = player.getPosition();
         s->context.worldBounds = worldBounds;
         s->Update(dt);
-        collisionMgr.CheckMapCollisions(s->getSprite(), obstacles);
 
+        collisionMgr.CheckMapCollisions(s->getSprite(), obstacles);
         keepInsideMap(s, worldBounds);
 
         collisionMgr.addHurtbox(&s->hurtbox);
-
-        if (s->IsDead())
-        {
-            pointsGagnesCeTour += 40;
-            delete s;
-            itSniper = m_snipers.erase(itSniper);
-        }
-        else
-        {
-            ++itSniper;
-        }
+        ++itSniper;
     }
 
     auto itProj = m_projectiles.begin();
     while (itProj != m_projectiles.end())
     {
         EnemyProjectile* p = *itProj;
-
         p->Update(dt);
 
         sf::Vector2f pos = p->getPosition();
-        if (pos.x < 0 || pos.y < 0 || pos.x > worldBounds.x || pos.y > worldBounds.y)
-        {
+        if (pos.x < 0 || pos.y < 0 || pos.x > worldBounds.x || pos.y > worldBounds.y) {
             p->Destroy();
         }
 
-        if (!p->IsActive())
-        {
+        if (!p->IsActive()) {
             delete p;
             itProj = m_projectiles.erase(itProj);
         }
-        else
-        {
+        else {
+            collisionMgr.addHitbox(&p->hitbox);
             ++itProj;
         }
     }
+    collisionMgr.checkCollisions();
     return pointsGagnesCeTour;
+}
+
+//test debug collision box ennemy
+void EnemyManager::DebugDrawCollisions(sf::RenderWindow& window, CollisionManager& colManager)
+{
+    for (auto* tank : m_tanks)
+    {
+        colManager.DebugDrawFeetBox(window, tank->getSprite());
+    }
+
+    for (auto* berserker : m_berserkers)
+    {
+        colManager.DebugDrawFeetBox(window, berserker->getSprite());
+    }
+
+    for (auto* sniper : m_snipers)
+    {
+        colManager.DebugDrawFeetBox(window, sniper->getSprite());
+    }
 }
 
 void EnemyManager::HandleWaves(sf::Vector2f mapSize)

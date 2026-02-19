@@ -9,18 +9,27 @@ Player::Player() :
     frameWidth(0), frameHeight(0), frameCount(0), speed(300.0f),
     animationSpeed(0.1f), isLooping(false),
     sprite(textureIdle),
-    health(100.0f),
+    health(1000.0f),
     hurtbox({ 35.f, 50.f }, { 0.f, 10.f }),
-    hitbox({ 0.f, 0.f }, { 0.f, 0.f }),
-    hitbox2({ 0.f, 0.f }, { 0.f, 0.f })
+    hitbox({ 60.f, 90.f }, { 28.f, 0.f }),
+    hitbox2({ 100.f, 40.f }, { 0.f, 40.f })
 {
     context.player = this;
 
     hurtbox.owner = this;
     hitbox.owner = this;
     hitbox2.owner = this;
+
+    hurtbox.isPlayer = true;
+    hurtbox.isActive = true;
+
+    hitbox.isPlayer = true;
     hitbox.isActive = false;
+    hitbox.damage = 25.0f;
+
+    hitbox2.isPlayer = true;
     hitbox2.isActive = false;
+    hitbox2.damage = 25.0f;
 
     if (!textureIdle.loadFromFile("../Assets/Player/Warrior_Idle.png")) {
         std::cerr << "Erreur : Impossible de charger Warrior_Idle.png" << std::endl;
@@ -36,7 +45,7 @@ Player::Player() :
     }
 
     sprite.setTexture(textureIdle);
-    sprite.setPosition({ 400, 300 });
+    sprite.setPosition({ 640, 360 });
 
     auto* idle = fsm.CreateState<PlayerIdleState>();
     auto* move = fsm.CreateState<PlayerMoveState>();
